@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cac6858b3d3b469ead18188903de3f72" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelGEDEquipe1.Classe" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.CompteJoueur" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.EffetItem" Width="1.5" PointX="12.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.Hero" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.InventaireHero" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.Item" Width="1.5" PointX="10.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.Monde" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.Monstre" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGEDEquipe1.ObjetMonde" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Classe_Monde" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Hero_Classe" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.IsPartOfAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_EffetItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.BelongsToHero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Hero_Monde" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Item_Heros" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.BelongsToItem" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Item_Monde" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_Monstre_Monde" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGEDEquipe1.FK_ObjetMonde_Monde" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
