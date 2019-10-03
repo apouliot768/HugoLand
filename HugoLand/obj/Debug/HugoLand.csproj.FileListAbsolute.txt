@@ -12,3 +12,4 @@ C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CopyComplete
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.exe
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
+C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache

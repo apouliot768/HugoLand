@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HugoLand.Models;
+using HugoLand.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,7 +40,44 @@ namespace HugoLand
         private void BtnMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
-            txtTestes.Text = "Monde";
+            GestionMonde gMonde = new GestionMonde();
+            gMonde.RetournerMondes();
+
+            txtTestes.Text += "Test RetournerMondes: (Affiche les descriptions, limites X et limites Y des mondes)...\r\n";
+            txtTestes.Text += "\r\n";
+            AfficherInfoMondes(gMonde);
+
+            txtTestes.Text += "\r\n";
+            txtTestes.Text += "Test CréerMonde...\r\n";
+            txtTestes.Text += "\r\n";
+
+            Monde monde1 = new Monde()
+            {
+                Description = "test",
+                LimiteX = 1,
+                LimiteY = 1,
+                PathTile = "test",
+                PathCsv = "test",
+                DefaultTile = 1,
+                SizeTile = 1
+            };
+
+            gMonde.CréerMonde(monde1);
+            AfficherInfoMondes(gMonde);
+
+            txtTestes.Text += "\r\n";
+            txtTestes.Text += "Test ModifierMonde...\r\n";
+            txtTestes.Text += "\r\n";
+
+            gMonde.ModifierMonde(gMonde.LstMondes.Last(), 2, 2, "Modification");
+            AfficherInfoMondes(gMonde);
+
+            txtTestes.Text += "\r\n";
+            txtTestes.Text += "Test SuprimerMonde...\r\n";
+            txtTestes.Text += "\r\n";
+
+            gMonde.SupprimerMonde(gMonde.LstMondes.Last());
+            AfficherInfoMondes(gMonde);
         }
 
         private void BtnClasse_Click(object sender, EventArgs e)
@@ -69,6 +108,14 @@ namespace HugoLand
         {
             txtTestes.Clear();
             txtTestes.Text = "Hero";
+        }
+
+        public void AfficherInfoMondes(GestionMonde gMonde)
+        {
+            foreach (Monde monde in gMonde.LstMondes)
+            {
+                txtTestes.Text += monde.Description.ToString() + "\r\n";
+            }
         }
     }
 }

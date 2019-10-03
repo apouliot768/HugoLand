@@ -45,6 +45,7 @@
             this.txtTestes.Location = new System.Drawing.Point(59, 98);
             this.txtTestes.Multiline = true;
             this.txtTestes.Name = "txtTestes";
+            this.txtTestes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtTestes.Size = new System.Drawing.Size(690, 150);
             this.txtTestes.TabIndex = 0;
             // 
