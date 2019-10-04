@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cac6858b3d3b469ead18188903de3f72" Name="Diagram1">
+      <Diagram DiagramId="cac6858b3d3b469ead18188903de3f72" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="ModelGEDEquipe1.Classe" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelGEDEquipe1.CompteJoueur" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelGEDEquipe1.EffetItem" Width="1.5" PointX="12.75" PointY="7.375" IsExpanded="true" />

@@ -54,8 +54,6 @@ namespace HugoLand
             Monde monde1 = new Monde()
             {
                 Description = "test",
-                LimiteX = 1,
-                LimiteY = 1,
                 PathTile = "test",
                 PathCsv = "test",
                 DefaultTile = 1,
@@ -82,7 +80,12 @@ namespace HugoLand
 
         private void BtnClasse_Click(object sender, EventArgs e)
         {
+            // test SupprimerMonde temporaire
             txtTestes.Clear();
+            GestionMonde gMonde = new GestionMonde();
+            gMonde.RetournerMondes();
+            gMonde.SupprimerMonde(gMonde.LstMondes.Last());
+
             txtTestes.Text = "Classe";
         }
 

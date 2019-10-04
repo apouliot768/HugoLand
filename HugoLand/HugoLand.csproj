@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Constantes.cs" />
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionCompteJoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />
