@@ -14,35 +14,51 @@ namespace HugoLand.ViewModels
     /// </summary>
     public class GestionObjetMonde
     {
+
+        public List<string> LstErreursObjetMondes { get; set; } = new List<string>();
+
         public void CréerObjetMonde(ObjetMonde objetMonde)
         {
-            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+            bool echecSauvegarde = false;
+            byte nombreEchec = 0;
+            do
             {
-                bool echecSauvegarde = false;
-                do
+                try
                 {
-                    try
+                    using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
                     {
-                        if (objetMonde.Description != null && objetMonde.x > -1 && objetMonde.y > -1 &&
+
+                        if (objetMonde.Description != null && objetMonde.x >= 0 && objetMonde.y >= 0 &&
                             !(contexte.ObjetMondes.Any(x => x.Id == objetMonde.Id)) &&
-                            objetMonde.TypeObjet > -1 && contexte.Mondes.Any(x => x.Id == objetMonde.MondeId))
+                            objetMonde.TypeObjet >= 0 && contexte.Mondes.Any(x => x.Id == objetMonde.MondeId))
                         {
                             contexte.ObjetMondes.Add(objetMonde);
                             contexte.SaveChanges();
-                            echecSauvegarde = false;
                         }
+                        else
+                            LstErreursObjetMondes.Add("Erreur dans la méthode \'CréerObjetMonde\' : Monde non existant ou données invalides");
+
+                        echecSauvegarde = false;
                     }
-                    catch (Exception)
+                }
+                catch (Exception ex)
+                {
+                    echecSauvegarde = true;
+                    nombreEchec++;
+                    if (nombreEchec == byte.MaxValue)
                     {
-                        echecSauvegarde = true;
+                        echecSauvegarde = false;
+                        LstErreursObjetMondes.Add("Erreur dans la méthode \'CréerObjetMonde\' : " + ex.Message);
                     }
-                } while (echecSauvegarde);
-            }
+                }
+            } while (echecSauvegarde);
+
         }
 
-        public void SupprimerObjetMonde(ObjetMonde objetMonde)
+        public ObjetMonde SupprimerObjetMonde(ObjetMonde objetMonde)
         {
             bool echecSauvegarde = false;
+            byte nombreEchec = 0;
             do
             {
                 try
@@ -52,35 +68,73 @@ namespace HugoLand.ViewModels
                         if (contexte.ObjetMondes.Any(x => x.Id == objetMonde.Id))
                         {
                             contexte.ObjetMondes.Remove(contexte.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id));
-                            contexte.SaveChanges();
+                            try
+                            {
+                                contexte.SaveChanges();
+                            }
+                            catch (Exception ex)
+                            {
+                                echecSauvegarde = true;
+                                nombreEchec++;
+                                if (nombreEchec == byte.MaxValue)
+                                {
+                                    echecSauvegarde = false;
+                                    LstErreursObjetMondes.Add("Erreur dans la méthode \'SupprimerObjetMonde\' : " + ex.Message);
+                                }
+                            }
+
                         }
+                        else
+                            LstErreursObjetMondes.Add("Erreur dans la méthode \'SupprimerObjetMonde\' : ObjetMonde inexistant!");
+
                         echecSauvegarde = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     echecSauvegarde = true;
+                    nombreEchec++;
+                    if (nombreEchec == byte.MaxValue)
+                    {
+                        echecSauvegarde = false;
+                        LstErreursObjetMondes.Add("Erreur dans la méthode \'SupprimerObjetMonde\' : " + ex.Message);
+                    }
                 }
             } while (echecSauvegarde);
+
+            return new ObjetMonde();
         }
 
-        public void ModifierObjetMonde(ObjetMonde objetMonde, string description)
+        public ObjetMonde ModifierObjetMonde(ObjetMonde objetMonde, string description)
         {
+            ObjetMonde objetMondeDB = new ObjetMonde();
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
             {
                 try
                 {
-                    ObjetMonde objetMondeDB = contexte.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id);
+                    objetMondeDB = contexte.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id);
                     if (objetMondeDB != null)
                     {
                         objetMondeDB.Description = description;
                         contexte.SaveChanges();
+                        return objetMondeDB;
+                    }
+                    else
+                    {
+                        LstErreursObjetMondes.Add("Erreur dans la méthode \'ModifierObjetMonde\' : ObjetMonde inexistant!");
+                        objetMondeDB.Description = description + " bugModif";
+                        CréerObjetMonde(objetMondeDB);
+                        return objetMondeDB;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // Gestion volontairement pessimiste de la concurence
+                    LstErreursObjetMondes.Add("Erreur dans la méthode \'ModifierObjetMonde\' : " + ex.Message);
+                    objetMondeDB.Description = description + " bugModif";
+                    CréerObjetMonde(objetMondeDB);
+                    return objetMondeDB;
                 }
+                
             }
         }
     }

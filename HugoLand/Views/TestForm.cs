@@ -50,7 +50,7 @@ namespace HugoLand
             txtTestes.Text += objMonde.Description + "\r\n\r\n";
 
             txtTestes.Text += "Modification ObjetMonde \r\n";
-            gestionObjetMonde.ModifierObjetMonde(objMonde, "Nouvelle description");
+            objMonde = gestionObjetMonde.ModifierObjetMonde(objMonde, "Nouvelle description");
             txtTestes.Text += objMonde.Description + "\r\n\r\n";
 
             txtTestes.Text += "Aupression ObjetMonde \r\n";
@@ -106,10 +106,57 @@ namespace HugoLand
 
         private void BtnClasse_Click(object sender, EventArgs e)
         {
-            // test SupprimerMonde temporaire
-            txtTestes.Clear();
 
-            txtTestes.Text = "Classe";
+            txtTestes.Clear();
+            GestionMonde gestionMonde = new GestionMonde();
+            GestionClasse gestionClasse = new GestionClasse();
+            gestionClasse.RecevoirClassesMonde(gestionMonde.LstMondes.First().Id);
+
+            txtTestes.Text += "Liste des classes du premier monde  de la base de données: \r\n";
+            AfficherInfoClasses(gestionClasse);
+
+            txtTestes.Text += "\r\nCréation d'une classe : \r\n";
+            Classe classe = new Classe()
+            {
+                NomClasse = "test",
+                Description = "test",
+                StatBaseStr = 3,
+                StatBaseDex = 3,
+                StatBaseInt = 3,
+                StatBaseVitalite = 3,
+                MondeId = gestionMonde.LstMondes.First().Id                
+            };
+            classe = gestionClasse.CréerClasse(classe);
+            AfficherInfoClasses(gestionClasse);
+
+            txtTestes.Text += "\r\nModification d'une classe : \r\n";
+            classe.NomClasse = "Test Modifier";
+
+            classe = gestionClasse.ModifierClasse(classe);
+            AfficherInfoClasses(gestionClasse);
+
+            txtTestes.Text += "\r\nSuppression d'une classe : \r\n";
+            classe = gestionClasse.SupprimerClasse(classe);
+
+            if (classe.NomClasse == null)
+                txtTestes.Text += "Supression réussie!\r\n";
+
+            classe = gestionClasse.LstClasses.First();
+
+            txtTestes.Text += "\r\nTrouver la classe d'un Hero : \r\n";
+
+            Hero hero = new Hero();
+
+            using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
+            {
+                hero = context.Heros.FirstOrDefault(x => x.MondeId == classe.MondeId);
+            }
+
+            txtTestes.Text += "Numéro de classe du Hero : "+ hero.ClasseId.ToString() +" \r\n";
+
+            classe = gestionClasse.TrouverClasseHero(hero);
+
+            txtTestes.Text += "Numéro de classe et nom de classe du Hero : " + classe.Id.ToString() + ", " + classe.NomClasse + " \r\n";
         }
 
         private void BtnItem_Click(object sender, EventArgs e)
@@ -169,6 +216,14 @@ namespace HugoLand
             foreach (Monde monde in gMonde.LstMondes)
             {
                 txtTestes.Text += monde.Description.ToString() + " " + monde.LimiteX.ToString() + " " + monde.LimiteY.ToString() + "\r\n";
+            }
+        }
+
+        public void AfficherInfoClasses(GestionClasse gestionClasse)
+        {
+            foreach (Classe classe in gestionClasse.LstClasses)
+            {
+                txtTestes.Text += classe.Id.ToString() + " " + classe.NomClasse.ToString() + "\r\n";
             }
         }
 

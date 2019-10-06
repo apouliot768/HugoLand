@@ -19,43 +19,52 @@ namespace HugoLand.ViewModels
     {
         public List<Monde> LstMondes { get; set; }
 
+        public List<string> LstErreursMondes { get; set; } = new List<string>();
+
         public GestionMonde()
         {
             RetournerMondes();
         }
 
-        public void CréerMonde(Monde monde)
+        public Monde CréerMonde(Monde monde)
         {
             bool echecSauvegarde = false;
-            byte nombeEchec = 0;
+            byte nombreEchec = 0;
             do
             {
                 try
                 {
                     using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
                     {
-                        if (monde.Description != null && monde.LimiteX > -1 && monde.LimiteY > -1 && !(contexte.Mondes.Any(x => x.Id == monde.Id)))
+                        if (monde.Description != null && monde.LimiteX >= 0 && monde.LimiteY >= 0 && !(contexte.Mondes.Any(x => x.Id == monde.Id)))
                         {
                             contexte.Mondes.Add(monde);
                             contexte.SaveChanges();
-                            echecSauvegarde = false;
                         }
+                        else
+                            LstErreursMondes.Add("Erreur dans la méthode \'CréerMonde\' : Monde déjà existant ou données invalides!");
+                        echecSauvegarde = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     echecSauvegarde = true;
-
-                    if (nombeEchec == byte.MaxValue)
+                    nombreEchec++;
+                    if (nombreEchec == byte.MaxValue)
+                    {
                         echecSauvegarde = false;
+                        LstErreursMondes.Add("Erreur dans la méthode \'CréerMonde\' : " + ex.Message);
+                    }
                 }
             } while (echecSauvegarde);
             RetournerMondes();
+            return LstMondes.Last();
         }
 
-        public void SupprimerMonde(Monde monde)
+        public Monde SupprimerMonde(Monde monde)
         {
             bool echecSauvegarde = false;
+            byte nombreEchec = 0;
             do
             {
                 try
@@ -97,46 +106,83 @@ namespace HugoLand.ViewModels
                                 connection.Close();
                             }
                         }
+                        else
+                            LstErreursMondes.Add("Erreur dans la méthode \'SupprimerMonde\' : Monde inexistant lors de la tentative de supression!");
+
                         echecSauvegarde = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     echecSauvegarde = true;
+                    nombreEchec++;
+                    if (nombreEchec == byte.MaxValue)
+                    {
+                        echecSauvegarde = false;
+                        LstErreursMondes.Add("Erreur dans la méthode \'SupprimerMonde\' : " + ex.Message);
+                    }
                 }
             } while (echecSauvegarde);
 
             RetournerMondes();
+            return new Monde();
         }
 
-        public void ModifierMonde(Monde monde, int limiteX, int limiteY, string description)
+        public Monde ModifierMonde(Monde monde, int limiteX, int limiteY, string description)
         {
+            Monde mondeDB = new Monde();
             try
             {
                 using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
                 {
-                    Monde mondeDB = contexte.Mondes.FirstOrDefault(x => x.Id == monde.Id);
+                    mondeDB = contexte.Mondes.FirstOrDefault(x => x.Id == monde.Id);
                     if (mondeDB != null)
                     {
                         mondeDB.LimiteX = limiteX;
                         mondeDB.LimiteY = limiteY;
                         mondeDB.Description = description;
                         contexte.SaveChanges();
+                        RetournerMondes();
+                        return mondeDB;
+                    }
+                    else
+                    {
+                        LstErreursMondes.Add("Erreur dans la méthode \'ModifierMonde\' : Monde inexistant!");
+                        mondeDB.LimiteX = limiteX;
+                        mondeDB.LimiteY = limiteY;
+                        mondeDB.Description = description + " BugModif";
+                        CréerMonde(mondeDB);
+                        RetournerMondes();
+                        return mondeDB;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Gestion volontairement pessimiste de la concurence
+                LstErreursMondes.Add("Erreur dans la méthode \'ModifierMonde\' : " + ex.Message);
+                RetournerMondes();
+                mondeDB.LimiteX = limiteX;
+                mondeDB.LimiteY = limiteY;
+                mondeDB.Description = description + " BugModif";
+                CréerMonde(mondeDB);
+                RetournerMondes();
+                return mondeDB;
             }
-            RetournerMondes();
         }
 
         public void RetournerMondes()
         {
-            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+            try
             {
-                LstMondes = contexte.Mondes.ToList();
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    LstMondes = contexte.Mondes.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursMondes.Add("Erreur dans la méthode \'RetournerMonde\' : " + ex.Message);
             }
         }
     }
