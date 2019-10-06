@@ -127,7 +127,36 @@ namespace HugoLand
         private void BtnMonstre_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
-            txtTestes.Text = "Monstre";
+            GestionMonstre gMonstre = new GestionMonstre();
+
+            Monstre monstre = new Monstre
+            {
+                Id = 11874,
+                x = 8,
+                y = 8,
+                MondeId = 3114,
+                Nom = "Test",
+                Niveau = 17,
+                StatPV = 18
+            };
+
+            gMonstre.CréerMonstre(monstre);
+            AfficherInfoMonstres(gMonstre);
+
+            txtTestes.Text += "\r\nModification du monstre créé : \r\n";
+            gMonstre.ModifierMonstre(monstre, monstre.x, monstre.y, 3111, "Pompom", 1, 8, 8f,12f,null);
+            AfficherInfoMonstres(gMonstre);
+            monstre = gMonstre.LstMonstres.Last();
+
+            txtTestes.Text += "Monstre modifié : \r\n";
+            txtTestes.Text += monstre.Id + " - " + monstre.x + " - " + monstre.y + " - " + monstre.MondeId + " - " + monstre.Niveau + " - " + monstre.Nom
+                + " - " + monstre.StatPV + " - " + monstre.StatDmgMax + " - " + monstre.StatDmgMin + "\r\n";
+
+            txtTestes.Text += "\r\nSuppression de monstre : \r\n";
+            txtTestes.Text += "Compte avant : " + gMonstre.LstMonstres.Count() + "\r\n";
+            gMonstre.SupprimerMonstre(monstre);
+            AfficherInfoMonstres(gMonstre);
+            txtTestes.Text += "Compte après : " + gMonstre.LstMonstres.Count() + "\r\n";
         }
 
         private void BtnHeros_Click(object sender, EventArgs e)
@@ -140,6 +169,14 @@ namespace HugoLand
             foreach (Monde monde in gMonde.LstMondes)
             {
                 txtTestes.Text += monde.Description.ToString() + " " + monde.LimiteX.ToString() + " " + monde.LimiteY.ToString() + "\r\n";
+            }
+        }
+
+        public void AfficherInfoMonstres(GestionMonstre gMonstre)
+        {
+            foreach (Monstre monstre in gMonstre.LstMonstres)
+            {
+                txtTestes.Text += monstre.Nom.ToString() + "\r\n";
             }
         }
     }

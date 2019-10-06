@@ -13,3 +13,18 @@ C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.exe
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
 C:\Users\alexa\OneDrive\Documents\Automne 2019\2D 3D\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\HugoLand.exe.config
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\HugoLand.exe
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\HugoLand.pdb
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.dll
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.xml
+Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.TestForm.resources
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.Properties.Resources.resources
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.GenerateResource.cache
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CoreCompileInputs.cache
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CopyComplete
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.exe
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
