@@ -16,40 +16,70 @@ namespace HugoLand.ViewModels
     {
         public void CréerObjetMonde(ObjetMonde objetMonde)
         {
-            using (EntitiesGEDEquipe1 contexteCréationObjetMonde = new EntitiesGEDEquipe1())
+            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
             {
-                if (objetMonde.Description != null && objetMonde.x > -1 && objetMonde.y > -1
-                    && !(contexteCréationObjetMonde.ObjetMondes.Any(x => x.Id == objetMonde.Id))
-                    && objetMonde.TypeObjet > -1 && contexteCréationObjetMonde.Mondes.Any(x => x.Id == objetMonde.MondeId))
+                bool echecSauvegarde = false;
+                do
                 {
-                    contexteCréationObjetMonde.ObjetMondes.Add(objetMonde);
-                    contexteCréationObjetMonde.SaveChanges();
-                }
+                    try
+                    {
+                        if (objetMonde.Description != null && objetMonde.x > -1 && objetMonde.y > -1 &&
+                            !(contexte.ObjetMondes.Any(x => x.Id == objetMonde.Id)) &&
+                            objetMonde.TypeObjet > -1 && contexte.Mondes.Any(x => x.Id == objetMonde.MondeId))
+                        {
+                            contexte.ObjetMondes.Add(objetMonde);
+                            contexte.SaveChanges();
+                            echecSauvegarde = false;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        echecSauvegarde = true;
+                    }
+                } while (echecSauvegarde);
             }
         }
 
         public void SupprimerObjetMonde(ObjetMonde objetMonde)
         {
-            using (EntitiesGEDEquipe1 contexteSupressionObjetMonde = new EntitiesGEDEquipe1())
+            bool echecSauvegarde = false;
+            do
             {
-                if (contexteSupressionObjetMonde.ObjetMondes.Any(x => x.Id == objetMonde.Id))
+                try
                 {
-                    contexteSupressionObjetMonde.Mondes.Remove(contexteSupressionObjetMonde.Mondes.FirstOrDefault(x => x.Id == objetMonde.Id));
-                    contexteSupressionObjetMonde.SaveChanges();
+                    using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                    {
+                        if (contexte.ObjetMondes.Any(x => x.Id == objetMonde.Id))
+                        {
+                            contexte.ObjetMondes.Remove(contexte.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id));
+                            contexte.SaveChanges();
+                        }
+                        echecSauvegarde = false;
+                    }
                 }
-            }
-
+                catch (Exception)
+                {
+                    echecSauvegarde = true;
+                }
+            } while (echecSauvegarde);
         }
 
         public void ModifierObjetMonde(ObjetMonde objetMonde, string description)
         {
-            using (EntitiesGEDEquipe1 contexteModifierObjetMonde = new EntitiesGEDEquipe1())
+            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
             {
-                ObjetMonde objetMondeDB = contexteModifierObjetMonde.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id);
-                if (objetMondeDB != null)
+                try
                 {
-                    objetMondeDB.Description = description;
-                    contexteModifierObjetMonde.SaveChanges();
+                    ObjetMonde objetMondeDB = contexte.ObjetMondes.FirstOrDefault(x => x.Id == objetMonde.Id);
+                    if (objetMondeDB != null)
+                    {
+                        objetMondeDB.Description = description;
+                        contexte.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    // Gestion volontairement pessimiste de la concurence
                 }
             }
         }

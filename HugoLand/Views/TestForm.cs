@@ -20,15 +20,42 @@ namespace HugoLand
     /// </summary>
     public partial class TestForm : Form
     {
+        private EntitiesGEDEquipe1 contextEF = new EntitiesGEDEquipe1();
+
         public TestForm()
         {
             InitializeComponent();
         }
 
+
         private void BtnObjetMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
-            txtTestes.Text = "ObjetMonde";
+            GestionMonde gestionMonde = new GestionMonde();
+
+            GestionObjetMonde gestionObjetMonde = new GestionObjetMonde();
+
+            Monde monde = gestionMonde.LstMondes.Last();
+
+            ObjetMonde objMonde = new ObjetMonde
+            {
+                x = 2,
+                y = 2,
+                Description = "Objet test!",
+                MondeId = monde.Id
+            };
+
+            txtTestes.Text += "Création ObjetMonde \r\n";
+            gestionObjetMonde.CréerObjetMonde(objMonde);
+            txtTestes.Text += objMonde.Description + "\r\n\r\n";
+
+            txtTestes.Text += "Modification ObjetMonde \r\n";
+            gestionObjetMonde.ModifierObjetMonde(objMonde, "Nouvelle description");
+            txtTestes.Text += objMonde.Description + "\r\n\r\n";
+
+            txtTestes.Text += "Aupression ObjetMonde \r\n";
+            gestionObjetMonde.SupprimerObjetMonde(objMonde);
+            txtTestes.Text += "Suppression réussie!";
         }
 
         private void BtnCompteJoueur_Click(object sender, EventArgs e)
@@ -41,7 +68,6 @@ namespace HugoLand
         {
             txtTestes.Clear();
             GestionMonde gMonde = new GestionMonde();
-            gMonde.RetournerMondes();
 
             txtTestes.Text += "Test RetournerMondes: (Affiche les descriptions, limites X et limites Y des mondes)...\r\n";
             txtTestes.Text += "\r\n";
@@ -82,9 +108,6 @@ namespace HugoLand
         {
             // test SupprimerMonde temporaire
             txtTestes.Clear();
-            GestionMonde gMonde = new GestionMonde();
-            gMonde.RetournerMondes();
-            gMonde.SupprimerMonde(gMonde.LstMondes.Last());
 
             txtTestes.Text = "Classe";
         }
@@ -110,14 +133,13 @@ namespace HugoLand
         private void BtnHeros_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
-            txtTestes.Text = "Hero";
         }
 
         public void AfficherInfoMondes(GestionMonde gMonde)
         {
             foreach (Monde monde in gMonde.LstMondes)
             {
-                txtTestes.Text += monde.Description.ToString() + "\r\n";
+                txtTestes.Text += monde.Description.ToString() + " " + monde.LimiteX.ToString() + " " + monde.LimiteY.ToString() + "\r\n";
             }
         }
     }
