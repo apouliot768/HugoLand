@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,16 +9,19 @@ using HugoLand.Models;
 namespace HugoLand.ViewModels
 {
     /// <summary>
-    /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Auteurs:        Alexandre Pouliot et Joëlle Boyer
+    /// Description:    Gère les objets Classe qui définissent la classe d'un héro
+    /// Date:           2019-10-27
     /// </summary>
     public class GestionClasse
     {
+        // Liste des classes à renvoyer à la vue
         public List<Classe> LstClasses { get; set; }
 
+        // Liste des erreurs de connexions de la classe
         public List<string> LstErreursClasses { get; set; } = new List<string>();
 
+        // Crée des objets classe
         public Classe CréerClasse(Classe classe)
         {
             bool echecSauvegarde = false;
@@ -55,6 +59,7 @@ namespace HugoLand.ViewModels
             return LstClasses.Last();
         }
 
+        // Supprime des classes de héros
         public Classe SupprimerClasse(Classe classe)
         {
             bool echecSauvegarde = false;
@@ -67,7 +72,40 @@ namespace HugoLand.ViewModels
                     {
                         if (contexte.Classes.Any(x => x.Id == classe.Id))
                         {
-                            contexte.Classes.Remove(contexte.Classes.FirstOrDefault(x => x.Id == classe.Id));
+                            List<Hero> lstHero = contexte.Heros.ToList();
+                            foreach (Hero hero in lstHero)
+                            {
+                                foreach (InventaireHero inventaire in contexte.InventaireHeroes.Where(x => x.IdHero == hero.Id).ToList())
+                                {
+                                    using (SqlConnection connection = new SqlConnection(Constantes.ConnectionString))
+                                    {
+                                        //la commade a exécuter avec la query et la connection
+                                        SqlCommand sql = new SqlCommand(Constantes.RequeteDeleteItem, connection);
+                                        //insérer toutes les valeurs dans les paramêtres
+                                        sql.Parameters.AddWithValue("@ItemId", inventaire.ItemId);
+                                        // ouvrir la connection
+                                        connection.Open();
+                                        // exécuter la commande
+                                        sql.ExecuteNonQuery();
+                                        // Ferme la connection
+                                        connection.Close();
+                                    }
+                                }
+                            }
+
+                            using (SqlConnection connection = new SqlConnection(Constantes.ConnectionString))
+                            {
+                                //la commade a exécuter avec la query et la connection
+                                SqlCommand sql = new SqlCommand(Constantes.RequeteDeleteHeroClasse, connection);
+                                //insérer toutes les valeurs dans les paramêtres
+                                sql.Parameters.AddWithValue("@ClasseId", classe.Id);
+                                // ouvrir la connection
+                                connection.Open();
+                                // exécuter la commande
+                                sql.ExecuteNonQuery();
+                                // Ferme la connection
+                                connection.Close();
+                            }
                             contexte.SaveChanges();
                         }
                         else
@@ -91,6 +129,7 @@ namespace HugoLand.ViewModels
             return new Classe();
         }
 
+        // Modifie la classe d'un héro
         public Classe ModifierClasse(Classe classe)
         {
             Classe classeBD = new Classe();
@@ -123,6 +162,7 @@ namespace HugoLand.ViewModels
             return classeBD;
         }
 
+        // Mise dans la propriété LstClasses les classes d'un monde
         public void RecevoirClassesMonde(int mondeId)
         {
             bool echecConnexion = false;
@@ -153,6 +193,7 @@ namespace HugoLand.ViewModels
             } while (echecConnexion);
         }
 
+        // Retourne la classe d'un héro
         public Classe TrouverClasseHero(Hero hero)
         {
             Classe clone = new Classe();

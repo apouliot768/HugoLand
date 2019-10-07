@@ -11,21 +11,25 @@ using HugoLand.Models;
 namespace HugoLand.ViewModels
 {
     /// <summary>
-    /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Auteurs:        Alexandre Pouliot et Joëlle Boyer
+    /// Description:    Classe de gestion d'un Monde
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionMonde
     {
+        // Liste des mondes pour la vue
         public List<Monde> LstMondes { get; set; }
 
+        // Liste des erreurs de connexions
         public List<string> LstErreursMondes { get; set; } = new List<string>();
 
+        // Initialisation d'un monde
         public GestionMonde()
         {
             RetournerMondes();
         }
 
+        // Création d'un Monde
         public Monde CréerMonde(Monde monde)
         {
             bool echecSauvegarde = false;
@@ -61,6 +65,8 @@ namespace HugoLand.ViewModels
             return LstMondes.Last();
         }
 
+        // Supression d'un monde et de toutes les dépendances
+        // TO DO: Créer un monde Archive pour ne pas supprimer les dépendances (Heros, Monstres, Item, etc) en les réattribuants.
         public Monde SupprimerMonde(Monde monde)
         {
             bool echecSauvegarde = false;
@@ -128,6 +134,7 @@ namespace HugoLand.ViewModels
             return new Monde();
         }
 
+        // Modifie les limites et la description d'un monde
         public Monde ModifierMonde(Monde monde, int limiteX, int limiteY, string description)
         {
             Monde mondeDB = new Monde();
@@ -171,6 +178,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Retourne la liste des mondes la plus fraîche
         public void RetournerMondes()
         {
             try

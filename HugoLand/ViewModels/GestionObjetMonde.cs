@@ -8,15 +8,16 @@ using HugoLand.Models;
 namespace HugoLand.ViewModels
 {
     /// <summary>
-    /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Auteurs:        Alexandre Pouliot et Joëlle Boyer
+    /// Description:    Classe de gestion des objets composant un monde donné
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionObjetMonde
     {
-
+        // Liste qui cumul les erreurs de connexion si lieu
         public List<string> LstErreursObjetMondes { get; set; } = new List<string>();
 
+        // Création d'un Objet présent dans un monde
         public void CréerObjetMonde(ObjetMonde objetMonde)
         {
             bool echecSauvegarde = false;
@@ -45,7 +46,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecSauvegarde = false;
                         LstErreursObjetMondes.Add("Erreur dans la méthode \'CréerObjetMonde\' : " + ex.Message);
@@ -54,7 +55,7 @@ namespace HugoLand.ViewModels
             } while (echecSauvegarde);
 
         }
-
+        // Supression d'un Objet présent dans un monde
         public ObjetMonde SupprimerObjetMonde(ObjetMonde objetMonde)
         {
             bool echecSauvegarde = false;
@@ -105,6 +106,7 @@ namespace HugoLand.ViewModels
             return new ObjetMonde();
         }
 
+        // Modification de la description d'un objet présent dans un monde
         public ObjetMonde ModifierObjetMonde(ObjetMonde objetMonde, string description)
         {
             ObjetMonde objetMondeDB = new ObjetMonde();

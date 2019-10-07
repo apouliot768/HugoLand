@@ -25,7 +25,7 @@ namespace HugoLand
             InitializeComponent();
         }
 
-
+        // Tests GestionObjetMonde
         private void BtnObjetMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -45,23 +45,78 @@ namespace HugoLand
 
             txtTestes.Text += "Création ObjetMonde \r\n";
             gestionObjetMonde.CréerObjetMonde(objMonde);
-            txtTestes.Text += objMonde.Description + "\r\n\r\n";
+            txtTestes.Text += "Description = " + objMonde.Description + "\r\n\r\n";
 
             txtTestes.Text += "Modification ObjetMonde \r\n";
             objMonde = gestionObjetMonde.ModifierObjetMonde(objMonde, "Nouvelle description");
-            txtTestes.Text += objMonde.Description + "\r\n\r\n";
+            txtTestes.Text += "Description = " + objMonde.Description + "\r\n\r\n";
 
             txtTestes.Text += "Supression ObjetMonde \r\n";
             gestionObjetMonde.SupprimerObjetMonde(objMonde);
-            txtTestes.Text += "Suppression réussie!";
+
+            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+            {
+                if (!(contexte.ObjetMondes.Any(x => x.Description == "Nouvelle description")))
+                {
+                    txtTestes.Text += "Suppression réussie!";
+                }
+            }
         }
 
+        // Tests GestionCompteJoueur
         private void BtnCompteJoueur_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
-            txtTestes.Text = "CompteJoueur";
+            GestionCompteJoueur gestionCompteJoueur = new GestionCompteJoueur();
+
+            string Message = gestionCompteJoueur.CréerCompteJoueur("LinkTheHero", "link@thehero.com", "Link", "The Hero", 1, "Abc1234!");
+
+            txtTestes.Text += "Test création CompteJoueur...\r\n";
+            txtTestes.Text += "\r\n";
+            txtTestes.Text += Message + "\r\n";
+
+            txtTestes.Text += "\r\nTest modification CompteJoueur...\r\n";
+            txtTestes.Text += "\r\n";
+
+            CompteJoueur compteJoueur = new CompteJoueur()
+            {
+                NomJoueur = "Ganon",
+                Courriel = "Ganon@zelda.com",
+                Prenom = "Ganon",
+                Nom = "Bad",
+                TypeUtilisateur = 1
+            };
+            string MotDePasse = "Toto";
+
+            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+            {
+                List<CompteJoueur> compteJoueurs = contexte.CompteJoueurs.ToList();
+                compteJoueur.Id = compteJoueurs.Last().Id;
+                gestionCompteJoueur.ModifierCompteJoueur(compteJoueur, MotDePasse);
+            }
+            txtTestes.Text += "SUCCESS\r\n";
+
+            txtTestes.Text += "\r\nTest connexion CompteJoueur...\r\n";
+            txtTestes.Text += "\r\n";
+
+            string testConnexion = gestionCompteJoueur.ConnexionCompteJoueur("Ganon", "Toto");
+
+            txtTestes.Text += testConnexion + "\r\n";
+
+            txtTestes.Text += "\r\nTest supression CompteJoueur...\r\n";
+            txtTestes.Text += "\r\n";
+
+            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+            {
+                List<CompteJoueur> compteJoueurs = contexte.CompteJoueurs.ToList();
+                compteJoueur = compteJoueurs.Last();
+                gestionCompteJoueur.SupprimerCompteJoueur(compteJoueur);
+            }
+            txtTestes.Text += "SUCCESS\r\n";
+
         }
 
+        // Tests GestionMonde
         private void BtnMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -102,6 +157,7 @@ namespace HugoLand
             AfficherInfoMondes(gMonde);
         }
 
+        // Tests GestionClasse
         private void BtnClasse_Click(object sender, EventArgs e)
         {
 
@@ -203,7 +259,7 @@ namespace HugoLand
 
             EffetItem effetItem = new EffetItem
             {
-                ItemId = 2160,
+                ItemId = 2161,
                 TypeEffet = 0,
                 ValeurEffet = -5
             };
@@ -214,10 +270,10 @@ namespace HugoLand
             AfficherInfoEffetsItems(gEffetItem);
 
             // Modification d'un effet d'item
-            txtTestes.Text += "\r\nModification d\'un effet d\'item : \r\n";
-            AfficherInfoEffetsItems(gEffetItem);
-            gEffetItem.ModifierEffetItem(effetItem, 2154, 7, 4);
-            AfficherInfoEffetsItems(gEffetItem);
+            txtTestes.Text += "\r\nDernier effet item : " + effetItem.Id.ToString() + " : " + effetItem.ValeurEffet.ToString() + " - " + effetItem.TypeEffet.ToString() + "\r\n";
+            gEffetItem.ModifierEffetItem(effetItem, 3161, 7, 4);
+            txtTestes.Text += "\r\nEffet item modifié - " + gEffetItem.LstEffetsItem.Last().Id.ToString() + " : "
+                + gEffetItem.LstEffetsItem.Last().ValeurEffet.ToString() + " - " + gEffetItem.LstEffetsItem.Last().TypeEffet.ToString() + "\r\n";
 
             // Suppression d'un effet d'item
             txtTestes.Text += "\r\nSuppression d\'un effet d\'item : \r\n";
