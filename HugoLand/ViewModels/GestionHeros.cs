@@ -178,25 +178,34 @@ namespace HugoLand.ViewModels
                         else
                             tileX = 200 / 16;
 
-                        foreach (var obj in monde.Heros)
-                            if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
-                                && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX) && hero.Id != obj.Id)
-                                lstHero.Add(obj);
+                        lstHero = contexte.Heros.Where(z => z.MondeId == hero.MondeId && (z.x <= hero.x + tileX && z.x >= hero.x - tileX) 
+                            && (z.y <= hero.y + tileX && z.y >= hero.y - tileX) && hero.Id != z.Id).ToList();
+                        lstItems = contexte.Items.Where(z => z.MondeId == hero.MondeId && (z.x <= hero.x + tileX && z.x >= hero.x - tileX)
+                            && (z.y <= hero.y + tileX && z.y >= hero.y - tileX) && hero.Id != z.Id).ToList();
+                        lstMonstres = contexte.Monstres.Where(z => z.MondeId == hero.MondeId && (z.x <= hero.x + tileX && z.x >= hero.x - tileX)
+                            && (z.y <= hero.y + tileX && z.y >= hero.y - tileX) && hero.Id != z.Id).ToList();
+                        lstObjmonde = contexte.ObjetMondes.Where(z => z.MondeId == hero.MondeId && (z.x <= hero.x + tileX && z.x >= hero.x - tileX)
+                            && (z.y <= hero.y + tileX && z.y >= hero.y - tileX) && hero.Id != z.Id).ToList();
 
-                        foreach (var obj in monde.Items)
-                            if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
-                                && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
-                                lstItems.Add(obj);
+                        //foreach (var obj in monde.Heros)
+                        //    if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
+                        //        && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX) && hero.Id != obj.Id)
+                        //        lstHero.Add(obj);
 
-                        foreach (var obj in monde.Monstres)
-                            if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
-                                && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
-                                lstMonstres.Add(obj);
+                        //foreach (var obj in monde.Items)
+                        //    if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
+                        //        && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
+                        //        lstItems.Add(obj);
 
-                        foreach (var obj in monde.ObjetMondes)
-                            if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
-                                && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
-                                lstObjmonde.Add(obj);
+                        //foreach (var obj in monde.Monstres)
+                        //    if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
+                        //        && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
+                        //        lstMonstres.Add(obj);
+
+                        //foreach (var obj in monde.ObjetMondes)
+                        //    if (obj.MondeId == hero.MondeId && (obj.x <= hero.x + tileX && obj.x >= hero.x - tileX)
+                        //        && (obj.y <= hero.y + tileX && obj.y >= hero.y - tileX))
+                        //        lstObjmonde.Add(obj);
                     }
                 }
             }

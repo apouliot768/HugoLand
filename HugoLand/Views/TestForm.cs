@@ -164,7 +164,6 @@ namespace HugoLand
 
             Item item = new Item
             {
-                Id = 11874,
                 x = 8,
                 y = 8,
                 MondeId = 3114,
@@ -201,31 +200,32 @@ namespace HugoLand
         {
             txtTestes.Clear();
             GestionEffetItem gEffetItem = new GestionEffetItem();
+
             EffetItem effetItem = new EffetItem
-            { 
-                ItemId = 2161,
+            {
+                ItemId = 2160,
                 TypeEffet = 0,
                 ValeurEffet = -5
             };
 
             // Ajouter un effet d'item
+            txtTestes.Text += "\r\nAjout d\'un effet d\'item : \r\n";
             gEffetItem.AjouterEffetItem(effetItem);
             AfficherInfoEffetsItems(gEffetItem);
 
             // Modification d'un effet d'item
-            txtTestes.Text += "\r\nDernier effet item : " + effetItem.Id.ToString() + " : " + effetItem.ValeurEffet.ToString() + " - " + effetItem.TypeEffet.ToString() + "\r\n";
-            gEffetItem.ModifierEffetItem(effetItem,3161, 7, 4);
-            txtTestes.Text += "\r\nEffet item modifié - " + gEffetItem.LstEffetsItem.Last().Id.ToString() + " : "
-                + gEffetItem.LstEffetsItem.Last().ValeurEffet.ToString() + " - " + gEffetItem.LstEffetsItem.Last().TypeEffet.ToString() + "\r\n";
+            txtTestes.Text += "\r\nModification d\'un effet d\'item : \r\n";
+            AfficherInfoEffetsItems(gEffetItem);
+            gEffetItem.ModifierEffetItem(effetItem, 2154, 7, 4);
+            AfficherInfoEffetsItems(gEffetItem);
 
             // Suppression d'un effet d'item
             txtTestes.Text += "\r\nSuppression d\'un effet d\'item : \r\n";
             txtTestes.Text += "Compte avant : " + gEffetItem.LstEffetsItem.Count() + "\r\n";
-            txtTestes.Text += "Dernier effet d\'item : " + effetItem.Id.ToString() + " : " + effetItem.ValeurEffet.ToString() + " - " + effetItem.TypeEffet.ToString() + "\r\n";
+            AfficherInfoEffetsItems(gEffetItem);
             gEffetItem.SupprimerEffetItem(effetItem);
             txtTestes.Text += "Compte après : " + gEffetItem.LstEffetsItem.Count() + "\r\n";
-            txtTestes.Text += "Dernier effet d\'item : " + gEffetItem.LstEffetsItem.Last().Id.ToString() + " : "
-                + gEffetItem.LstEffetsItem.Last().ValeurEffet.ToString() + " - " + gEffetItem.LstEffetsItem.Last().TypeEffet.ToString() + "\r\n";
+            AfficherInfoEffetsItems(gEffetItem);
         }
 
         private void BtnMonstre_Click(object sender, EventArgs e)
@@ -235,7 +235,6 @@ namespace HugoLand
             GestionMonstre gMonstre = new GestionMonstre();
             Monstre monstre = new Monstre
             {
-                Id = 11874,
                 x = 8,
                 y = 8,
                 MondeId = 3114,
@@ -275,7 +274,6 @@ namespace HugoLand
 
             Hero hero = new Hero
             {
-                Id = 11874,
                 x = 8,
                 y = 8,
                 MondeId = 3114,
@@ -285,11 +283,11 @@ namespace HugoLand
                 CompteJoueurId = 2091
             };
 
-            // Création d'un monstre
+            // Création d'un héro
             gHero.CréationHero(hero);
             AfficherInfoHeros(gHero);
 
-            // Modification d'un monstre
+            // Modification d'un héro
             txtTestes.Text += "\r\nModification du héro créé : \r\n";
             txtTestes.Text += "Dernier héro : " + gHero.LstHeros.Last().Id + " - " + gHero.LstHeros.Last().NomHero + "\r\n";
             gHero.ModifierHero(hero, 11, 15487, hero.x, hero.y, 18, 17, 16, 15, 3111, false);
@@ -299,7 +297,7 @@ namespace HugoLand
                 + " - " + hero.StatVitalite + " - " + hero.StatStr + " - " + hero.StatDex + " - " + hero.StatInt + " - " + hero.EstConnecte + "\r\n";
             txtTestes.Text += "Dernier héro : " + gHero.LstHeros.Last().Id + " - " + gHero.LstHeros.Last().NomHero + "\r\n";
 
-            // Suppression d'un monstre
+            // Suppression d'un héro
             txtTestes.Text += "\r\nSuppression de héro : \r\n";
             txtTestes.Text += "Compte avant : " + gHero.LstHeros.Count() + "\r\n";
             txtTestes.Text += "Dernier héro : " + gHero.LstHeros.Last().Id + " - " + gHero.LstHeros.Last().NomHero + "\r\n";
@@ -309,20 +307,24 @@ namespace HugoLand
 
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
             {
-                txtTestes.Text += "Retourner les héros pour le joueur 2091 : " + contexte.CompteJoueurs.First(x => x.Id == 2091).NomJoueur;
-            }
-            lstHeros = gHero.RetourHerosJoueur(2091);
-            foreach (var h in lstHeros)
-                txtTestes.Text += h.Id + " - " + h.NomHero + "\r\n";
+                txtTestes.Text += "\r\nRetourner les héros pour le joueur 3093 : " + contexte.CompteJoueurs.First(x => x.Id == 3093).NomJoueur + "\r\n";
 
+                lstHeros = gHero.RetourHerosJoueur(3093);
+                if (lstHeros.Count() > 0)
+                    foreach (var h in lstHeros)
+                        txtTestes.Text += h.Id + " - " + h.NomHero + "\r\n";
+                else
+                    txtTestes.Text += "\r\nAucun héros trouvés pour le joueur " + contexte.CompteJoueurs.First(x => x.Id == 2091).NomJoueur;
+            }
 
             // Je considère le 200 x 200 comme un multiple de la taille d'une tile (SizeTile) et de la position du héro
             // Si le héro est à la position 8, peu importe en x ou y, la marge sera de 200/monde.SizeTile (si SizeTile = 32, marge = +/- 6.25)
             // Donc dans le 200 x 200, le héros aura comme éléments se situant à 6 tuiles plus haut, plus bas, à gauche et à droite.
             // Donc entre 8-6 et 8+6, entre 2 et 14 autant en x qu'en y.
-            hero = gHero.LstHeros.Last();
-            txtTestes.Text += "Tous les éléments dans un rayon de 200 x 200 : \r\n" +
-                "Position du héro de base : " + hero.x + ", " + hero.y;
+            hero = gHero.LstHeros.First(x => x.MondeId == 3111);
+            txtTestes.Text += "\r\nTous les éléments dans un rayon de 200 x 200 : \r\n" +
+                "Position du héro de base : " + hero.x + ", " + hero.y + "\r\n" +
+                "Monde de base du héro : " + hero.MondeId.ToString() + "\r\n";
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
             {
                 gHero.ÉlémentsRayon200x200(hero);
@@ -380,7 +382,7 @@ namespace HugoLand
         public void AfficherInfoEffetsItems(GestionEffetItem gEffetItem)
         {
             foreach (EffetItem ef in gEffetItem.LstEffetsItem)
-                txtTestes.Text += ef.Id.ToString() + " - " + ef.ItemId.ToString() + "\r\n";
+                txtTestes.Text += ef.Id.ToString() + " - " + ef.ItemId.ToString() + " - " + ef.ValeurEffet.ToString() + " - " + ef.TypeEffet.ToString() + "\r\n";
         }
         #endregion
     }
