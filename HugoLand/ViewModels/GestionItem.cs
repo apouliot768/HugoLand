@@ -14,5 +14,6 @@ namespace HugoLand.ViewModels
     /// </summary>
     public class GestionItem : Item
     {
+
     }
 }

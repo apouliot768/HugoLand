@@ -20,7 +20,6 @@ Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.dll
 Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.dll
 Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.xml
 Z:\Desktop\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.xml
-Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.TestForm.resources
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.Properties.Resources.resources
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.GenerateResource.cache
@@ -28,3 +27,4 @@ Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CoreCompileInput
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CopyComplete
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.exe
 Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
+Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
