@@ -25,7 +25,10 @@ namespace HugoLand
             InitializeComponent();
         }
 
+<<<<<<< Updated upstream
         // Tests GestionObjetMonde
+=======
+>>>>>>> Stashed changes
         private void BtnObjetMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -217,6 +220,7 @@ namespace HugoLand
         {
             txtTestes.Clear();
             GestionItem gItem = new GestionItem();
+            GestionHeros ghero = new GestionHeros();
 
             Item item = new Item
             {
@@ -226,22 +230,25 @@ namespace HugoLand
                 Nom = "Test",
                 Description = "Ceci est un test"
             };
-            Hero hero = new Hero();
 
-            using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
-            {
-                hero = contexte.Heros.First(x => x.MondeId == item.MondeId);
-            }
+            Hero hero = ghero.LstHeros.First();
 
             // Création d'un item
             gItem.CréationItem(item);
             AfficherInfoItems(gItem);
 
             // Modification d'un item
-            txtTestes.Text += "\r\nDernier item : " + item.Id + " : " + item.Nom + " - " + item.Description + " - " + item.x + ", " + item.y + " - " + item.MondeId + "\r\n";
-            gItem.ModificationItem(item, "Nouvelle description", 14, 15, 3111, null);
-            txtTestes.Text += "\r\nItem modifié - " + gItem.LstItems.Last().Id + " : " + gItem.LstItems.Last().Nom + " - " + gItem.LstItems.Last().Description + " - " +
-                gItem.LstItems.Last().x + ", " + gItem.LstItems.Last().y + " - " + gItem.LstItems.Last().MondeId + "\r\n";
+            txtTestes.Text += "\r\nDernier item : " + item.Id + " : " + item.Nom + " - " + item.Description + " - " + item.x + ", " + item.y + " - " + item.MondeId + "\r\n\r\n";
+
+            gItem.ModificationItem(item.Id, hero.Id, -2);
+
+            //foreach (Item c in ghero.LstHeros.Last(x => x.Id == hero.Id).Items)
+            //{
+            //    if (hero.InventaireHeroes != null)
+            //        txtTestes.Text += "Inventaire héro - " + c.IdHero + " - " + c.Id + "\r\n";
+            //    else
+            //        txtTestes.Text += "\r\nLe héro ne possède aucun inventaire!+\r\n";
+            //}
 
             // Suppression d'un item
             txtTestes.Text += "\r\nSuppression d\'un item : \r\n";

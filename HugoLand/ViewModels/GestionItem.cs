@@ -16,6 +16,11 @@ namespace HugoLand.ViewModels
     {
         public List<Item> LstItems { get; set; }
 
+        public GestionItem()
+        {
+            RetournerItems();
+        }
+
         public void CréationItem(Item item)
         {
             try
@@ -82,37 +87,43 @@ namespace HugoLand.ViewModels
             }
         }
 
-        public void ModificationItem(Item item, string description, int x, int y, int mondeId, int? imgId)
+        public void ModificationItem(int idItem, int idHero, int quantite)
         {
+            // Item item, string description, int x, int y, int mondeId, int? imgId
             try
             {
+                InventaireHero inv = new InventaireHero();
+
                 using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
                 {
-                    Monde monde = contexte.Mondes.Find(item.MondeId);
-                    monde.Items.Remove(item);
+                    Item item = contexte.Items.FirstOrDefault(x => x.Id == idItem);
+                    Hero hero = contexte.Heros.FirstOrDefault(x => x.Id == idHero);
 
-                    Item dbItem = contexte.Items.FirstOrDefault(z => z.Id == item.Id);
-
-                    if (dbItem != null)
+                    if (hero != null && item != null)
                     {
-                        dbItem.Description = description;
-                        dbItem.ImageId = imgId;
-                        dbItem.MondeId = mondeId;
-                        dbItem.x = x;
-                        dbItem.y = y;
-
-                        monde = contexte.Mondes.Find(mondeId);
-                        dbItem.Monde = monde;
-                        monde.Items.Add(dbItem);
-
-                        contexte.SaveChanges();
-                        RetournerItems();
+                        if (quantite > 0)
+                            for (int i = 0; i < quantite; i++)
+                            {
+                                item.Hero = hero;
+                                item.IdHero = hero.Id;
+                                hero.Items.Add(item);
+                            }
+                        else
+                        {
+                            for (int i = 0; i > quantite; i--)
+                            {
+                                contexte.Items.Remove(item);
+                                item = contexte.Items.FirstOrDefault(x => x.IdHero == idHero);
+                            }
+                        }
                     }
+
+                    contexte.SaveChanges();
+                    RetournerItems();
                 }
             }
             catch (Exception ex)
             {
-
             }
         }
 

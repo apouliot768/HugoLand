@@ -17,6 +17,11 @@ namespace HugoLand.ViewModels
         public List<EffetItem> LstEffetsItem { get; set; }
         public List<string> LstErreursEffetsItems { get; set; } = new List<string>();
 
+        public GestionEffetItem()
+        {
+            RetournerEffetItem();
+        }
+
         public EffetItem AjouterEffetItem(EffetItem effetItem)
         {
             bool echecSauvegarde = false;

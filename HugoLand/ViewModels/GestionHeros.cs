@@ -21,6 +21,11 @@ namespace HugoLand.ViewModels
         public List<Item> lstItems = new List<Item>();
         public List<Monstre> lstMonstres = new List<Monstre>();
 
+        public GestionHeros()
+        {
+            RetournerHeros();
+        }
+
         public void CréationHero(Hero hero)
         {
             try

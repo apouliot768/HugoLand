@@ -16,6 +16,10 @@ namespace HugoLand.ViewModels
     {
         public List<Monstre> LstMonstres { get; set; }
 
+        public GestionMonstre()
+        {
+            RetournerMonstres();
+        }
 
         public void CréerMonstre(Monstre monstre)
         {
