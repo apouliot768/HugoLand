@@ -9,18 +9,21 @@ namespace HugoLand.ViewModels
 {
     /// <summary>
     /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Description:    Gère les objets monstres qui définissent les monstres
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionMonstre : Monstre
     {
+        // Liste des monstres à renvoyer à la vue
         public List<Monstre> LstMonstres { get; set; }
 
+        // Remplir la liste des monstres
         public GestionMonstre()
         {
             RetournerMonstres();
         }
 
+        // Création d'un monstre
         public void CréerMonstre(Monstre monstre)
         {
             try
@@ -49,6 +52,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Suppression d'un monstre
         public void SupprimerMonstre(Monstre monstre)
         {
             try
@@ -73,6 +77,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Modification d'un monstre
         public void ModifierMonstre(Monstre monstre, int x, int y, int mondeId, string nom, int niveau, int Pv, float DmgMin, float DmgMax, int? imgId)
         {
             try
@@ -111,6 +116,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Peupler la liste des monstres
         public void RetournerMonstres()
         {
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())

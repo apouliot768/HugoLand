@@ -9,18 +9,21 @@ namespace HugoLand.ViewModels
 {
     /// <summary>
     /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Description:    Gère les objets items qui définissent un item
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionItem : Item
     {
+        // Liste des items à renvoyer à la vue
         public List<Item> LstItems { get; set; }
 
+        // Remplir la liste des items
         public GestionItem()
         {
             RetournerItems();
         }
 
+        // Création d'un item
         public void CréationItem(Item item)
         {
             try
@@ -48,6 +51,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Suppression d'un item
         public void SuppressionItem(Item item, Hero hero)
         {
             try
@@ -87,6 +91,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Modification d'un item
         public void ModificationItem(int idItem, int idHero, int quantite)
         {
             // Item item, string description, int x, int y, int mondeId, int? imgId
@@ -124,9 +129,11 @@ namespace HugoLand.ViewModels
             }
             catch (Exception ex)
             {
+
             }
         }
 
+        // Peupler la liste des items
         public void RetournerItems()
         {
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())

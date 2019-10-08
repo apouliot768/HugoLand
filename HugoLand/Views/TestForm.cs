@@ -213,6 +213,7 @@ namespace HugoLand
             txtTestes.Text += "Numéro de classe et nom de classe du Hero : " + classe.Id.ToString() + ", " + classe.NomClasse + " \r\n";
         }
 
+        // Tests GestionItem
         private void BtnItem_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -238,14 +239,7 @@ namespace HugoLand
             txtTestes.Text += "\r\nDernier item : " + item.Id + " : " + item.Nom + " - " + item.Description + " - " + item.x + ", " + item.y + " - " + item.MondeId + "\r\n\r\n";
 
             gItem.ModificationItem(item.Id, hero.Id, -2);
-
-            //foreach (Item c in ghero.LstHeros.Last(x => x.Id == hero.Id).Items)
-            //{
-            //    if (hero.InventaireHeroes != null)
-            //        txtTestes.Text += "Inventaire héro - " + c.IdHero + " - " + c.Id + "\r\n";
-            //    else
-            //        txtTestes.Text += "\r\nLe héro ne possède aucun inventaire!+\r\n";
-            //}
+            AfficherInfoItems(gItem);
 
             // Suppression d'un item
             txtTestes.Text += "\r\nSuppression d\'un item : \r\n";
@@ -256,6 +250,7 @@ namespace HugoLand
             txtTestes.Text += "Dernier item : " + gItem.LstItems.Last().Id + " - " + gItem.LstItems.Last().Nom + " - " + gItem.LstItems.Last().x.ToString() + ", " + gItem.LstItems.Last().y.ToString() + " - " + gItem.LstItems.Last().IdHero.ToString() + "\r\n";
         }
 
+        // Tests GestionEffetItem
         private void BtnEffetItem_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -263,7 +258,7 @@ namespace HugoLand
 
             EffetItem effetItem = new EffetItem
             {
-                ItemId = 2161,
+                ItemId = 2160,
                 TypeEffet = 0,
                 ValeurEffet = -5
             };
@@ -275,7 +270,7 @@ namespace HugoLand
 
             // Modification d'un effet d'item
             txtTestes.Text += "\r\nDernier effet item : " + effetItem.Id.ToString() + " : " + effetItem.ValeurEffet.ToString() + " - " + effetItem.TypeEffet.ToString() + "\r\n";
-            gEffetItem.ModifierEffetItem(effetItem, 3161, 7, 4);
+            gEffetItem.ModifierEffetItem(effetItem, 2151, 7, 4);
             txtTestes.Text += "\r\nEffet item modifié - " + gEffetItem.LstEffetsItem.Last().Id.ToString() + " : "
                 + gEffetItem.LstEffetsItem.Last().ValeurEffet.ToString() + " - " + gEffetItem.LstEffetsItem.Last().TypeEffet.ToString() + "\r\n";
 
@@ -288,6 +283,7 @@ namespace HugoLand
             AfficherInfoEffetsItems(gEffetItem);
         }
 
+        // Tests GestionMonstre
         private void BtnMonstre_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -326,6 +322,7 @@ namespace HugoLand
             txtTestes.Text += "Dernier monstre : " + gMonstre.LstMonstres.Last().Id + " - " + gMonstre.LstMonstres.Last().Nom + "\r\n";
         }
 
+        // Tests GestionHero
         private void BtnHeros_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
@@ -405,6 +402,7 @@ namespace HugoLand
 
 
         #region Méthodes permettant l'affichage d'informations
+        // Méthode permettant d'afifcher les infos des mondes
         public void AfficherInfoMondes(GestionMonde gMonde)
         {
             foreach (Monde monde in gMonde.LstMondes)
@@ -413,6 +411,7 @@ namespace HugoLand
             }
         }
 
+        // Méthode permettant d'afifcher les infos des classes
         public void AfficherInfoClasses(GestionClasse gestionClasse)
         {
             foreach (Classe classe in gestionClasse.LstClasses)
@@ -421,24 +420,28 @@ namespace HugoLand
             }
         }
 
+        // Méthode permettant d'afifcher les infos des monstres
         public void AfficherInfoMonstres(GestionMonstre gMonstre)
         {
             foreach (Monstre monstre in gMonstre.LstMonstres)
                 txtTestes.Text += monstre.Id.ToString() + " - " + monstre.Nom.ToString() + "\r\n";
         }
 
+        // Méthode permettant d'afifcher les infos des héros
         public void AfficherInfoHeros(GestionHeros gHeros)
         {
             foreach (Hero hero in gHeros.LstHeros)
                 txtTestes.Text += "Joueur : " + hero.CompteJoueurId + " | Héro : " + hero.Id.ToString() + " - " + hero.NomHero + "\r\n";
         }
 
+        // Méthode permettant d'afifcher les infos des items
         public void AfficherInfoItems(GestionItem gItem)
         {
             foreach (Item item in gItem.LstItems)
                 txtTestes.Text += item.Id.ToString() + " - " + item.Nom.ToString() + "\r\n";
         }
 
+        // Méthode permettant d'afifcher les infos des effets d'items
         public void AfficherInfoEffetsItems(GestionEffetItem gEffetItem)
         {
             foreach (EffetItem ef in gEffetItem.LstEffetsItem)

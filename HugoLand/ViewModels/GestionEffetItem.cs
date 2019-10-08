@@ -9,19 +9,24 @@ namespace HugoLand.ViewModels
 {
     /// <summary>
     /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Description:    Gère les objets EffetsItems qui définissent l'effet donné d'un item
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionEffetItem : EffetItem
     {
+        // Liste des effets d'items à renvoyer à la vue
         public List<EffetItem> LstEffetsItem { get; set; }
+
+        // Liste des erreurs de fonctionnements pour les effets d'items
         public List<string> LstErreursEffetsItems { get; set; } = new List<string>();
 
+        // Remplir la liste des effets d'items
         public GestionEffetItem()
         {
             RetournerEffetItem();
         }
 
+        // Ajouter des effets d'items
         public EffetItem AjouterEffetItem(EffetItem effetItem)
         {
             bool echecSauvegarde = false;
@@ -63,6 +68,7 @@ namespace HugoLand.ViewModels
             return LstEffetsItem.Last();
         }
 
+        // Supprimer des effets d'items
         public EffetItem SupprimerEffetItem(EffetItem effetItem)
         {
             bool echecSauvegarde = false;
@@ -102,6 +108,7 @@ namespace HugoLand.ViewModels
             return new EffetItem();
         }
 
+        // Modifier des effets d'items
         public EffetItem ModifierEffetItem(EffetItem effetItem, int itemId, int valEffet, int typeEffet)
         {
             EffetItem dbeffetItem = new EffetItem();
@@ -145,6 +152,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Peupler la liste des items
         public void RetournerEffetItem()
         {
             try

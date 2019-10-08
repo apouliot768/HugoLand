@@ -8,7 +8,7 @@ namespace HugoLand.Models
 {
     public class Constantes
     {
-        public const string ConnectionString = "Data source=(localdb)\\MSSQLLocalDB;initial catalog=GED-Equipe1-2019;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;";
+        public const string ConnectionString = "Data Source=172.16.2.246;Initial Catalog=GED-Equipe1-2019;User ID=Equipe1;Password=maison;MultipleActiveResultSets=True;Application Name=EntityFramework";
         
         public const string RequeteDeleteItem = "DELETE FROM EffetItem Where ItemId = @ItemId; DELETE FROM [dbo].[InventaireHero] WHERE ItemId = @ItemId; DELETE FROM [dbo].[Item] WHERE Id = @ItemId;";
 

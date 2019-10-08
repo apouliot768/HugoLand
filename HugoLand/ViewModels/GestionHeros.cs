@@ -9,23 +9,27 @@ namespace HugoLand.ViewModels
 {
     /// <summary>
     /// Auteurs:        Joëlle Boyer et Alexandre Pouliot
-    /// Description:    
-    /// Date:           
+    /// Description:    Gère les objets Héros qui définissent les propriétés d'un héro
+    /// Date:           2019-10-07
     /// </summary>
     public class GestionHeros : Hero
     {
+        // Liste des héros à renvoyer à la vue
         public List<Hero> LstHeros { get; set; }
 
+        // Listes des objets se trouvant dans le champs de vision du héro (rayon de 200x200)
         public List<Hero> lstHero = new List<Hero>();
         public List<ObjetMonde> lstObjmonde = new List<ObjetMonde>();
         public List<Item> lstItems = new List<Item>();
         public List<Monstre> lstMonstres = new List<Monstre>();
 
+        // Remplir la liste des héros
         public GestionHeros()
         {
             RetournerHeros();
         }
 
+        // Création d'un héro
         public void CréationHero(Hero hero)
         {
             try
@@ -63,6 +67,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Suppression d'un héro
         public void SuppressionHero(Hero hero)
         {
             try
@@ -88,6 +93,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Modification d'un héro
         public void ModifierHero(Hero hero, int niveau, long exp, int x, int y, int str, int dex, int inte, int vit, int mondeId, bool estConnecte)
         {
             try
@@ -128,6 +134,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Déplacement d'un héro
         public void DéplacerHero(Hero hero, int x, int y)
         {
             try
@@ -165,6 +172,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Éléments étant à proximité du héro
         public void ÉlémentsRayon200x200(Hero hero)
         {
             try
@@ -220,6 +228,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Retourne la liste des héros pour un joueur donné
         public List<Hero> RetourHerosJoueur(int joueurId)
         {
             try
@@ -235,7 +244,7 @@ namespace HugoLand.ViewModels
             }
         }
 
-
+        // Peupler la liste des héros
         public void RetournerHeros()
         {
             using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
