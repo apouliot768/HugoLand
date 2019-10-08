@@ -95,7 +95,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecSauvegarde = false;
                         LstErreursObjetMondes.Add("Erreur dans la méthode \'SupprimerObjetMonde\' : " + ex.Message);

@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HugoLand.Models
+namespace HugoLand
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ObjetMonde
+    public partial class EffetItem
     {
         public int Id { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public string Description { get; set; }
-        public int TypeObjet { get; set; }
-        public int MondeId { get; set; }
+        public int ItemId { get; set; }
+        public int ValeurEffet { get; set; }
+        public int TypeEffet { get; set; }
     
-        public virtual Monde Monde { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

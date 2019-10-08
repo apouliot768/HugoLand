@@ -55,7 +55,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classe.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompteJoueur.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EffetItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hero.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventaireHero.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Constantes.cs" />
+    <Compile Include="Monde.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Monstre.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjetMonde.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionCompteJoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />
@@ -64,53 +106,11 @@
     <Compile Include="ViewModels\GestionMonde.cs" />
     <Compile Include="ViewModels\GestionMonstre.cs" />
     <Compile Include="ViewModels\GestionObjetMonde.cs" />
-    <Compile Include="Models\Classe.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompteJoueur.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EffetItem.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GED-Equipe1-2019.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GED-Equipe1-2019.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GED-Equipe1-2019.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GED-Equipe1-2019.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GED-Equipe1-2019.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Hero.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\InventaireHero.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Item.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Monde.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Monstre.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ObjetMonde.cs">
-      <DependentUpon>GED-Equipe1-2019.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,12 +126,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="Models\GED-Equipe1-2019.edmx">
+    <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GED-Equipe1-2019.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\GED-Equipe1-2019.edmx.diagram">
-      <DependentUpon>GED-Equipe1-2019.edmx</DependentUpon>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -148,20 +148,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\GED-Equipe1-2019.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GED-Equipe1-2019.Context.cs</LastGenOutput>
-      <DependentUpon>GED-Equipe1-2019.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\GED-Equipe1-2019.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GED-Equipe1-2019.edmx</DependentUpon>
-      <LastGenOutput>GED-Equipe1-2019.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

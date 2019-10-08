@@ -47,7 +47,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecSauvegarde = false;
                         LstErreursClasses.Add("Erreur dans la méthode \'CréerClasse\' : " + ex.Message);
@@ -117,7 +117,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue - 1)
+                    if (nombreEchec > 10)
                     {
                         LstErreursClasses.Add("Erreur dans la méthode \'SupprimerClasse\' : " + ex.Message);
                         echecSauvegarde = false;
@@ -184,7 +184,7 @@ namespace HugoLand.ViewModels
                 {
                     echecConnexion = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecConnexion = false;
                         LstErreursClasses.Add("Erreur dans la méthode \'RecevoirClassesMonde\' : " + ex.Message);
@@ -221,7 +221,7 @@ namespace HugoLand.ViewModels
                 {
                     echecConnexion = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecConnexion = false;
                         LstErreursClasses.Add("Erreur dans la méthode \'TrouverClasseHero\' : " + ex.Message);

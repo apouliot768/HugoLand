@@ -54,7 +54,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecSauvegarde = false;
                         LstErreursMondes.Add("Erreur dans la méthode \'CréerMonde\' : " + ex.Message);
@@ -122,7 +122,7 @@ namespace HugoLand.ViewModels
                 {
                     echecSauvegarde = true;
                     nombreEchec++;
-                    if (nombreEchec == byte.MaxValue)
+                    if (nombreEchec > 10)
                     {
                         echecSauvegarde = false;
                         LstErreursMondes.Add("Erreur dans la méthode \'SupprimerMonde\' : " + ex.Message);

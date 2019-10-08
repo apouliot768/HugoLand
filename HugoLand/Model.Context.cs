@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HugoLand.Models
+namespace HugoLand
 {
     using System;
     using System.Data.Entity;

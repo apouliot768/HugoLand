@@ -25,10 +25,7 @@ namespace HugoLand
             InitializeComponent();
         }
 
-<<<<<<< Updated upstream
         // Tests GestionObjetMonde
-=======
->>>>>>> Stashed changes
         private void BtnObjetMonde_Click(object sender, EventArgs e)
         {
             txtTestes.Clear();
