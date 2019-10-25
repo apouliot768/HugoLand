@@ -131,14 +131,20 @@ namespace HugoLandEditeur.ViewModels
         }
 
         // Connexion du compte d'un joueur à l'aide de la procédure stockée
-        public string ConnexionCompteJoueur(string pNomJoueur, string pMotDePasse)
+        public CompteJoueur ConnexionCompteJoueur(string pNomJoueur, string pMotDePasse)
         {
             string Message = "";
             ObjectParameter objectParameter = new ObjectParameter("message", Message);
             using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
             {
                 var procédureInsertion = context.Connexion(pNomJoueur, pMotDePasse, objectParameter);
-                return objectParameter.Value.ToString();
+                if (objectParameter.Value.ToString() == "SUCCESS")
+                {
+                    CompteJoueur compteJoueur = context.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == pNomJoueur);
+                    return compteJoueur;
+                }
+                else
+                    return new CompteJoueur();
             }
         }
     }

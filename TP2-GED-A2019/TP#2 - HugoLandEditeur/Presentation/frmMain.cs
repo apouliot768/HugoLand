@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HugoLandEditeur.Presentation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +14,6 @@ namespace HugoLandEditeur
 {
     public partial class frmMain : Form
     {
-
-
         private CMap m_Map;
         private CTileLibrary m_TileLibrary;
         private int m_XSel;
@@ -31,7 +30,8 @@ namespace HugoLandEditeur
         private int m_ActiveYIndex;
         private int m_ActiveTileID;
         private int m_ActiveTileXIndex;
-        private int m_ActiveTileYIndex;		
+        private int m_ActiveTileYIndex;
+        private CompteJoueur Compte;
 
         /// <summary>
         /// Summary description for Form1.
@@ -55,7 +55,24 @@ namespace HugoLandEditeur
 
         public frmMain()
         {
-            InitializeComponent();
+            using (frmLogIn logIn = new frmLogIn())
+            {
+                if (logIn.ShowDialog() == DialogResult.OK)
+                {
+                    InitializeComponent();
+                    Compte = new CompteJoueur
+                    {
+                        Id = logIn.Compte.Id,
+                        NomJoueur = logIn.Compte.NomJoueur,
+                        Prenom = logIn.Compte.Prenom,
+                        Nom = logIn.Compte.Nom,
+                        Courriel = logIn.Compte.Courriel,
+                        TypeUtilisateur = logIn.Compte.TypeUtilisateur,
+                    };
+                }
+                else
+                    System.Environment.Exit(1);
+            }
         }
 
         /* -------------------------------------------------------------- *\
@@ -64,6 +81,7 @@ namespace HugoLandEditeur
     \* -------------------------------------------------------------- */
         private void frmMain_Load(object sender, System.EventArgs e)
         {
+
             m_Map = new CMap();
             m_TileLibrary = new CTileLibrary();
             m_Map.TileLibrary = m_TileLibrary;
@@ -123,6 +141,7 @@ namespace HugoLandEditeur
 
             tbMain.Controls.Add(lblZoom);
             tbMain.Controls.Add(cboZoom);
+
         }
 
 
@@ -479,7 +498,8 @@ namespace HugoLandEditeur
         private void picActiveTile_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Rectangle destrect = new Rectangle(0, 0, picActiveTile.Width, picActiveTile.Height);
-            m_TileLibrary.DrawTile(e.Graphics, m_ActiveTileID, destrect);
+            if (m_TileLibrary != null)
+                m_TileLibrary.DrawTile(e.Graphics, m_ActiveTileID, destrect);
         }
 
         /* -------------------------------------------------------------- *\
@@ -651,7 +671,7 @@ namespace HugoLandEditeur
 
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            
+
             ComboItem myItem;
             myItem = (ComboItem)cboZoom.SelectedItem;
             ResetScroll();
