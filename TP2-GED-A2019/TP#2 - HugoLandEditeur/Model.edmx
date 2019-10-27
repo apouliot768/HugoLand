@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Classe">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +30,7 @@
           <Property Name="TypeUtilisateur" Type="int" Nullable="false" />
           <Property Name="MotDePasseHash" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Connexion" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EffetItem">
           <Key>
@@ -338,8 +339,7 @@
             <End Role="Heros" EntitySet="Heros" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -371,6 +371,7 @@
           <Property Name="MotDePasseHash" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
           <Property Name="Salt" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Heros" Relationship="Self.IsPartOfAccount" FromRole="CompteJoueur" ToRole="Heros" />
+          <Property Name="Connexion" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EffetItem">
           <Key>
@@ -721,6 +722,7 @@
           <EntitySetMapping Name="CompteJoueurs">
             <EntityTypeMapping TypeName="Model.CompteJoueur">
               <MappingFragment StoreEntitySet="CompteJoueur">
+                <ScalarProperty Name="Connexion" ColumnName="Connexion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="NomJoueur" ColumnName="NomJoueur" />
                 <ScalarProperty Name="Courriel" ColumnName="Courriel" />

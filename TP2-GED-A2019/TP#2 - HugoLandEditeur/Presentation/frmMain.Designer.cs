@@ -219,7 +219,6 @@ namespace HugoLandEditeur
             this.menuItem1,
             this.mnuCreateNewUser});
             this.mnuSettings.Text = "&Settings";
-            this.mnuSettings.Visible = false;
             // 
             // mnuZoom
             // 
@@ -506,6 +505,7 @@ namespace HugoLandEditeur
             this.Menu = this.mbMain;
             this.Name = "frmMain";
             this.Text = "Éditeur de monde Hugo Land";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picEditArea)).EndInit();
             this.panelTools.ResumeLayout(false);

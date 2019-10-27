@@ -19,6 +19,20 @@ namespace HugoLandEditeur.ViewModels
         // liste des erreurs de connexion
         public List<string> LstErreursComptesJoueurs { get; set; } = new List<string>();
 
+        // Liste des joueurs d'un objet GestionComptesjoueurs
+        public List<CompteJoueur> LstComptes { get; set; }
+
+        // Compte courrant
+        public CompteJoueur CompteCourrant { get; set; }
+
+        // Rôles des utilisateurs
+        public enum Role
+        {
+            Admin,
+            Joueur,
+            Défaut
+        }
+
         // Création du compte d'un joueur à l'aide de la procédure stockée
         public string CréerCompteJoueur(string NomJoueur, string Courriel, string Prenom, string Nom, int TypeUtilisateur, string MotDePasse)
         {
@@ -26,8 +40,17 @@ namespace HugoLandEditeur.ViewModels
             ObjectParameter objectParameter = new ObjectParameter("message", Message);
             using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
             {
-                var procédureInsertion = context.CreerCompteJoueur(NomJoueur, Courriel, Prenom, Nom, TypeUtilisateur, MotDePasse, objectParameter);
-                return objectParameter.Value.ToString();
+                if (!(context.CompteJoueurs.Any(x => x.NomJoueur == NomJoueur)))
+                {
+                    var procédureInsertion = context.CreerCompteJoueur(NomJoueur, Courriel, Prenom, Nom, TypeUtilisateur, MotDePasse, objectParameter);
+                    RafraichirComptes();
+                    return objectParameter.Value.ToString();
+                }
+                else
+                {
+                    Message = "Nom de joueur déjà existant!";
+                    return Message;
+                }
             }
         }
 
@@ -75,6 +98,7 @@ namespace HugoLandEditeur.ViewModels
                     }
 
                     contexte.SaveChanges();
+                    RafraichirComptes();
                 }
             }
             catch (Exception ex)
@@ -120,6 +144,7 @@ namespace HugoLandEditeur.ViewModels
                     contexte.SaveChanges();
                 }
                 SupprimerCompteJoueur(compteJoueurUpdate);
+                RafraichirComptes();
             }
             catch (Exception ex)
             {
@@ -141,10 +166,53 @@ namespace HugoLandEditeur.ViewModels
                 if (objectParameter.Value.ToString() == "SUCCESS")
                 {
                     CompteJoueur compteJoueur = context.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == pNomJoueur);
+                    compteJoueur.Connexion = true;
+                    context.SaveChanges();
+                    RafraichirComptes();
                     return compteJoueur;
                 }
                 else
                     return new CompteJoueur();
+            }
+        }
+
+        public void Déconnexion(CompteJoueur compte)
+        {
+            using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
+            {
+                CompteJoueur compteJoueur = context.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == compte.NomJoueur);
+                compteJoueur.Connexion = false;
+                context.SaveChanges();
+            }
+        }
+
+        public void RafraichirComptes()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    LstComptes = contexte.CompteJoueurs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public void ObtenirCompte(string nomJoueur)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    CompteCourrant = contexte.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == nomJoueur);
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
             }
         }
     }

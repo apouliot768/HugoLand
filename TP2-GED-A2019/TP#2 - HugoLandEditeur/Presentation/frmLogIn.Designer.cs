@@ -44,11 +44,11 @@
             // 
             this.lblTitre1.AutoSize = true;
             this.lblTitre1.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitre1.Font = new System.Drawing.Font("Beyond Wonderland", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitre1.Font = new System.Drawing.Font("Diablo", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitre1.ForeColor = System.Drawing.Color.Red;
-            this.lblTitre1.Location = new System.Drawing.Point(244, 120);
+            this.lblTitre1.Location = new System.Drawing.Point(209, 120);
             this.lblTitre1.Name = "lblTitre1";
-            this.lblTitre1.Size = new System.Drawing.Size(182, 41);
+            this.lblTitre1.Size = new System.Drawing.Size(270, 43);
             this.lblTitre1.TabIndex = 0;
             this.lblTitre1.Text = "Hugo Land";
             this.lblTitre1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -57,13 +57,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Old English Text MT", 16.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Diablo", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(276, 163);
+            this.label1.Location = new System.Drawing.Point(230, 163);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 33);
+            this.label1.Size = new System.Drawing.Size(225, 30);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Connexion";
+            this.label1.Text = "Game editor";
             // 
             // label2
             // 
@@ -71,11 +71,11 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(283, 196);
+            this.label2.Location = new System.Drawing.Point(307, 193);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 19);
+            this.label2.Size = new System.Drawing.Size(61, 19);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Éditeur de jeu";
+            this.label2.Text = "Sign in";
             // 
             // txtNomJoueur
             // 
@@ -103,7 +103,7 @@
             this.btnConnexion.Name = "btnConnexion";
             this.btnConnexion.Size = new System.Drawing.Size(110, 23);
             this.btnConnexion.TabIndex = 5;
-            this.btnConnexion.Text = "Connexion";
+            this.btnConnexion.Text = "Connect";
             this.btnConnexion.UseVisualStyleBackColor = true;
             this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
@@ -113,11 +113,11 @@
             this.lblNom.BackColor = System.Drawing.Color.Transparent;
             this.lblNom.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNom.ForeColor = System.Drawing.Color.Red;
-            this.lblNom.Location = new System.Drawing.Point(274, 263);
+            this.lblNom.Location = new System.Drawing.Point(279, 263);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(129, 19);
+            this.lblNom.Size = new System.Drawing.Size(113, 19);
             this.lblNom.TabIndex = 6;
-            this.lblNom.Text = "Nom de joueur :";
+            this.lblNom.Text = "Player name :";
             // 
             // lblMotDePasse
             // 
@@ -125,11 +125,11 @@
             this.lblMotDePasse.BackColor = System.Drawing.Color.Transparent;
             this.lblMotDePasse.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMotDePasse.ForeColor = System.Drawing.Color.Red;
-            this.lblMotDePasse.Location = new System.Drawing.Point(283, 321);
+            this.lblMotDePasse.Location = new System.Drawing.Point(292, 321);
             this.lblMotDePasse.Name = "lblMotDePasse";
-            this.lblMotDePasse.Size = new System.Drawing.Size(120, 19);
+            this.lblMotDePasse.Size = new System.Drawing.Size(93, 19);
             this.lblMotDePasse.TabIndex = 7;
-            this.lblMotDePasse.Text = "Mot de passe :";
+            this.lblMotDePasse.Text = "Password :";
             // 
             // lblEchec
             // 
@@ -137,7 +137,7 @@
             this.lblEchec.BackColor = System.Drawing.Color.Transparent;
             this.lblEchec.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEchec.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblEchec.Location = new System.Drawing.Point(154, 215);
+            this.lblEchec.Location = new System.Drawing.Point(176, 226);
             this.lblEchec.Name = "lblEchec";
             this.lblEchec.Size = new System.Drawing.Size(0, 29);
             this.lblEchec.TabIndex = 8;

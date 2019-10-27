@@ -1,4 +1,5 @@
 ﻿using HugoLandEditeur.Presentation;
+using HugoLandEditeur.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace HugoLandEditeur
         private int m_ActiveTileID;
         private int m_ActiveTileXIndex;
         private int m_ActiveTileYIndex;
-        private CompteJoueur Compte;
+        private GestionCompteJoueur m_GestionCompteJoueur = new GestionCompteJoueur();
 
         /// <summary>
         /// Summary description for Form1.
@@ -60,15 +61,7 @@ namespace HugoLandEditeur
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
                     InitializeComponent();
-                    Compte = new CompteJoueur
-                    {
-                        Id = logIn.Compte.Id,
-                        NomJoueur = logIn.Compte.NomJoueur,
-                        Prenom = logIn.Compte.Prenom,
-                        Nom = logIn.Compte.Nom,
-                        Courriel = logIn.Compte.Courriel,
-                        TypeUtilisateur = logIn.Compte.TypeUtilisateur,
-                    };
+                    m_GestionCompteJoueur.ObtenirCompte(logIn.Compte.NomJoueur);
                 }
                 else
                     System.Environment.Exit(1);
@@ -636,7 +629,7 @@ namespace HugoLandEditeur
             bEnabled = m_bOpen;
             mnuFileSave.Enabled = bEnabled;
             mnuFileClose.Enabled = bEnabled;
-            mnuCreateNewUser.Enabled = bEnabled;
+            //mnuCreateNewUser.Enabled = bEnabled; // Not look like a nessecity A.P. 2019-10-27
             mnuZoom.Enabled = bEnabled;
             tbbSave.Enabled = bEnabled;
         }
@@ -682,7 +675,18 @@ namespace HugoLandEditeur
 
         private void mnuCreateNewUser_Click(object sender, EventArgs e)
         {
+            using (frmCreateUser createUser = new frmCreateUser())
+            {
+                if (createUser.ShowDialog() == DialogResult.OK)
+                {
 
+                }
+            }
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_GestionCompteJoueur.Déconnexion(m_GestionCompteJoueur.CompteCourrant);
         }
     }
 }

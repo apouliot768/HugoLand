@@ -28,6 +28,7 @@ namespace HugoLandEditeur
         public int TypeUtilisateur { get; set; }
         public byte[] MotDePasseHash { get; set; }
         public System.Guid Salt { get; set; }
+        public bool Connexion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hero> Heros { get; set; }
