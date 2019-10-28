@@ -168,6 +168,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Presentation\frmAbout.cs">
       <SubType>Form</SubType>
@@ -209,6 +210,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
@@ -247,7 +249,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Resources\LogIn.gif" />
+    <Content Include="Resources\LogIn.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -271,8 +275,12 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <EmbeddedResource Include="Resources\DiabloHeavy.ttf" />
-    <None Include="Resources\HugoLand.jpg" />
+    <EmbeddedResource Include="Resources\DiabloHeavy.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\HugoLand.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BLL\" />
