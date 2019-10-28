@@ -61,7 +61,7 @@
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(230, 163);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 30);
+            this.label1.Size = new System.Drawing.Size(235, 31);
             this.label1.TabIndex = 1;
             this.label1.Text = "Game editor";
             // 
@@ -144,6 +144,7 @@
             // 
             // frmLogIn
             // 
+            this.AcceptButton = this.btnConnexion;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
