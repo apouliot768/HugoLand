@@ -275,7 +275,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Resources\DiabloHeavy.ttf" />
+    <None Include="Resources\DiabloLight.ttf" />
     <None Include="Resources\HugoLand.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

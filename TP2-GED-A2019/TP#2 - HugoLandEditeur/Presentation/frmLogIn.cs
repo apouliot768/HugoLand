@@ -41,7 +41,7 @@ namespace HugoLandEditeur.Presentation
         private void loadFont()
         {
             PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile(@"..\..\Resources\DiabloHeavy.ttf");
+            pfc.AddFontFile(@"..\..\Resources\DiabloLight.ttf");
             lblTitre1.Font = new Font(pfc.Families[0], lblTitre1.Font.Size);
             label1.Font = new Font(pfc.Families[0], label1.Font.Size, FontStyle.Underline);
         }
