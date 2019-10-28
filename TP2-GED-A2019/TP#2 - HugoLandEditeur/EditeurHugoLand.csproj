@@ -222,7 +222,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameData\AllTiles.bmp" />
+    <Content Include="GameData\AllTiles.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="GameData\Animations.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -250,19 +252,27 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="GameData\AllTilesLookups.csv" />
-    <None Include="GameData\ClasseHeroLookups.csv" />
-    <None Include="GameData\ItemLookups.csv" />
-    <None Include="GameData\MonstreLookups.csv" />
-    <None Include="GameData\ObjetLookups.csv" />
+    <None Include="GameData\AllTilesLookups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="GameData\ClasseHeroLookups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="GameData\ItemLookups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="GameData\MonstreLookups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="GameData\ObjetLookups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\DiabloHeavy.ttf" />
-    <None Include="Resources\HugoLand.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Resources\HugoLand.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BLL\" />
