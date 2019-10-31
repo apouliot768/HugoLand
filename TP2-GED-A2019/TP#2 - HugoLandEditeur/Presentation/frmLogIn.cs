@@ -20,16 +20,9 @@ namespace HugoLandEditeur.Presentation
     /// </summary>
     public partial class frmLogIn : Form
     {
-        [DllImport("gdi32.dll")]
-        private static extern IntPtr AddFontMemRessourceEx(IntPtr pbfont, uint cbfont, IntPtr pdv,
-            [In] ref GraphicsUnit pcFonts);
-
-        FontFamily ff;
-        Font font;
-
         private GestionCompteJoueur _gestionCompteJoueur = new GestionCompteJoueur();
-        public int Tentative { get; set; }
-        public CompteJoueur Compte { get; set; }
+        public int _tentative { get; set; }
+        public CompteJoueur _compte { get; set; }
 
         public frmLogIn()
         {
@@ -49,11 +42,23 @@ namespace HugoLandEditeur.Presentation
         // Valide la connexion de l'utilisateur et son statut d'administrateur
         private void btnConnexion_Click(object sender, EventArgs e)
         {
-            Compte = _gestionCompteJoueur.ConnexionCompteJoueur(txtNomJoueur.Text, txtMotDePasse.Text);
-            if (Compte.Id > 0 && Compte.TypeUtilisateur == 0)
-                DialogResult = DialogResult.OK;
-            else
-                lblEchec.Text = "Connexion failed : attempt # " + ++Tentative;
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                _compte = _gestionCompteJoueur.ConnexionCompteJoueur(txtNomJoueur.Text, txtMotDePasse.Text);
+                if (_compte.Id > 0 && _compte.TypeUtilisateur == 0)
+                    DialogResult = DialogResult.OK;
+                else
+                    lblEchec.Text = "Connexion failed : attempt # " + ++_tentative;
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception)
+            {
+                Cursor.Current = Cursors.Default;
+                DialogResult mboxEchecConntivité = MessageBox.Show("Can't connect to the database.\r\nCheck your connexion to the server and try again!", "Can't reach server!");
+                if (mboxEchecConntivité == DialogResult.OK)
+                    DialogResult = DialogResult.Cancel;
+            }
         }
     }
 }

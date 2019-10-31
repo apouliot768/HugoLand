@@ -25,13 +25,7 @@ namespace HugoLandEditeur.ViewModels
         // Compte courrant
         public CompteJoueur CompteCourrant { get; set; }
 
-        // Rôles des utilisateurs
-        public enum Role
-        {
-            Admin,
-            Joueur,
-            Défaut
-        }
+
 
         // Création du compte d'un joueur à l'aide de la procédure stockée
         public string CréerCompteJoueur(string NomJoueur, string Courriel, string Prenom, string Nom, int TypeUtilisateur, string MotDePasse)

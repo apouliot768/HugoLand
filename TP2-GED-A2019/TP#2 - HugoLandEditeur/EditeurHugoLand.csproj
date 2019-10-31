@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Modele\Tile.cs" />
+    <Compile Include="ViewModels\CompteCréation.cs" />
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionComptejoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />

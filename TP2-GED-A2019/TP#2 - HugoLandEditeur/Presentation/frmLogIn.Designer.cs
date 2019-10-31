@@ -81,6 +81,7 @@
             // 
             this.txtNomJoueur.BackColor = System.Drawing.Color.LightGray;
             this.txtNomJoueur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNomJoueur.ForeColor = System.Drawing.Color.Red;
             this.txtNomJoueur.Location = new System.Drawing.Point(159, 285);
             this.txtNomJoueur.Name = "txtNomJoueur";
             this.txtNomJoueur.Size = new System.Drawing.Size(367, 30);
@@ -91,6 +92,7 @@
             // 
             this.txtMotDePasse.BackColor = System.Drawing.Color.LightGray;
             this.txtMotDePasse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMotDePasse.ForeColor = System.Drawing.Color.Red;
             this.txtMotDePasse.Location = new System.Drawing.Point(159, 343);
             this.txtMotDePasse.Name = "txtMotDePasse";
             this.txtMotDePasse.Size = new System.Drawing.Size(367, 30);
@@ -113,7 +115,7 @@
             this.lblNom.BackColor = System.Drawing.Color.Transparent;
             this.lblNom.Font = new System.Drawing.Font("Arial Black", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNom.ForeColor = System.Drawing.Color.Red;
-            this.lblNom.Location = new System.Drawing.Point(279, 263);
+            this.lblNom.Location = new System.Drawing.Point(278, 263);
             this.lblNom.Name = "lblNom";
             this.lblNom.Size = new System.Drawing.Size(113, 19);
             this.lblNom.TabIndex = 6;

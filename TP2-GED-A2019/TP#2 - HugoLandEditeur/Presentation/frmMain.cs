@@ -61,7 +61,7 @@ namespace HugoLandEditeur
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
                     InitializeComponent();
-                    m_GestionCompteJoueur.ObtenirCompte(logIn.Compte.NomJoueur);
+                    m_GestionCompteJoueur.ObtenirCompte(logIn._compte.NomJoueur);
                 }
                 else
                     System.Environment.Exit(1);
@@ -679,7 +679,7 @@ namespace HugoLandEditeur
             {
                 if (createUser.ShowDialog() == DialogResult.OK)
                 {
-
+                    // TO DO : Update users list!
                 }
             }
         }
