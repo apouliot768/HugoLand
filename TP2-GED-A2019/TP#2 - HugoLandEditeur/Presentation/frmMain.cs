@@ -33,6 +33,7 @@ namespace HugoLandEditeur
         private int m_ActiveTileXIndex;
         private int m_ActiveTileYIndex;
         private GestionCompteJoueur m_GestionCompteJoueur = new GestionCompteJoueur();
+        private frmMenuUsers m_frmUser = null;
 
         /// <summary>
         /// Summary description for Form1.
@@ -687,6 +688,22 @@ namespace HugoLandEditeur
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             m_GestionCompteJoueur.Déconnexion(m_GestionCompteJoueur.CompteCourrant);
+        }
+
+        private void mnuUsers_Click(object sender, EventArgs e)
+        {
+            if (m_frmUser == null)
+            {
+                m_frmUser = new frmMenuUsers();
+                m_frmUser.Owner = this;
+                m_frmUser.FormClosed += m_frmUser_Closed;
+                m_frmUser.Show();
+            }
+        }
+
+        private void m_frmUser_Closed(object sender, EventArgs e)
+        {
+            m_frmUser = null;
         }
     }
 }
