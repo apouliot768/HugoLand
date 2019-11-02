@@ -148,12 +148,21 @@ namespace HugoLandEditeur
             Application.Exit();
         }
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : From the file drop-down menu, show the about window.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuHelpAbout_Click(object sender, System.EventArgs e)
         {
             frmAbout f = new frmAbout();
             f.ShowDialog(this);
         }
 
+        #region Zoom options
+        // Zoom at x1 force.
         private void mnuZoomX1_Click(object sender, System.EventArgs e)
         {
             ResetScroll();
@@ -161,6 +170,7 @@ namespace HugoLandEditeur
             m_bResize = true;
         }
 
+        // Zoom at x2 force.
         private void mnuZoomX2_Click(object sender, System.EventArgs e)
         {
             ResetScroll();
@@ -168,6 +178,7 @@ namespace HugoLandEditeur
             m_bResize = true;
         }
 
+        // Zoom at x4 force.
         private void mnuZoomX4_Click(object sender, System.EventArgs e)
         {
             ResetScroll();
@@ -175,6 +186,7 @@ namespace HugoLandEditeur
             m_bResize = true;
         }
 
+        // Zoom at x8 force.
         private void mnuZoomX8_Click(object sender, System.EventArgs e)
         {
             ResetScroll();
@@ -182,33 +194,65 @@ namespace HugoLandEditeur
             m_bResize = true;
         }
 
+        // Zoom at x16 force.
         private void mnuZoomX16_Click(object sender, System.EventArgs e)
         {
             ResetScroll();
             m_Zoom = 16;
             m_bResize = true;
         }
+        #endregion
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : From the file drop-down menu, open the map of the selected world.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuFileOpen_Click(object sender, System.EventArgs e)
         {
-            LoadMap();
+            frmOpen f = new frmOpen();
+            f.ShowDialog(this);
+
+            if (f.DialogResult == DialogResult.OK)
+            {
+                LoadMap();
+            }
+            else
+                MessageBox.Show("You have cancelled the opening of a new world.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : From the file drop-down menu, save the current map.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuFileSave_Click(object sender, System.EventArgs e)
         {
             m_SaveMap();
         }
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : When using the toolbar, do an action depending on the button clicked.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbMain_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
         {
-            if (e.Button == tbbSave)
+            if (e.Button == tbbSave) // Save the world
                 m_SaveMap();
-            if (e.Button == tbbOpen)
+            if (e.Button == tbbOpen) // Browse for an existing world
                 LoadMap();
-            else if (e.Button == tbbNew)
+            if (e.Button == tbbNew) // Create a new map
                 NewMap();
+            else if (e.Button == tbbHelp) // Open the help window
+                ShowHelp();
         }
-
         #endregion
 
 
@@ -520,33 +564,38 @@ namespace HugoLandEditeur
         }
         #endregion
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : Open a window allowing the user to select a *.map file to load.
+        /// Date : ???
+        /// </summary>
         private void LoadMap()
         {
-            //DialogResult result;
+            DialogResult result;
 
-            //dlgLoadMap.Title = "Load Map";
-            //dlgLoadMap.Filter = "Map Files (*.map)|*.map|All Files (*.*)|*.*";
+            dlgLoadMap.Title = "Load Map";
+            dlgLoadMap.Filter = "Map Files (*.map)|*.map|All Files (*.*)|*.*";
 
-            //result = dlgLoadMap.ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    m_bOpen = false;
-            //    picMap.Visible = false;
-            //    this.Cursor = Cursors.WaitCursor;
-            //    try
-            //    {
-            //        m_Map.Load(dlgLoadMap.FileName);
-            //        m_bOpen = true;
-            //        m_bRefresh = true;
-            //        picMap.Visible = true;
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Error Loading...");
-            //    }
-            //    m_MenuLogic();
-            //    this.Cursor = Cursors.Default;
-            //}
+            result = dlgLoadMap.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                m_bOpen = false;
+                picMap.Visible = false;
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    m_Map.Load(dlgLoadMap.FileName);
+                    m_bOpen = true;
+                    m_bRefresh = true;
+                    picMap.Visible = true;
+                }
+                catch
+                {
+                    Console.WriteLine("Error Loading...");
+                }
+                m_MenuLogic();
+                this.Cursor = Cursors.Default;
+            }
         }
 
         /* -------------------------------------------------------------- *\
@@ -556,25 +605,25 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void m_SaveMap()
         {
-            //DialogResult result;
+            DialogResult result;
 
-            //dlgSaveMap.Title = "Save Map";
-            //dlgSaveMap.Filter = "Map File (*.map)|*.map";
+            dlgSaveMap.Title = "Save Map";
+            dlgSaveMap.Filter = "Map File (*.map)|*.map";
 
-            //result = dlgSaveMap.ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    this.Cursor = Cursors.WaitCursor;
-            //    try
-            //    {
-            //        m_Map.Save(dlgSaveMap.FileName);
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Error Saving...");
-            //    }
-            //    this.Cursor = Cursors.Default;
-            //}
+            result = dlgSaveMap.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    m_Map.Save(dlgSaveMap.FileName);
+                }
+                catch
+                {
+                    Console.WriteLine("Error Saving...");
+                }
+                this.Cursor = Cursors.Default;
+            }
         }
 
         /* -------------------------------------------------------------- *\
@@ -616,6 +665,19 @@ namespace HugoLandEditeur
                 m_MenuLogic();
                 this.Cursor = Cursors.Default;
             }
+            else
+                MessageBox.Show("You have cancelled the creation of a new world.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        /// <summary>
+        /// Auteure : Joëlle Boyer
+        /// Description : Opens the window when help is needed.
+        /// Date : 2019/11/02
+        /// </summary>
+        private void ShowHelp()
+        {
+            frmHelp f = new frmHelp();
+            f.ShowDialog(this);
         }
 
         /* -------------------------------------------------------------- *\
@@ -663,6 +725,13 @@ namespace HugoLandEditeur
             m_bRefresh = true;
         }
 
+        /// <summary>
+        /// Auteur : ???
+        /// Description : Changes the zoom on the map depending on the selected index of cboZoom.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
 
@@ -674,6 +743,13 @@ namespace HugoLandEditeur
             picTiles.Focus();
         }
 
+        /// <summary>
+        /// Auteur : Alexandre Pouliot
+        /// Description : Allows the creation of a new user.
+        /// Date : 2019/10/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuCreateNewUser_Click(object sender, EventArgs e)
         {
             using (frmCreateUser createUser = new frmCreateUser())
@@ -685,6 +761,13 @@ namespace HugoLandEditeur
             }
         }
 
+        /// <summary>
+        /// Auteur : Alexandre Pouliot
+        /// Description : Disconnect the user when the form is closed.
+        /// Date : 2019/10/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             m_GestionCompteJoueur.Déconnexion(m_GestionCompteJoueur.CompteCourrant);
