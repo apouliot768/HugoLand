@@ -117,10 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Please note : The game screen will have a dimension of 8x8 tiles.
-If a world is 32x32, it means that you will have 4x4 game screens.
-A total of tiles and game screens is shown 
-at the row "Total number of :".</value>
-  </data>
 </root>
