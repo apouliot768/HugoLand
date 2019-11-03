@@ -8,8 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.Models;
-using HugoLandEditeur.ViewModels;
+using HugoLand.Models;
+using HugoLand.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {
@@ -25,7 +25,7 @@ namespace HugoLandEditeur.Presentation
         {
             InitializeComponent();
 
-            foreach (Monde m in _gMonde.LstMondes)
+            foreach (HugoLand.Monde m in _gMonde.LstMondes)
                 cboChoose.Items.Add(m.Description);
         }
 
@@ -40,7 +40,7 @@ namespace HugoLandEditeur.Presentation
         {
             string sDescription = cboChoose.Text;
 
-            Monde m = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
+            HugoLand.Monde m = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
 
             txtHeight.Text = m.LimiteY.ToString();
             txtWidth.Text = m.LimiteX.ToString();

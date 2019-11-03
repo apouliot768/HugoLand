@@ -1,4 +1,4 @@
-﻿using HugoLandEditeur.Models;
+﻿using HugoLand.Models;
 using System;
 
 namespace HugoLandEditeur.Presentation

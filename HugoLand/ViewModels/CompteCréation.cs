@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.Models;
+using HugoLand.Models;
 
-namespace HugoLandEditeur.ViewModels
+namespace HugoLand.ViewModels
 {
     public class CompteCréation
     {

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>7.10.3077</ProductVersion>
@@ -22,7 +22,7 @@
     <StartupObject />
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
@@ -101,43 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitmapCache.cs" />
-    <Compile Include="ChatMessage.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classe.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CompteJoueur.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="csteApplication.cs" />
-    <Compile Include="EffetItem.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Hero.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InventaireHero.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Item.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Modele\CMap.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -145,16 +109,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modele\TypeTyle.cs" />
-    <Compile Include="Models\Constantes.cs" />
-    <Compile Include="Monde.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Monstre.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ObjetMonde.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\frmCreateUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,16 +165,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Modele\Tile.cs" />
-    <Compile Include="ViewModels\CompteCréation.cs" />
-    <Compile Include="ViewModels\CompteRoles.cs" />
-    <Compile Include="ViewModels\GestionClasse.cs" />
-    <Compile Include="ViewModels\GestionComptejoueur.cs" />
-    <Compile Include="ViewModels\GestionEffetItem.cs" />
-    <Compile Include="ViewModels\GestionHeros.cs" />
-    <Compile Include="ViewModels\GestionItem.cs" />
-    <Compile Include="ViewModels\GestionMonde.cs" />
-    <Compile Include="ViewModels\GestionMonstre.cs" />
-    <Compile Include="ViewModels\GestionObjetMonde.cs" />
     <EmbeddedResource Include="Presentation\frmCreateUser.resx">
       <DependentUpon>frmCreateUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,16 +215,6 @@
     <Content Include="GameData\Objets.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\UserMenu6.jpg" />
     <None Include="Resources\UsersMenu5.jpg" />
     <None Include="Resources\UserMenu4.png" />
@@ -294,10 +228,6 @@
     <Content Include="Resources\LogIn.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="GameData\AllTilesLookups.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -313,9 +243,6 @@
     <None Include="GameData\ObjetLookups.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\HugoLandEditeur.Models.Constantes+Role.datasource" />
     <None Include="Properties\DataSources\HugoLandEditeur.ViewModels.CompteRoles.datasource" />
@@ -329,6 +256,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HugoLand\HugoLand.csproj">
+      <Project>{4891a93c-31e3-4dde-9a0c-c47b0de37fcb}</Project>
+      <Name>HugoLand</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

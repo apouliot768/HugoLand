@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HugoLandEditeur.Models;
+using HugoLand.Models;
 
-namespace HugoLandEditeur.ViewModels
+namespace HugoLand.ViewModels
 {
     public class CompteRoles
     {

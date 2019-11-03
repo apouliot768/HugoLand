@@ -1,5 +1,5 @@
 ﻿using HugoLandEditeur.Presentation;
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +32,7 @@ namespace HugoLandEditeur
         private int m_ActiveTileID;
         private int m_ActiveTileXIndex;
         private int m_ActiveTileYIndex;
-        private GestionCompteJoueur m_GestionCompteJoueur = new GestionCompteJoueur();
+        private HugoLand.ViewModels.GestionCompteJoueur m_GestionCompteJoueur = new GestionCompteJoueur();
         private frmMenuUsers m_frmUser = null;
 
         /// <summary>
