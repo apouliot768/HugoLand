@@ -447,7 +447,7 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void picMap_Click(object sender, System.EventArgs e)
         {
-            //hUGO : mODIFIER ICI POUR AVOIR le tile et le type
+            // TO DO : HUGO - MODIFIER ICI POUR AVOIR le tile et le type
             m_Map.PlotTile(m_ActiveXIndex, m_ActiveYIndex, m_ActiveTileID);
 
             m_bRefresh = true;
@@ -567,6 +567,7 @@ namespace HugoLandEditeur
         /// <summary>
         /// Auteur : ???
         /// Description : Open a window allowing the user to select a *.map file to load.
+        /// Update : Joëlle Boyer -> Added "m_ResizeMap()" so that the map immediately shows the changes made. 2019/11/03
         /// Date : ???
         /// </summary>
         private void LoadMap()
@@ -593,6 +594,8 @@ namespace HugoLandEditeur
                 {
                     Console.WriteLine("Error Loading...");
                 }
+
+                m_ResizeMap();
                 m_MenuLogic();
                 this.Cursor = Cursors.Default;
             }
@@ -610,7 +613,7 @@ namespace HugoLandEditeur
             dlgSaveMap.Title = "Save Map";
             dlgSaveMap.Filter = "Map File (*.map)|*.map";
 
-            result = dlgSaveMap.ShowDialog();
+            result = dlgSaveMap.ShowDialog(); 
             if (result == DialogResult.OK)
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -640,6 +643,8 @@ namespace HugoLandEditeur
             f = new frmNew();
             f.MapWidth = m_Map.Width;
             f.MapHeight = m_Map.Height;
+            f.DefaultTile = m_Map.DefaultTileID;
+
 
             result = f.ShowDialog(this);
             if (result == DialogResult.OK)
@@ -649,7 +654,8 @@ namespace HugoLandEditeur
                 this.Cursor = Cursors.WaitCursor;
                 try
                 {
-                    bResult = m_Map.CreateNew(f.MapWidth, f.MapHeight, 32);
+                    bResult = m_Map.CreateNew(f.MapWidth, f.MapHeight, f.DefaultTile);
+
                     if (bResult)
                     {
                         m_bOpen = true;
@@ -734,7 +740,6 @@ namespace HugoLandEditeur
         /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-
             ComboItem myItem;
             myItem = (ComboItem)cboZoom.SelectedItem;
             ResetScroll();

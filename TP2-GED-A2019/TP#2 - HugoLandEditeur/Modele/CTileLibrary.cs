@@ -12,8 +12,8 @@ namespace HugoLandEditeur
 	{
 
 
-        private int m_Count;			// number of tiles
-        private Bitmap m_TileSource;		// to be loaded from external File or resource...
+        private int m_Count; // number of tiles
+        private Bitmap m_TileSource; // to be loaded from external File or resource...
         private int m_Width;
         private int m_Height;
         private Dictionary<string, Tile> _ObjMonde = new Dictionary<string, Tile>();
@@ -119,7 +119,7 @@ namespace HugoLandEditeur
 		}
 
         /// <summary>
-        ///  Each line contains a comma delimited tile definition that the tile constructor understands.
+        /// Each line contains a comma delimited tile definition that the tile constructor understands.
         /// </summary>
         /// <param name="tileDescriptionFile"></param>
         private void readTileDefinitions(string tileDescriptionFile)

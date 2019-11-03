@@ -74,11 +74,9 @@ namespace HugoLandEditeur
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 foreach (string s in tileData)
                     Console.WriteLine(s);
-
             }
         }
     }
