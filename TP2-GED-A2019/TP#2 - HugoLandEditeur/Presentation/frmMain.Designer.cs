@@ -438,8 +438,9 @@ namespace HugoLandEditeur
             // vscMap
             // 
             this.vscMap.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vscMap.LargeChange = 5;
+            this.vscMap.LargeChange = 1;
             this.vscMap.Location = new System.Drawing.Point(799, 28);
+            this.vscMap.Maximum = 0;
             this.vscMap.Name = "vscMap";
             this.vscMap.Size = new System.Drawing.Size(20, 320);
             this.vscMap.TabIndex = 6;
@@ -448,8 +449,9 @@ namespace HugoLandEditeur
             // hscMap
             // 
             this.hscMap.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hscMap.LargeChange = 5;
+            this.hscMap.LargeChange = 1;
             this.hscMap.Location = new System.Drawing.Point(0, 329);
+            this.hscMap.Maximum = 0;
             this.hscMap.Name = "hscMap";
             this.hscMap.Size = new System.Drawing.Size(799, 19);
             this.hscMap.TabIndex = 7;
@@ -463,9 +465,9 @@ namespace HugoLandEditeur
             // picMap
             // 
             this.picMap.BackColor = System.Drawing.Color.White;
-            this.picMap.Location = new System.Drawing.Point(19, 46);
+            this.picMap.Location = new System.Drawing.Point(0, 0);
             this.picMap.Name = "picMap";
-            this.picMap.Size = new System.Drawing.Size(605, 351);
+            this.picMap.Size = new System.Drawing.Size(799, 326);
             this.picMap.TabIndex = 8;
             this.picMap.TabStop = false;
             this.picMap.Visible = false;

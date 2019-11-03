@@ -189,130 +189,130 @@ namespace HugoLandEditeur
 
         public int Save(String strFilename)
         {
-            //int i,j;
+            int i, j;
 
-            //FileStream file = new FileStream(strFilename, FileMode.Create, FileAccess.Write);
-            //StreamWriter sw = new StreamWriter(file);
+            FileStream file = new FileStream(strFilename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(file);
 
-            //sw.WriteLine("ID: {0}",MAPFILE_ID.ToString());
-            //sw.WriteLine("WIDTH: {0}",m_Width.ToString());
-            //sw.WriteLine("HEIGHT: {0}",m_Height.ToString());
-            //sw.WriteLine("DATA:");
+            sw.WriteLine("ID: {0}", csteApplication.MAPFILE_ID.ToString());
+            sw.WriteLine("WIDTH: {0}", m_Width.ToString());
+            sw.WriteLine("HEIGHT: {0}", m_Height.ToString());
+            sw.WriteLine("DATA:");
 
-            //for (i=0; i<m_Height; i++)
-            //{
-            //    for (j=0; j<m_Width; j++)
-            //        sw.Write("{0},", m_Tiles[i,j]);
-            //    sw.WriteLine();
-            //}
-            //sw.Close();
+            for (i = 0; i < m_Height; i++)
+            {
+                for (j = 0; j < m_Width; j++)
+                    sw.Write("{0},", m_Tiles[i, j]);
+                sw.WriteLine();
+            }
+            sw.Close();
 
             return 0;
         }
 
         public int Load(String strFilename)
         {
-            //int i;
+            int i;
 
-            //FileStream file;						
-            //StreamReader sr;
-            //String strLine;
-            //int index;
-            //char[] delim = {':'};
-            //char[] delim2 = {','};
-            //int id = -1;
-            //int width = -1;
-            //int height = -1;
-            //int data = -1;
-            //String strVar;
-            //String strValue;
-            //String[] arrValues;
-            //int count;
-            //int[] arrData;
-            //int rowcount = 0;
+            FileStream file;
+            StreamReader sr;
+            String strLine;
+            int index;
+            char[] delim = { ':' };
+            char[] delim2 = { ',' };
+            int id = -1;
+            int width = -1;
+            int height = -1;
+            int data = -1;
+            String strVar;
+            String strValue;
+            String[] arrValues;
+            int count;
+            int[] arrData;
+            int rowcount = 0;
 
-            //arrData = new int[128];
+            arrData = new int[128];
 
-            //try
-            //{
-            //    file = new FileStream(strFilename, FileMode.Open, FileAccess.Read);
-            //    sr = new StreamReader(file);
-            //}
-            //catch
-            //{
-            //    return -1;
-            //}
+            try
+            {
+                file = new FileStream(strFilename, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(file);
+            }
+            catch
+            {
+                return -1;
+            }
 
-            //while(sr.Peek() >= 0)
-            //{					
-            //    strLine = sr.ReadLine();
-            //    index = strLine.IndexOfAny(delim);
-            //    if (index > 0)
-            //    {
-            //        strVar = strLine.Substring(0,index);
-            //        strVar = strVar.Trim();					
-            //        strVar = strVar.ToLower();
-            //        strValue = strLine.Substring(index+1);
-            //        strValue = strValue.Trim();
-            //        strValue = strValue.ToLower();
+            while (sr.Peek() >= 0)
+            {
+                strLine = sr.ReadLine();
+                index = strLine.IndexOfAny(delim);
+                if (index > 0)
+                {
+                    strVar = strLine.Substring(0, index);
+                    strVar = strVar.Trim();
+                    strVar = strVar.ToLower();
+                    strValue = strLine.Substring(index + 1);
+                    strValue = strValue.Trim();
+                    strValue = strValue.ToLower();
 
-            //        if (strVar == "id")
-            //            id = Convert.ToInt32(strValue);
-            //        else if (strVar == "width")
-            //            width = Convert.ToInt32(strValue);
-            //        else if (strVar == "height")
-            //            height = Convert.ToInt32(strValue);
-            //        else if (strVar == "data")
-            //        {
-            //            data = 1;						
-            //            break;
-            //        }
-            //    }
-            //}
+                    if (strVar == "id")
+                        id = Convert.ToInt32(strValue);
+                    else if (strVar == "width")
+                        width = Convert.ToInt32(strValue);
+                    else if (strVar == "height")
+                        height = Convert.ToInt32(strValue);
+                    else if (strVar == "data")
+                    {
+                        data = 1;
+                        break;
+                    }
+                }
+            }
 
-            //if (width <= 0 || height <=0 || data < 0 || id < 0)
-            //    return -1;
-            //if (width < 8 || width > MAP_MAX_WIDTH)
-            //    return -1;
-            //if (height < 8 || height > MAP_MAX_HEIGHT)
-            //    return -1;
+            if (width <= 0 || height <= 0 || data < 0 || id < 0)
+                return -1;
+            if (width < 8 || width > csteApplication.MAP_MAX_WIDTH)
+                return -1;
+            if (height < 8 || height > csteApplication.MAP_MAX_HEIGHT)
+                return -1;
 
-            //// Build Backbuffer
-            //m_Width = width;
-            //m_Height = height;
-            //m_Tiles = new int[m_Height,m_Width];
-            //m_BackBuffer = new Bitmap(m_Width * TILE_WIDTH_IN_MAP, m_Height * TILE_HEIGHT_IN_MAP);
-            //m_BackBufferDC = Graphics.FromImage(m_BackBuffer);
+            // Build Backbuffer
+            m_Width = width;
+            m_Height = height;
+            m_Tiles = new int[m_Height, m_Width];
+            m_BackBuffer = new Bitmap(m_Width * csteApplication.TILE_WIDTH_IN_MAP, m_Height * csteApplication.TILE_HEIGHT_IN_MAP);
+            m_BackBufferDC = Graphics.FromImage(m_BackBuffer);
 
-            //while(sr.Peek() >= 0)
-            //{
-            //    strLine = sr.ReadLine();
-            //    strLine = strLine.Trim();
-            //    if (strLine.Length > 1)
-            //    {
-            //        arrValues = strLine.Split(delim2);
+            while (sr.Peek() >= 0)
+            {
+                strLine = sr.ReadLine();
+                strLine = strLine.Trim();
+                if (strLine.Length > 1)
+                {
+                    arrValues = strLine.Split(delim2);
 
-            //        count = 0;
-            //        for (i=0; i<=arrValues.GetUpperBound(0); i++)
-            //        {
-            //            strValue = arrValues[i].Trim();
-            //            if (strValue.Length > 0)
-            //            {
-            //                arrData[count] = Convert.ToByte(arrValues[i],10);
-            //                count++;
-            //            }
-            //        }
-            //        if (count != width)
-            //            return -1;
+                    count = 0;
+                    for (i = 0; i <= arrValues.GetUpperBound(0); i++)
+                    {
+                        strValue = arrValues[i].Trim();
+                        if (strValue.Length > 0)
+                        {
+                            arrData[count] = Convert.ToByte(arrValues[i], 10);
+                            count++;
+                        }
+                    }
+                    if (count != width)
+                        return -1;
 
-            //        for (i=0; i<width; i++)
-            //            m_Tiles[rowcount,i] = arrData[i];
-            //        rowcount++;
-            //    }
-            //}			
-            //sr.Close();
+                    for (i = 0; i < width; i++)
+                        m_Tiles[rowcount, i] = arrData[i];
+                    rowcount++;
+                }
+            }
+            sr.Close();
 
-            //Refresh();
+            Refresh();
 
             return 0;
         }
