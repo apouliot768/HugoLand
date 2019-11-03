@@ -36,6 +36,7 @@ namespace HugoLandEditeur
         public virtual DbSet<Monde> Mondes { get; set; }
         public virtual DbSet<Monstre> Monstres { get; set; }
         public virtual DbSet<ObjetMonde> ObjetMondes { get; set; }
+        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
     
         public virtual int Connexion(string pNomJoueur, string pMotDePasse, ObjectParameter message)
         {

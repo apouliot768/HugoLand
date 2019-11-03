@@ -209,5 +209,132 @@ namespace HugoLandEditeur.ViewModels
                 LstErreursComptesJoueurs.Add(ex.Message);
             }
         }
+
+        public void UpdateRole(string sId, string sRole)
+        {
+            try
+            {
+                int iId = Int32.Parse(sId);
+                Constantes.Role enumRole = (Constantes.Role)Enum.Parse(typeof(Constantes.Role), sRole, true);
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    CompteJoueur compte = contexte.CompteJoueurs.FirstOrDefault(x => x.Id == iId);
+                    compte.TypeUtilisateur = (int)enumRole;
+                    contexte.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public bool CompareUsersList()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    List<CompteJoueur> lstComptes = contexte.CompteJoueurs.ToList();
+
+                    if (lstComptes.Count != LstComptes.Count)
+                        return true;
+                    else
+                    {
+                        for (int i = 0; i < LstComptes.Count; i++)
+                        {
+                            if (LstComptes[i].Connexion != lstComptes[i].Connexion)
+                                return true;
+                            if (LstComptes[i].TypeUtilisateur != lstComptes[i].TypeUtilisateur)
+                                return true;
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                RafraichirComptes();
+                return true;
+            }
+        }
+
+        public List<string> UpdateEditorChatBox(int lastId)
+        {
+            List<ChatMessage> lstChats = new List<ChatMessage>();
+            List<string> lstMessages = new List<string>();
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    if (contexte.ChatMessages.Any(x => x.MessageID > lastId))
+                    {
+
+                        lstChats = contexte.ChatMessages.Where(x => x.ContextPost == "Editor").OrderByDescending(x => x.MessageID).Take(50).ToList();
+                        foreach (ChatMessage chat in lstChats)
+                        {
+                            lstMessages.Add(chat.DatePost + "\r\n" + chat.CompteJoueur.NomJoueur + " say : \r\n" + chat.MessageText + "\r\n\r\n");
+                        }
+
+                        return lstMessages;
+                    }
+                    else
+                    {
+                        return lstMessages;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                lstMessages.Add("??? ERROR ???");
+                return lstMessages;
+            }
+        }
+
+        public void PostOnChatEditor(int Id, string Message)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    if (contexte.CompteJoueurs.Any(x => x.Id == Id) && Message != "")
+                    {
+                        ChatMessage chatMessage = new ChatMessage
+                        {
+                            CompteJoueurId = Id,
+                            MessageText = Message,
+                            DatePost = DateTime.Now,
+                            ContextPost = Constantes.ContextChat.Editor.ToString()
+                        };
+                        contexte.ChatMessages.Add(chatMessage);
+                        contexte.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public int GetLastEditorPostId()
+        {
+            int lastId = 0;
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    lastId = (from chat in contexte.ChatMessages orderby chat.MessageID descending select chat.MessageID).First();
+                    return lastId;
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                return lastId;
+            }
+        }
     }
 }

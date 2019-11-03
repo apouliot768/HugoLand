@@ -514,6 +514,7 @@ namespace HugoLandEditeur
             this.Controls.Add(this.picEditArea);
             this.Menu = this.mbMain;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Éditeur de monde Hugo Land";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);

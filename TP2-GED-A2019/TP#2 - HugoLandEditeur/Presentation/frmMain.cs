@@ -778,6 +778,9 @@ namespace HugoLandEditeur
             if (m_frmUser == null)
             {
                 m_frmUser = new frmMenuUsers();
+                m_frmUser._gestionCompteJoueur.CompteCourrant = m_GestionCompteJoueur.CompteCourrant;
+                m_frmUser.Location = new Point((this.Location.X + this.Width + this.Width / 6) - (m_frmUser.Width / 2), (this.Location.Y + this.Height / 2) - (m_frmUser.Height / 2));
+                m_frmUser.StartPosition = FormStartPosition.Manual;
                 m_frmUser.Owner = this;
                 m_frmUser.FormClosed += m_frmUser_Closed;
                 m_frmUser.Show();

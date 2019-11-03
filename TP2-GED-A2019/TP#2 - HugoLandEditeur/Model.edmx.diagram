@@ -25,6 +25,8 @@
         <AssociationConnector Association="Model.FK_Item_Monde" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Monstre_Monde" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_ObjetMonde_Monde" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.ChatMessage" Width="1.5" PointX="5.25" PointY="1.375" />
+        <AssociationConnector Association="Model.FK__ChatMessa__Compt__4AB81AF0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

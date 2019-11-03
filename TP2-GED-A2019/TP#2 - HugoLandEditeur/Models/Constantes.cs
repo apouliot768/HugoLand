@@ -25,5 +25,9 @@ namespace HugoLandEditeur.Models
             Player,
             Default
         }
+        public enum ContextChat
+        {
+            Editor
+        }
     }
 }

@@ -101,6 +101,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitmapCache.cs" />
+    <Compile Include="ChatMessage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Classe.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -209,6 +212,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Modele\Tile.cs" />
     <Compile Include="ViewModels\CompteCréation.cs" />
+    <Compile Include="ViewModels\CompteRoles.cs" />
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionComptejoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />
@@ -222,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\frmHelp.resx">
       <DependentUpon>frmHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\frmMenuUsers.resx">
+      <DependentUpon>frmMenuUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\frmNew.resx">
       <DependentUpon>frmNew.cs</DependentUpon>
@@ -274,6 +281,16 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\UserMenu6.jpg" />
+    <None Include="Resources\UsersMenu5.jpg" />
+    <None Include="Resources\UserMenu4.png" />
+    <None Include="Resources\UsersMenu3.png" />
+    <None Include="Resources\UserMenu3.jpg" />
+    <None Include="Resources\UsersMenuBack2.jpg" />
+    <None Include="Resources\UserMenuBack.jpg" />
+    <None Include="Resources\red.jpg" />
+    <None Include="Resources\green.bmp" />
+    <None Include="Resources\green.jpg" />
     <Content Include="Resources\LogIn.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -300,6 +317,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\HugoLandEditeur.Models.Constantes+Role.datasource" />
+    <None Include="Properties\DataSources\HugoLandEditeur.ViewModels.CompteRoles.datasource" />
     <None Include="Resources\DiabloLight.ttf" />
     <None Include="Resources\HugoLand.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
