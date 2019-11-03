@@ -18,6 +18,7 @@ namespace HugoLand
         public CompteJoueur()
         {
             this.Heros = new HashSet<Hero>();
+            this.ChatMessages = new HashSet<ChatMessage>();
         }
     
         public int Id { get; set; }
@@ -28,8 +29,11 @@ namespace HugoLand
         public int TypeUtilisateur { get; set; }
         public byte[] MotDePasseHash { get; set; }
         public System.Guid Salt { get; set; }
+        public bool Connexion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hero> Heros { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

@@ -99,7 +99,10 @@ namespace HugoLand
             txtTestes.Text += "\r\nTest connexion CompteJoueur...\r\n";
             txtTestes.Text += "\r\n";
 
-            string testConnexion = gestionCompteJoueur.ConnexionCompteJoueur("Ganon", "Toto");
+            string testConnexion = "ERROR";
+            CompteJoueur compte = gestionCompteJoueur.ConnexionCompteJoueur("Ganon", "Toto");
+            if (compte != null)
+                testConnexion = "SUCCESS";
 
             txtTestes.Text += testConnexion + "\r\n";
 

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ModelGEDEquipe1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChatMessages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompteJoueurId" Type="int" Nullable="false" />
+          <Property Name="MessageText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatePost" Type="datetime" Nullable="false" />
+          <Property Name="ContextPost" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Classe">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +40,7 @@
           <Property Name="TypeUtilisateur" Type="int" Nullable="false" />
           <Property Name="MotDePasseHash" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Connexion" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EffetItem">
           <Key>
@@ -148,6 +159,18 @@
             </Principal>
             <Dependent Role="InventaireHero">
               <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa__Compt__534D60F1">
+          <End Role="CompteJoueur" Type="Self.CompteJoueur" Multiplicity="1" />
+          <End Role="ChatMessages" Type="Self.ChatMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompteJoueur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessages">
+              <PropertyRef Name="CompteJoueurId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -284,6 +307,7 @@
           <Parameter Name="Message" Type="nvarchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="ModelGEDEquipe1StoreContainer">
+          <EntitySet Name="ChatMessages" EntityType="Self.ChatMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classe" EntityType="Self.Classe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompteJoueur" EntityType="Self.CompteJoueur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EffetItem" EntityType="Self.EffetItem" Schema="dbo" store:Type="Tables" />
@@ -300,6 +324,10 @@
           <AssociationSet Name="BelongsToItem" Association="Self.BelongsToItem">
             <End Role="Item" EntitySet="Item" />
             <End Role="InventaireHero" EntitySet="InventaireHero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa__Compt__534D60F1" Association="Self.FK__ChatMessa__Compt__534D60F1">
+            <End Role="CompteJoueur" EntitySet="CompteJoueur" />
+            <End Role="ChatMessages" EntitySet="ChatMessages" />
           </AssociationSet>
           <AssociationSet Name="FK_Classe_Monde" Association="Self.FK_Classe_Monde">
             <End Role="Monde" EntitySet="Monde" />
@@ -370,6 +398,8 @@
           <Property Name="MotDePasseHash" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
           <Property Name="Salt" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Heros" Relationship="Self.IsPartOfAccount" FromRole="CompteJoueur" ToRole="Heros" />
+          <Property Name="Connexion" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChatMessages" Relationship="ModelGEDEquipe1.FK__ChatMessa__Compt__534D60F1" FromRole="CompteJoueur" ToRole="ChatMessage" />
         </EntityType>
         <EntityType Name="EffetItem">
           <Key>
@@ -696,7 +726,35 @@
             <Parameter Name="pMotDePasse" Mode="In" Type="String" />
             <Parameter Name="Message" Mode="InOut" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ChatMessages" EntityType="ModelGEDEquipe1.ChatMessage" />
+          <AssociationSet Name="FK__ChatMessa__Compt__534D60F1" Association="ModelGEDEquipe1.FK__ChatMessa__Compt__534D60F1">
+            <End Role="CompteJoueur" EntitySet="CompteJoueurs" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompteJoueurId" Type="Int32" Nullable="false" />
+          <Property Name="MessageText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatePost" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContextPost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompteJoueur" Relationship="ModelGEDEquipe1.FK__ChatMessa__Compt__534D60F1" FromRole="ChatMessage" ToRole="CompteJoueur" />
+        </EntityType>
+        <Association Name="FK__ChatMessa__Compt__534D60F1">
+          <End Type="ModelGEDEquipe1.CompteJoueur" Role="CompteJoueur" Multiplicity="1" />
+          <End Type="ModelGEDEquipe1.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompteJoueur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="CompteJoueurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -720,6 +778,7 @@
           <EntitySetMapping Name="CompteJoueurs">
             <EntityTypeMapping TypeName="ModelGEDEquipe1.CompteJoueur">
               <MappingFragment StoreEntitySet="CompteJoueur">
+                <ScalarProperty Name="Connexion" ColumnName="Connexion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="NomJoueur" ColumnName="NomJoueur" />
                 <ScalarProperty Name="Courriel" ColumnName="Courriel" />
@@ -836,6 +895,17 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Connexion" FunctionName="ModelGEDEquipe1.Store.Connexion" />
           <FunctionImportMapping FunctionImportName="CreerCompteJoueur" FunctionName="ModelGEDEquipe1.Store.CreerCompteJoueur" />
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="ModelGEDEquipe1.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessages">
+                <ScalarProperty Name="ContextPost" ColumnName="ContextPost" />
+                <ScalarProperty Name="DatePost" ColumnName="DatePost" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="CompteJoueurId" ColumnName="CompteJoueurId" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

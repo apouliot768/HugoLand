@@ -20,6 +20,14 @@ namespace HugoLand.ViewModels
         // liste des erreurs de connexion
         public List<string> LstErreursComptesJoueurs { get; set; } = new List<string>();
 
+        // Liste des joueurs d'un objet GestionComptesjoueurs
+        public List<CompteJoueur> LstComptes { get; set; }
+
+        // Compte courrant
+        public CompteJoueur CompteCourrant { get; set; }
+
+
+
         // Création du compte d'un joueur à l'aide de la procédure stockée
         public string CréerCompteJoueur(string NomJoueur, string Courriel, string Prenom, string Nom, int TypeUtilisateur, string MotDePasse)
         {
@@ -27,8 +35,17 @@ namespace HugoLand.ViewModels
             ObjectParameter objectParameter = new ObjectParameter("message", Message);
             using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
             {
+                if (!(context.CompteJoueurs.Any(x => x.NomJoueur == NomJoueur)))
+                {
                     var procédureInsertion = context.CreerCompteJoueur(NomJoueur, Courriel, Prenom, Nom, TypeUtilisateur, MotDePasse, objectParameter);
-                return objectParameter.Value.ToString();
+                    RafraichirComptes();
+                    return objectParameter.Value.ToString();
+                }
+                else
+                {
+                    Message = "Nom de joueur déjà existant!";
+                    return Message;
+                }
             }
         }
 
@@ -76,6 +93,7 @@ namespace HugoLand.ViewModels
                     }
 
                     contexte.SaveChanges();
+                    RafraichirComptes();
                 }
             }
             catch (Exception ex)
@@ -121,6 +139,7 @@ namespace HugoLand.ViewModels
                     contexte.SaveChanges();
                 }
                 SupprimerCompteJoueur(compteJoueurUpdate);
+                RafraichirComptes();
             }
             catch (Exception ex)
             {
@@ -132,14 +151,190 @@ namespace HugoLand.ViewModels
         }
 
         // Connexion du compte d'un joueur à l'aide de la procédure stockée
-        public string ConnexionCompteJoueur(string pNomJoueur, string pMotDePasse)
+        public CompteJoueur ConnexionCompteJoueur(string pNomJoueur, string pMotDePasse)
         {
             string Message = "";
             ObjectParameter objectParameter = new ObjectParameter("message", Message);
             using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
             {
                 var procédureInsertion = context.Connexion(pNomJoueur, pMotDePasse, objectParameter);
-                return objectParameter.Value.ToString();
+                if (objectParameter.Value.ToString() == "SUCCESS")
+                {
+                    CompteJoueur compteJoueur = context.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == pNomJoueur);
+                    compteJoueur.Connexion = true;
+                    context.SaveChanges();
+                    RafraichirComptes();
+                    return compteJoueur;
+                }
+                else
+                    return new CompteJoueur();
+            }
+        }
+
+        public void Déconnexion(CompteJoueur compte)
+        {
+            using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
+            {
+                CompteJoueur compteJoueur = context.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == compte.NomJoueur);
+                compteJoueur.Connexion = false;
+                context.SaveChanges();
+            }
+        }
+
+        public void RafraichirComptes()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    LstComptes = contexte.CompteJoueurs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public void ObtenirCompte(string nomJoueur)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    CompteCourrant = contexte.CompteJoueurs.FirstOrDefault(x => x.NomJoueur == nomJoueur);
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public void UpdateRole(string sId, string sRole)
+        {
+            try
+            {
+                int iId = Int32.Parse(sId);
+                Constantes.Role enumRole = (Constantes.Role)Enum.Parse(typeof(Constantes.Role), sRole, true);
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    CompteJoueur compte = contexte.CompteJoueurs.FirstOrDefault(x => x.Id == iId);
+                    compte.TypeUtilisateur = (int)enumRole;
+                    contexte.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public bool CompareUsersList()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    List<CompteJoueur> lstComptes = contexte.CompteJoueurs.ToList();
+
+                    if (lstComptes.Count != LstComptes.Count)
+                        return true;
+                    else
+                    {
+                        for (int i = 0; i < LstComptes.Count; i++)
+                        {
+                            if (LstComptes[i].Connexion != lstComptes[i].Connexion)
+                                return true;
+                            if (LstComptes[i].TypeUtilisateur != lstComptes[i].TypeUtilisateur)
+                                return true;
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                RafraichirComptes();
+                return true;
+            }
+        }
+
+        public List<string> UpdateEditorChatBox(int lastId)
+        {
+            List<ChatMessage> lstChats = new List<ChatMessage>();
+            List<string> lstMessages = new List<string>();
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    if (contexte.ChatMessages.Any(x => x.MessageID > lastId))
+                    {
+
+                        lstChats = contexte.ChatMessages.Where(x => x.ContextPost == "Editor").OrderByDescending(x => x.MessageID).Take(50).ToList();
+                        foreach (ChatMessage chat in lstChats)
+                        {
+                            lstMessages.Add(chat.DatePost + "\r\n" + chat.CompteJoueur.NomJoueur + " say : \r\n" + chat.MessageText + "\r\n\r\n");
+                        }
+
+                        return lstMessages;
+                    }
+                    else
+                    {
+                        return lstMessages;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                lstMessages.Add("??? ERROR ???");
+                return lstMessages;
+            }
+        }
+
+        public void PostOnChatEditor(int Id, string Message)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    if (contexte.CompteJoueurs.Any(x => x.Id == Id) && Message != "")
+                    {
+                        ChatMessage chatMessage = new ChatMessage
+                        {
+                            CompteJoueurId = Id,
+                            MessageText = Message,
+                            DatePost = DateTime.Now,
+                            ContextPost = Constantes.ContextChat.Editor.ToString()
+                        };
+                        contexte.ChatMessages.Add(chatMessage);
+                        contexte.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+            }
+        }
+
+        public int GetLastEditorPostId()
+        {
+            int lastId = 0;
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    lastId = (from chat in contexte.ChatMessages orderby chat.MessageID descending select chat.MessageID).First();
+                    return lastId;
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursComptesJoueurs.Add(ex.Message);
+                return lastId;
             }
         }
     }
