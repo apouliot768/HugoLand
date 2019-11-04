@@ -249,14 +249,19 @@ namespace HugoLandEditeur
         private void cboDefaultTile_SelectedIndexChanged(object sender, EventArgs e)
         {
             CTileLibrary cTile = new CTileLibrary();
+            Tile t;
             string myItem = cboDefaultTile.SelectedItem.ToString();
-            myItem = myItem.Substring(myItem.IndexOf('-')).Replace("-", "");
-            Tile t = cTile.ObjMonde.FirstOrDefault(x => x.Value.Name == myItem).Value;
 
-            if (myItem.Contains("No tile"))
+            if (myItem == "No tile")
                 m_DefaultTile = -1;
             else
+                myItem = myItem.Substring(myItem.IndexOf('-')).Replace("-", "");
+            
+            if (myItem != "No tile")
+            {
+                t = cTile.ObjMonde.FirstOrDefault(x => x.Value.Name == myItem).Value;
                 m_DefaultTile = cTile.TileToTileID(t.X_Image, t.Y_Image);
+            }
         }
         #endregion
 

@@ -1,8 +1,10 @@
 
+using HugoLandEditeur.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace HugoLandEditeur
 {
@@ -23,6 +25,10 @@ namespace HugoLandEditeur
         private int m_nTilesVert;
         private int m_nTilesHoriz;
         private int m_Zoom;
+        private GestionItem m_GestionItem = new GestionItem();
+        private GestionMonde m_GestionMonde = new GestionMonde();
+        private GestionMonstre m_GestionMonstre = new GestionMonstre();
+        private GestionObjetMonde m_GestionObjetMonde = new GestionObjetMonde();
 
         private CTileLibrary m_TileLibrary;		// Reference to a Tile Library
 
@@ -346,6 +352,62 @@ namespace HugoLandEditeur
                 return false;
             }
             return true;
+        }
+
+        public void MapExistingWorld(int worldId)
+        {
+            List<Item> lstItems = new List<Item>();
+            lstItems = m_GestionItem.LstItems.Where(x => x.MondeId == worldId).ToList();
+            List<Monstre> lstMonstres = new List<Monstre>();
+            lstMonstres = m_GestionMonstre.LstMonstres.Where(x => x.MondeId == worldId).ToList();
+            List<ObjetMonde> lstObjMonde = new List<ObjetMonde>();
+            lstObjMonde = m_GestionObjetMonde.LstObjetMondes.Where(x => x.MondeId == worldId).ToList();
+
+            Monde m = m_GestionMonde.LstMondes.FirstOrDefault(x => x.Id == worldId);
+            int i, j;
+
+            if (m.LimiteX > csteApplication.MAP_MAX_WIDTH)
+                return;
+            if (m.LimiteY > csteApplication.MAP_MAX_HEIGHT)
+                return;
+
+            // Build Backbuffer
+            m_Width = m.LimiteX;
+            m_Height = m.LimiteY;
+            int defaultTile = 32; // Grass
+
+            int[,] allThings = new int[m.LimiteX, m.LimiteY];
+
+            try
+            {
+                m_Tiles = new int[m_Height, m_Width];
+
+                for (i = 0; i < m_Height; i++)
+                    for (j = 0; j < m_Width; j++)
+                    {
+                        if (j == 0 && i == 0)
+                        {
+                            foreach (ObjetMonde obj in lstObjMonde)
+                                m_Tiles[obj.x, obj.y] = m_TileLibrary.TileToTileID(obj.x, obj.y);
+                            foreach (Monstre monster in lstMonstres)
+                                m_Tiles[monster.x, monster.y] = m_TileLibrary.TileToTileID(monster.x, monster.y);
+                            foreach (Item item in lstItems)
+                                if (item.IdHero != null)
+                                    m_Tiles[(int)item.x, (int)item.y] = m_TileLibrary.TileToTileID((int)item.x, (int)item.y);
+                        }
+                        if (m.DefaultTile != null && m_Tiles[i, j] == 0)
+                            m_Tiles[i, j] = defaultTile;
+                    }
+
+                m_BackBuffer = new Bitmap(m_Width * csteApplication.TILE_WIDTH_IN_MAP, m_Height * csteApplication.TILE_HEIGHT_IN_MAP);
+                m_BackBufferDC = Graphics.FromImage(m_BackBuffer);
+
+                Refresh();
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

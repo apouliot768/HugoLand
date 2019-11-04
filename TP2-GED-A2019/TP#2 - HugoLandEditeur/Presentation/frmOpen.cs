@@ -15,6 +15,22 @@ namespace HugoLandEditeur.Presentation
     {
         // Local variables
         private GestionMonde _gMonde = new GestionMonde(); // Allowing to have infos from db.
+        private Monde m = new Monde();
+        private bool noFile = false;
+
+        public Monde MyWorld
+        {
+            get { return m; }
+            set { m = value; }
+        }
+
+        public bool NoFile
+        {
+            get { return noFile; }
+            set { noFile = value; }
+        }
+
+
 
         /// <summary>
         ///  Auteure : Joëlle Boyer
@@ -24,6 +40,8 @@ namespace HugoLandEditeur.Presentation
         public frmOpen()
         {
             InitializeComponent();
+
+            cboChoose.Items.Add("Browse from my maps...");
 
             foreach (Monde m in _gMonde.LstMondes)
                 cboChoose.Items.Add(m.Description);
@@ -40,7 +58,8 @@ namespace HugoLandEditeur.Presentation
         {
             string sDescription = cboChoose.Text;
 
-            Monde m = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
+            if (sDescription != "Browse from my maps...")
+                m = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
 
             txtHeight.Text = m.LimiteY.ToString();
             txtWidth.Text = m.LimiteX.ToString();
@@ -69,6 +88,11 @@ namespace HugoLandEditeur.Presentation
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void chkNoFile_CheckedChanged(object sender, EventArgs e)
+        {
+            noFile = chkNoFile.Checked;
         }
     }
 }

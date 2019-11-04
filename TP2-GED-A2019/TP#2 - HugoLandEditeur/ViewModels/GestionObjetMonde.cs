@@ -13,8 +13,15 @@ namespace HugoLandEditeur.ViewModels
     /// </summary>
     public class GestionObjetMonde
     {
+        // Liste des objets mondes pour la vue
+        public List<ObjetMonde> LstObjetMondes { get; set; } = new List<ObjetMonde>();
         // Liste qui cumul les erreurs de connexion si lieu
         public List<string> LstErreursObjetMondes { get; set; } = new List<string>();
+
+        public GestionObjetMonde()
+        {
+            RetournerObjetMonde();
+        }
 
         // Création d'un Objet présent dans un monde
         public void CréerObjetMonde(ObjetMonde objetMonde)
@@ -135,6 +142,22 @@ namespace HugoLandEditeur.ViewModels
                     CréerObjetMonde(objetMondeDB);
                     return objetMondeDB;
                 }
+            }
+        }
+
+        // Retourne la liste des objets mondes la plus fraîche
+        public void RetournerObjetMonde()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    LstObjetMondes = contexte.ObjetMondes.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursObjetMondes.Add("Erreur dans la méthode \'RetournerObjetMonde\' : " + ex.Message);
             }
         }
     }

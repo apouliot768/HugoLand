@@ -38,7 +38,6 @@ namespace HugoLandEditeur
         /// <summary>
         /// Summary description for Form1.
         /// </summary>
-        /// 	
         public struct ComboItem
         {
             public string Text;
@@ -72,7 +71,7 @@ namespace HugoLandEditeur
         /* -------------------------------------------------------------- *\
         frmMain_Load()			
         - Main Form Initialization		
-    \* -------------------------------------------------------------- */
+        \* -------------------------------------------------------------- */
         private void frmMain_Load(object sender, System.EventArgs e)
         {
 
@@ -138,10 +137,9 @@ namespace HugoLandEditeur
 
         }
 
-
         /* -------------------------------------------------------------- *\
         Menus
-    \* -------------------------------------------------------------- */
+        \* -------------------------------------------------------------- */
         #region Menu Code
         private void mnuFileExit_Click(object sender, System.EventArgs e)
         {
@@ -212,15 +210,7 @@ namespace HugoLandEditeur
         /// <param name="e"></param>
         private void mnuFileOpen_Click(object sender, System.EventArgs e)
         {
-            frmOpen f = new frmOpen();
-            f.ShowDialog(this);
-
-            if (f.DialogResult == DialogResult.OK)
-            {
-                LoadMap();
-            }
-            else
-                MessageBox.Show("You have cancelled the opening of a new world.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            LoadMap();
         }
 
         /// <summary>
@@ -447,9 +437,8 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void picMap_Click(object sender, System.EventArgs e)
         {
-            // TO DO : HUGO - MODIFIER ICI POUR AVOIR le tile et le type
+            // To do : HUGO - MODIFIER ICI POUR AVOIR le tile et le type
             m_Map.PlotTile(m_ActiveXIndex, m_ActiveYIndex, m_ActiveTileID);
-
             m_bRefresh = true;
         }
 
@@ -475,6 +464,7 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void picTiles_Click(object sender, System.EventArgs e)
         {
+            // To do : HUGO - MODIFIER ICI POUR OBTENIR tile type.
             m_ActiveTileID = m_TileLibrary.TileToTileID(m_ActiveTileXIndex, m_ActiveTileYIndex);
             picActiveTile.Refresh();
         }
@@ -572,33 +562,79 @@ namespace HugoLandEditeur
         /// </summary>
         private void LoadMap()
         {
-            DialogResult result;
+            frmOpen f = new frmOpen();
+            f.ShowDialog(this);
 
-            dlgLoadMap.Title = "Load Map";
-            dlgLoadMap.Filter = "Map Files (*.map)|*.map|All Files (*.*)|*.*";
-
-            result = dlgLoadMap.ShowDialog();
-            if (result == DialogResult.OK)
+            if (f.DialogResult == DialogResult.OK)
             {
-                m_bOpen = false;
-                picMap.Visible = false;
-                this.Cursor = Cursors.WaitCursor;
-                try
+                DialogResult result;
+                Monde monde = f.MyWorld;
+                string myWorld = monde.Id.ToString() + ".map";
+
+                if (File.Exists(myWorld) && f.MyWorld.Id != -1)
                 {
-                    m_Map.Load(dlgLoadMap.FileName);
-                    m_bOpen = true;
-                    m_bRefresh = true;
-                    picMap.Visible = true;
+                    try
+                    {
+                        m_Map.Load(myWorld);
+                        m_bOpen = true;
+                        m_bRefresh = true;
+                        picMap.Visible = true;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Error Loading Existing File ...");
+                    }
                 }
-                catch
+
+                else if (!f.NoFile)
                 {
-                    Console.WriteLine("Error Loading...");
+                    dlgLoadMap.Title = "Load Map";
+                    dlgLoadMap.Filter = "Map Files (*.map)|*.map|All Files (*.*)|*.*";
+
+                    result = dlgLoadMap.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        m_bOpen = false;
+                        picMap.Visible = false;
+                        this.Cursor = Cursors.WaitCursor;
+                        try
+                        {
+                            m_Map.Load(dlgLoadMap.FileName);
+                            m_bOpen = true;
+                            m_bRefresh = true;
+                            picMap.Visible = true;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Error Loading Chosen File ...");
+                        }
+                    }
+                }
+                else if (f.NoFile && f.MyWorld.Id != -1)
+                {
+                    m_bOpen = false;
+                    picMap.Visible = false;
+                    this.Cursor = Cursors.WaitCursor;
+                    try
+                    {
+                        m_Map.MapExistingWorld(f.MyWorld.Id);
+                        m_bOpen = true;
+                        m_bRefresh = true;
+                        picMap.Visible = true;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Error Loading Chosen File ...");
+                    }
                 }
 
                 m_ResizeMap();
                 m_MenuLogic();
                 this.Cursor = Cursors.Default;
             }
+            else
+                MessageBox.Show("You have cancelled the opening of a new world.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         /* -------------------------------------------------------------- *\
@@ -613,7 +649,7 @@ namespace HugoLandEditeur
             dlgSaveMap.Title = "Save Map";
             dlgSaveMap.Filter = "Map File (*.map)|*.map";
 
-            result = dlgSaveMap.ShowDialog(); 
+            result = dlgSaveMap.ShowDialog();
             if (result == DialogResult.OK)
             {
                 this.Cursor = Cursors.WaitCursor;

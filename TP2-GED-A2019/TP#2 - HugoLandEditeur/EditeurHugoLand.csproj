@@ -281,6 +281,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\OpenWorld.jpg" />
     <None Include="Resources\UserMenu6.jpg" />
     <None Include="Resources\UsersMenu5.jpg" />
     <None Include="Resources\UserMenu4.png" />

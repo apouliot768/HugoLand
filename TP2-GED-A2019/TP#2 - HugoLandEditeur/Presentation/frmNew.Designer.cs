@@ -67,7 +67,10 @@
             // 
             // lblWidth
             // 
-            this.lblWidth.Location = new System.Drawing.Point(12, 310);
+            this.lblWidth.BackColor = System.Drawing.Color.Transparent;
+            this.lblWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblWidth.ForeColor = System.Drawing.Color.White;
+            this.lblWidth.Location = new System.Drawing.Point(53, 417);
             this.lblWidth.Name = "lblWidth";
             this.lblWidth.Size = new System.Drawing.Size(125, 20);
             this.lblWidth.TabIndex = 0;
@@ -75,7 +78,10 @@
             // 
             // lblHeight
             // 
-            this.lblHeight.Location = new System.Drawing.Point(12, 338);
+            this.lblHeight.BackColor = System.Drawing.Color.Transparent;
+            this.lblHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblHeight.ForeColor = System.Drawing.Color.White;
+            this.lblHeight.Location = new System.Drawing.Point(53, 470);
             this.lblHeight.Name = "lblHeight";
             this.lblHeight.Size = new System.Drawing.Size(125, 20);
             this.lblHeight.TabIndex = 1;
@@ -83,7 +89,7 @@
             // 
             // txtWidth
             // 
-            this.txtWidth.Location = new System.Drawing.Point(237, 307);
+            this.txtWidth.Location = new System.Drawing.Point(245, 415);
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.Size = new System.Drawing.Size(120, 22);
             this.txtWidth.TabIndex = 2;
@@ -93,7 +99,7 @@
             // 
             // txtHeight
             // 
-            this.txtHeight.Location = new System.Drawing.Point(237, 335);
+            this.txtHeight.Location = new System.Drawing.Point(245, 468);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(120, 22);
             this.txtHeight.TabIndex = 3;
@@ -103,7 +109,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(129, 473);
+            this.btnOK.Location = new System.Drawing.Point(212, 645);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(90, 27);
             this.btnOK.TabIndex = 4;
@@ -113,7 +119,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(225, 473);
+            this.btnCancel.Location = new System.Drawing.Point(308, 645);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 5;
@@ -123,17 +129,19 @@
             // lblInfos
             // 
             this.lblInfos.AutoSize = true;
+            this.lblInfos.BackColor = System.Drawing.Color.Transparent;
+            this.lblInfos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.lblInfos.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblInfos.Location = new System.Drawing.Point(62, 402);
+            this.lblInfos.Location = new System.Drawing.Point(30, 549);
             this.lblInfos.Name = "lblInfos";
-            this.lblInfos.Size = new System.Drawing.Size(418, 68);
+            this.lblInfos.Size = new System.Drawing.Size(562, 80);
             this.lblInfos.TabIndex = 6;
             this.lblInfos.Text = resources.GetString("lblInfos.Text");
             this.lblInfos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtGScreenH
             // 
-            this.txtGScreenH.Location = new System.Drawing.Point(380, 335);
+            this.txtGScreenH.Location = new System.Drawing.Point(388, 468);
             this.txtGScreenH.Name = "txtGScreenH";
             this.txtGScreenH.ReadOnly = true;
             this.txtGScreenH.Size = new System.Drawing.Size(66, 22);
@@ -142,7 +150,7 @@
             // 
             // txtGScreenW
             // 
-            this.txtGScreenW.Location = new System.Drawing.Point(380, 307);
+            this.txtGScreenW.Location = new System.Drawing.Point(388, 415);
             this.txtGScreenW.Name = "txtGScreenW";
             this.txtGScreenW.ReadOnly = true;
             this.txtGScreenW.Size = new System.Drawing.Size(66, 22);
@@ -151,15 +159,18 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.Location = new System.Drawing.Point(12, 366);
+            this.lblTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.ForeColor = System.Drawing.Color.White;
+            this.lblTotal.Location = new System.Drawing.Point(53, 510);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(125, 20);
+            this.lblTotal.Size = new System.Drawing.Size(167, 20);
             this.lblTotal.TabIndex = 9;
             this.lblTotal.Text = "Total number of : ";
             // 
             // txtAllGameScreen
             // 
-            this.txtAllGameScreen.Location = new System.Drawing.Point(380, 363);
+            this.txtAllGameScreen.Location = new System.Drawing.Point(388, 508);
             this.txtAllGameScreen.Name = "txtAllGameScreen";
             this.txtAllGameScreen.ReadOnly = true;
             this.txtAllGameScreen.Size = new System.Drawing.Size(66, 22);
@@ -168,7 +179,7 @@
             // 
             // txtAllGameTiles
             // 
-            this.txtAllGameTiles.Location = new System.Drawing.Point(237, 363);
+            this.txtAllGameTiles.Location = new System.Drawing.Point(245, 508);
             this.txtAllGameTiles.Name = "txtAllGameTiles";
             this.txtAllGameTiles.ReadOnly = true;
             this.txtAllGameTiles.Size = new System.Drawing.Size(120, 22);
@@ -177,18 +188,24 @@
             // 
             // lblTiles
             // 
-            this.lblTiles.Location = new System.Drawing.Point(237, 275);
+            this.lblTiles.BackColor = System.Drawing.Color.Transparent;
+            this.lblTiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTiles.ForeColor = System.Drawing.Color.Black;
+            this.lblTiles.Location = new System.Drawing.Point(230, 355);
             this.lblTiles.Name = "lblTiles";
-            this.lblTiles.Size = new System.Drawing.Size(120, 20);
+            this.lblTiles.Size = new System.Drawing.Size(147, 48);
             this.lblTiles.TabIndex = 12;
             this.lblTiles.Text = "Tiles :";
             this.lblTiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblGameScreens
             // 
-            this.lblGameScreens.Location = new System.Drawing.Point(380, 266);
+            this.lblGameScreens.BackColor = System.Drawing.Color.Transparent;
+            this.lblGameScreens.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblGameScreens.ForeColor = System.Drawing.Color.White;
+            this.lblGameScreens.Location = new System.Drawing.Point(373, 346);
             this.lblGameScreens.Name = "lblGameScreens";
-            this.lblGameScreens.Size = new System.Drawing.Size(66, 38);
+            this.lblGameScreens.Size = new System.Drawing.Size(93, 66);
             this.lblGameScreens.TabIndex = 13;
             this.lblGameScreens.Text = "Game screens :";
             this.lblGameScreens.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -196,9 +213,12 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
+            this.lblDescription.BackColor = System.Drawing.Color.Transparent;
+            this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblDescription.ForeColor = System.Drawing.Color.White;
             this.lblDescription.Location = new System.Drawing.Point(12, 9);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(91, 17);
+            this.lblDescription.Size = new System.Drawing.Size(124, 20);
             this.lblDescription.TabIndex = 14;
             this.lblDescription.Text = "Description : ";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -206,23 +226,26 @@
             // lblDefaultTile
             // 
             this.lblDefaultTile.AutoSize = true;
-            this.lblDefaultTile.Location = new System.Drawing.Point(12, 40);
+            this.lblDefaultTile.BackColor = System.Drawing.Color.Transparent;
+            this.lblDefaultTile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblDefaultTile.ForeColor = System.Drawing.Color.White;
+            this.lblDefaultTile.Location = new System.Drawing.Point(11, 53);
             this.lblDefaultTile.Name = "lblDefaultTile";
-            this.lblDefaultTile.Size = new System.Drawing.Size(92, 17);
+            this.lblDefaultTile.Size = new System.Drawing.Size(125, 20);
             this.lblDefaultTile.TabIndex = 15;
             this.lblDefaultTile.Text = "Default Tile : ";
             this.lblDefaultTile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(108, 8);
+            this.txtDescription.Location = new System.Drawing.Point(206, 9);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(338, 22);
             this.txtDescription.TabIndex = 16;
             // 
             // txtSizeTile
             // 
-            this.txtSizeTile.Location = new System.Drawing.Point(326, 228);
+            this.txtSizeTile.Location = new System.Drawing.Point(245, 299);
             this.txtSizeTile.Name = "txtSizeTile";
             this.txtSizeTile.Size = new System.Drawing.Size(120, 22);
             this.txtSizeTile.TabIndex = 18;
@@ -231,7 +254,10 @@
             // 
             // lblSizeTile
             // 
-            this.lblSizeTile.Location = new System.Drawing.Point(12, 231);
+            this.lblSizeTile.BackColor = System.Drawing.Color.Transparent;
+            this.lblSizeTile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblSizeTile.ForeColor = System.Drawing.Color.White;
+            this.lblSizeTile.Location = new System.Drawing.Point(12, 299);
             this.lblSizeTile.Name = "lblSizeTile";
             this.lblSizeTile.Size = new System.Drawing.Size(125, 20);
             this.lblSizeTile.TabIndex = 17;
@@ -240,7 +266,7 @@
             // cboDefaultTile
             // 
             this.cboDefaultTile.FormattingEnabled = true;
-            this.cboDefaultTile.Location = new System.Drawing.Point(108, 39);
+            this.cboDefaultTile.Location = new System.Drawing.Point(206, 53);
             this.cboDefaultTile.Name = "cboDefaultTile";
             this.cboDefaultTile.Size = new System.Drawing.Size(338, 24);
             this.cboDefaultTile.TabIndex = 19;
@@ -249,9 +275,12 @@
             // lblPathCsv
             // 
             this.lblPathCsv.AutoSize = true;
-            this.lblPathCsv.Location = new System.Drawing.Point(12, 86);
+            this.lblPathCsv.BackColor = System.Drawing.Color.Transparent;
+            this.lblPathCsv.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblPathCsv.ForeColor = System.Drawing.Color.White;
+            this.lblPathCsv.Location = new System.Drawing.Point(12, 104);
             this.lblPathCsv.Name = "lblPathCsv";
-            this.lblPathCsv.Size = new System.Drawing.Size(131, 17);
+            this.lblPathCsv.Size = new System.Drawing.Size(180, 20);
             this.lblPathCsv.TabIndex = 20;
             this.lblPathCsv.Text = "Path of (*.csv) file : ";
             this.lblPathCsv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,16 +288,19 @@
             // lblPathTile
             // 
             this.lblPathTile.AutoSize = true;
-            this.lblPathTile.Location = new System.Drawing.Point(12, 161);
+            this.lblPathTile.BackColor = System.Drawing.Color.Transparent;
+            this.lblPathTile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblPathTile.ForeColor = System.Drawing.Color.White;
+            this.lblPathTile.Location = new System.Drawing.Point(12, 184);
             this.lblPathTile.Name = "lblPathTile";
-            this.lblPathTile.Size = new System.Drawing.Size(137, 17);
+            this.lblPathTile.Size = new System.Drawing.Size(186, 20);
             this.lblPathTile.TabIndex = 21;
             this.lblPathTile.Text = "Path of (*.bmp) file : ";
             this.lblPathTile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtPathCsv
             // 
-            this.txtPathCsv.Location = new System.Drawing.Point(147, 86);
+            this.txtPathCsv.Location = new System.Drawing.Point(245, 104);
             this.txtPathCsv.Name = "txtPathCsv";
             this.txtPathCsv.ReadOnly = true;
             this.txtPathCsv.Size = new System.Drawing.Size(299, 22);
@@ -276,7 +308,7 @@
             // 
             // txtPathBmp
             // 
-            this.txtPathBmp.Location = new System.Drawing.Point(147, 156);
+            this.txtPathBmp.Location = new System.Drawing.Point(245, 184);
             this.txtPathBmp.Name = "txtPathBmp";
             this.txtPathBmp.ReadOnly = true;
             this.txtPathBmp.Size = new System.Drawing.Size(299, 22);
@@ -284,7 +316,7 @@
             // 
             // btnChangeCsv
             // 
-            this.btnChangeCsv.Location = new System.Drawing.Point(320, 114);
+            this.btnChangeCsv.Location = new System.Drawing.Point(418, 132);
             this.btnChangeCsv.Name = "btnChangeCsv";
             this.btnChangeCsv.Size = new System.Drawing.Size(126, 29);
             this.btnChangeCsv.TabIndex = 24;
@@ -294,7 +326,7 @@
             // 
             // btnChangeBmp
             // 
-            this.btnChangeBmp.Location = new System.Drawing.Point(320, 184);
+            this.btnChangeBmp.Location = new System.Drawing.Point(418, 212);
             this.btnChangeBmp.Name = "btnChangeBmp";
             this.btnChangeBmp.Size = new System.Drawing.Size(126, 29);
             this.btnChangeBmp.TabIndex = 25;
@@ -306,8 +338,10 @@
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.BackgroundImage = global::HugoLandEditeur.Properties.Resources.UsersMenu5;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(458, 507);
+            this.ClientSize = new System.Drawing.Size(556, 684);
             this.Controls.Add(this.btnChangeBmp);
             this.Controls.Add(this.btnChangeCsv);
             this.Controls.Add(this.txtPathBmp);
