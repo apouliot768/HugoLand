@@ -19,6 +19,10 @@ namespace HugoLand.ViewModels
     {
         // Liste des mondes pour la vue
         public List<Monde> LstMondes { get; set; }
+        public Monde mondeCourrant { get; set; }
+        public List<Item> lstItemsCourrant { get; set; }
+        public List<Monstre> lstMonstresCourrant { get; set; }
+        public List<ObjetMonde> lstObjMondeCourrant { get; set; }
 
         // Liste des erreurs de connexions
         public List<string> LstErreursMondes { get; set; } = new List<string>();
@@ -176,6 +180,25 @@ namespace HugoLand.ViewModels
                 RetournerMondes();
                 return mondeDB;
             }
+        }
+
+        public void ChargerMondeCourrant(int id)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    mondeCourrant = contexte.Mondes.FirstOrDefault(x => x.Id == id);
+                    lstItemsCourrant = contexte.Items.Where(x => x.MondeId == id).ToList();
+                    lstMonstresCourrant = contexte.Monstres.Where(x => x.MondeId == id).ToList();
+                    lstObjMondeCourrant = contexte.ObjetMondes.Where(x => x.MondeId == id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursMondes.Add("Erreur dans la méthode \'ChargerMondeCourrant\' : " + ex.Message);
+            }
+
         }
 
         // Retourne la liste des mondes la plus fraîche

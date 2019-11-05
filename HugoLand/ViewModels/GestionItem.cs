@@ -51,6 +51,79 @@ namespace HugoLand.ViewModels
             }
         }
 
+        public void CreerItemMonde(Item item)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    // Ajouter l'item dans le monde demandé
+                    Item itemNew = new Item()
+                    {
+                        Nom = item.Nom,
+                        x = item.x,
+                        y = item.y,
+                        ImageId = item.ImageId,
+                        MondeId = item.MondeId,
+                        Description = item.Description
+                    };
+
+                    if (itemNew.y > -1 && itemNew.x > -1)
+                    {
+                        contexte.Items.Add(itemNew);
+                        contexte.SaveChanges();
+                        RetournerItems();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        //// Complètement supprimer un item
+        //public void ItemDisparait(Item item)
+        //{
+        //    try
+        //    {
+        //        using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+        //        {
+        //            if (contexte.Items.Any(x => x.Id == item.Id))
+        //            {
+        //                Item item2 = contexte.Items.FirstOrDefault(x => x.Id == item.Id);
+        //                contexte.Items.Remove(item2);
+        //                contexte.SaveChanges();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+        //}
+
+        // Modification d'un item lors d'un changement dans la bd
+        public void ModificationItem(string tileName, int TileID, int itemID)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    Item item = contexte.Items.FirstOrDefault(x => x.Id == itemID);
+                    item.Nom = tileName;
+                    item.ImageId = TileID;
+
+                    contexte.SaveChanges();
+                    RetournerItems();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         // Suppression d'un item
         public void SuppressionItem(Item item, Hero hero)
         {

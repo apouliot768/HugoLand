@@ -171,6 +171,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Logout a user in database
         public void Déconnexion(CompteJoueur compte)
         {
             using (EntitiesGEDEquipe1 context = new EntitiesGEDEquipe1())
@@ -181,6 +182,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Refresh user's list with database
         public void RafraichirComptes()
         {
             try
@@ -196,6 +198,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Get a user account by user name
         public void ObtenirCompte(string nomJoueur)
         {
             try
@@ -211,6 +214,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Update the role of a user in database
         public void UpdateRole(string sId, string sRole)
         {
             try
@@ -230,6 +234,7 @@ namespace HugoLand.ViewModels
             }
         }
 
+        // Determine the neccesity to update users list
         public bool CompareUsersList()
         {
             try
@@ -258,83 +263,6 @@ namespace HugoLand.ViewModels
                 LstErreursComptesJoueurs.Add(ex.Message);
                 RafraichirComptes();
                 return true;
-            }
-        }
-
-        public List<string> UpdateEditorChatBox(int lastId)
-        {
-            List<ChatMessage> lstChats = new List<ChatMessage>();
-            List<string> lstMessages = new List<string>();
-            try
-            {
-                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
-                {
-                    if (contexte.ChatMessages.Any(x => x.MessageID > lastId))
-                    {
-
-                        lstChats = contexte.ChatMessages.Where(x => x.ContextPost == "Editor").OrderByDescending(x => x.MessageID).Take(50).ToList();
-                        foreach (ChatMessage chat in lstChats)
-                        {
-                            lstMessages.Add(chat.DatePost + "\r\n" + chat.CompteJoueur.NomJoueur + " say : \r\n" + chat.MessageText + "\r\n\r\n");
-                        }
-
-                        return lstMessages;
-                    }
-                    else
-                    {
-                        return lstMessages;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LstErreursComptesJoueurs.Add(ex.Message);
-                lstMessages.Add("??? ERROR ???");
-                return lstMessages;
-            }
-        }
-
-        public void PostOnChatEditor(int Id, string Message)
-        {
-            try
-            {
-                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
-                {
-                    if (contexte.CompteJoueurs.Any(x => x.Id == Id) && Message != "")
-                    {
-                        ChatMessage chatMessage = new ChatMessage
-                        {
-                            CompteJoueurId = Id,
-                            MessageText = Message,
-                            DatePost = DateTime.Now,
-                            ContextPost = Constantes.ContextChat.Editor.ToString()
-                        };
-                        contexte.ChatMessages.Add(chatMessage);
-                        contexte.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LstErreursComptesJoueurs.Add(ex.Message);
-            }
-        }
-
-        public int GetLastEditorPostId()
-        {
-            int lastId = 0;
-            try
-            {
-                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
-                {
-                    lastId = (from chat in contexte.ChatMessages orderby chat.MessageID descending select chat.MessageID).First();
-                    return lastId;
-                }
-            }
-            catch (Exception ex)
-            {
-                LstErreursComptesJoueurs.Add(ex.Message);
-                return lastId;
             }
         }
     }

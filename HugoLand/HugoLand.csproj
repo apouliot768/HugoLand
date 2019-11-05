@@ -101,6 +101,9 @@
     <Compile Include="ObjetMonde.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CompteCréation.cs" />
+    <Compile Include="ViewModels\CompteRoles.cs" />
+    <Compile Include="ViewModels\GestionChatMessage.cs" />
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionCompteJoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />

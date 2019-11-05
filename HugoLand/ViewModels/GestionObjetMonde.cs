@@ -14,8 +14,15 @@ namespace HugoLand.ViewModels
     /// </summary>
     public class GestionObjetMonde
     {
+        // Liste des objets mondes pour la vue
+        public List<ObjetMonde> LstObjetMondes { get; set; } = new List<ObjetMonde>();
         // Liste qui cumul les erreurs de connexion si lieu
         public List<string> LstErreursObjetMondes { get; set; } = new List<string>();
+
+        public GestionObjetMonde()
+        {
+            RetournerObjetMonde();
+        }
 
         // Création d'un Objet présent dans un monde
         public void CréerObjetMonde(ObjetMonde objetMonde)
@@ -55,6 +62,59 @@ namespace HugoLand.ViewModels
             } while (echecSauvegarde);
 
         }
+
+
+        public void CreerObjetMonde(ObjetMonde objMonde)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    // Ajouter l'item dans le monde demandé
+                    ObjetMonde objNew = new ObjetMonde()
+                    {
+                        x = objMonde.x,
+                        y = objMonde.y,
+                        TypeObjet = objMonde.TypeObjet,
+                        MondeId = objMonde.MondeId,
+                        Description = objMonde.Description
+                    };
+
+                    if (objNew.y > -1 && objNew.x > -1)
+                    {
+                        contexte.ObjetMondes.Add(objNew);
+                        contexte.SaveChanges();
+                        RetournerObjetMonde();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        // Modification d'un objetMonde lors d'un changement dans la bd
+        public void ModificationObjetMonde(string tileName, int TileID, int itemID)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    ObjetMonde objMonde = contexte.ObjetMondes.FirstOrDefault(x => x.Id == itemID);
+                    objMonde.Description = tileName;
+                    objMonde.TypeObjet = TileID;
+
+                    contexte.SaveChanges();
+                    RetournerObjetMonde();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         // Supression d'un Objet présent dans un monde
         public ObjetMonde SupprimerObjetMonde(ObjetMonde objetMonde)
         {
@@ -136,7 +196,22 @@ namespace HugoLand.ViewModels
                     CréerObjetMonde(objetMondeDB);
                     return objetMondeDB;
                 }
-                
+            }
+        }
+
+        // Retourne la liste des objets mondes la plus fraîche
+        public void RetournerObjetMonde()
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    LstObjetMondes = contexte.ObjetMondes.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LstErreursObjetMondes.Add("Erreur dans la méthode \'RetournerObjetMonde\' : " + ex.Message);
             }
         }
     }
