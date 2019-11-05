@@ -20,10 +20,12 @@ namespace HugoLandEditeur.Presentation
     /// </summary>
     public partial class frmLogIn : Form
     {
+        // Local variable
         private GestionCompteJoueur _gestionCompteJoueur = new GestionCompteJoueur();
         public int _tentative { get; set; }
         public CompteJoueur _compte { get; set; }
 
+        // Constructor
         public frmLogIn()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace HugoLandEditeur.Presentation
             loadFont();
         }
 
+        // Load special font style
         private void loadFont()
         {
             PrivateFontCollection pfc = new PrivateFontCollection();
@@ -39,7 +42,7 @@ namespace HugoLandEditeur.Presentation
             label1.Font = new Font(pfc.Families[0], label1.Font.Size, FontStyle.Underline);
         }
 
-        // Valide la connexion de l'utilisateur et son statut d'administrateur
+        // Validate user connection
         private void btnConnexion_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -49,11 +52,15 @@ namespace HugoLandEditeur.Presentation
                 if (_compte.Id > 0 && _compte.TypeUtilisateur == 0)
                     DialogResult = DialogResult.OK;
                 else
+                {
                     lblEchec.Text = "Connexion failed : attempt # " + ++_tentative;
+                    txtMotDePasse.Clear();
+                }
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception)
             {
+                // Advice user that the editor can't connect to the server and close editor.
                 Cursor.Current = Cursors.Default;
                 DialogResult mboxEchecConntivité = MessageBox.Show("Can't connect to the database.\r\nCheck your connexion to the server and try again!", "Can't reach server!");
                 if (mboxEchecConntivité == DialogResult.OK)

@@ -87,7 +87,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

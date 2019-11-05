@@ -38,7 +38,6 @@ namespace HugoLandEditeur
         private GestionMonstre m_GestionMonstre = new GestionMonstre();
         private GestionObjetMonde m_GestionObjetMonde = new GestionObjetMonde();
         private frmMenuUsers m_frmUser = null;
-        private string m_posTile;
         private Tile tile;
         private Monde world = new Monde();
 
@@ -216,6 +215,67 @@ namespace HugoLandEditeur
         private void mnuFileSave_Click(object sender, System.EventArgs e)
         {
             m_SaveMap();
+        }
+
+        /// <summary>
+        /// Auteur : Alexandre Pouliot
+        /// Description : Allows the creation of a new user.
+        /// Date : 2019/10/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuCreateNewUser_Click(object sender, EventArgs e)
+        {
+            using (frmCreateUser createUser = new frmCreateUser())
+            {
+                createUser.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Author : Alexandre Pouliot
+        /// Description : Disconnect the user when the form is closed.
+        /// Date : 2019/10/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_GestionCompteJoueur.Déconnexion(m_GestionCompteJoueur.CompteCourrant);
+        }
+
+        /// <summary>
+        /// Author :        Alexandre Pouliot
+        /// Description :   Open the users menu that allows to edit user role,
+        ///                 watch if a user is connected and chat with users.
+        /// Date :          2019-11-04
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuUsers_Click(object sender, EventArgs e)
+        {
+            if (m_frmUser == null)
+            {
+                m_frmUser = new frmMenuUsers();
+                m_frmUser._gestionCompteJoueur.CompteCourrant = m_GestionCompteJoueur.CompteCourrant;
+                m_frmUser.Location = new Point((this.Location.X + this.Width + this.Width / 6) - (m_frmUser.Width / 2), (this.Location.Y + this.Height / 2) - (m_frmUser.Height / 2));
+                m_frmUser.StartPosition = FormStartPosition.Manual;
+                m_frmUser.Owner = this;
+                m_frmUser.FormClosed += m_frmUser_Closed;
+                m_frmUser.Show();
+            }
+        }
+
+        /// <summary>
+        /// Author :        Alexandre Pouliot
+        /// Description :   Clear the frmUser variable to allow the user to open and close the form at will.
+        /// Date :          2019-11-04
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void m_frmUser_Closed(object sender, EventArgs e)
+        {
+            m_frmUser = null;
         }
 
         /// <summary>
@@ -882,55 +942,6 @@ namespace HugoLandEditeur
             m_Zoom = myItem.Value;
             m_bResize = true;
             picTiles.Focus();
-        }
-
-        /// <summary>
-        /// Auteur : Alexandre Pouliot
-        /// Description : Allows the creation of a new user.
-        /// Date : 2019/10/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuCreateNewUser_Click(object sender, EventArgs e)
-        {
-            using (frmCreateUser createUser = new frmCreateUser())
-            {
-                if (createUser.ShowDialog() == DialogResult.OK)
-                {
-                    // TO DO : Update users list!
-                }
-            }
-        }
-
-        /// <summary>
-        /// Auteur : Alexandre Pouliot
-        /// Description : Disconnect the user when the form is closed.
-        /// Date : 2019/10/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            m_GestionCompteJoueur.Déconnexion(m_GestionCompteJoueur.CompteCourrant);
-        }
-
-        private void mnuUsers_Click(object sender, EventArgs e)
-        {
-            if (m_frmUser == null)
-            {
-                m_frmUser = new frmMenuUsers();
-                m_frmUser._gestionCompteJoueur.CompteCourrant = m_GestionCompteJoueur.CompteCourrant;
-                m_frmUser.Location = new Point((this.Location.X + this.Width + this.Width / 6) - (m_frmUser.Width / 2), (this.Location.Y + this.Height / 2) - (m_frmUser.Height / 2));
-                m_frmUser.StartPosition = FormStartPosition.Manual;
-                m_frmUser.Owner = this;
-                m_frmUser.FormClosed += m_frmUser_Closed;
-                m_frmUser.Show();
-            }
-        }
-
-        private void m_frmUser_Closed(object sender, EventArgs e)
-        {
-            m_frmUser = null;
         }
     }
 }

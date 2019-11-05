@@ -7,6 +7,12 @@ using HugoLandEditeur.Models;
 
 namespace HugoLandEditeur.ViewModels
 {
+    /// <summary>
+    /// Author :        Alexandre Pouliot
+    /// Description :   Object used to view users connexion state and manage user's role
+    ///                 in the data grid of frmMenuUsers.
+    /// Date :
+    /// </summary>
     public class CompteRoles
     {
         public int Id { get; set; }

@@ -45,7 +45,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LstErreursMonstres.Add("Erreur dans la méthode \'CréerMonstre\' : " + ex.Message);
             }
@@ -167,7 +167,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LstErreursMonstres.Add("Erreur dans la méthode \'SupprimerMonstre\' : " + ex.Message);
             }
@@ -206,7 +206,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LstErreursMonstres.Add("Erreur dans la méthode \'ModifierMonstre\' : " + ex.Message);
             }

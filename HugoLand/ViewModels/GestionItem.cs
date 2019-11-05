@@ -45,7 +45,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -85,7 +85,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -127,7 +127,7 @@ namespace HugoLand.ViewModels
                     RetournerItems();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

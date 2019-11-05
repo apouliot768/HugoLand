@@ -12,11 +12,22 @@ using HugoLandEditeur.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {
+    /// <summary>
+    /// Author :        Alexandre Pouliot
+    /// Description :   Nice tool form that allows user to administrtate role
+    ///                 to others users, know who works on the editor and 
+    ///                 chat with them.
+    /// Date :          2019-11-04
+    /// </summary>
     public partial class frmMenuUsers : Form
     {
+        // Local variables
         bool _loaded = false;
         public GestionCompteJoueur _gestionCompteJoueur = new GestionCompteJoueur();
+        private GestionChatMessage _gestionChatMessage = new GestionChatMessage();
         private int _lastMessageId = 0;
+
+        // Constructor
         public frmMenuUsers()
         {
             InitializeComponent();
@@ -24,11 +35,13 @@ namespace HugoLandEditeur.Presentation
             LoadChatbox();
         }
 
+        // Handle the useless error messagebox created by microsoft that spam for nothing.
         private void dtgUsers_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
 
+        // Handle changes on role's combobox
         private void dtgUsers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (_loaded)
@@ -36,24 +49,24 @@ namespace HugoLandEditeur.Presentation
                 DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dtgUsers.Rows[e.RowIndex].Cells[2];
                 if (cb.Value != null)
                 {
-                    // do stuff
                     dtgUsers.Invalidate();
                 }
             }
 
         }
 
+        // Commit changes on role's combobox
         private void dtgUsers_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (this.dtgUsers.IsCurrentCellDirty)
             {
-                // This fires the cell value changed handler below
                 dtgUsers.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 string selected = dtgUsers.CurrentCell.Value.ToString();
                 _gestionCompteJoueur.UpdateRole(dtgUsers.CurrentRow.Cells[0].Value.ToString(), selected);
             }
         }
 
+        // Load users list
         private void ShowUsers()
         {
             _gestionCompteJoueur.RafraichirComptes();
@@ -69,9 +82,10 @@ namespace HugoLandEditeur.Presentation
             _loaded = true;
         }
 
+        // Refrech the users list and chatbox every 5 seconds when new changes are commited on database
         private void timRefreshUsers_Tick(object sender, EventArgs e)
         {
-            if (_gestionCompteJoueur.CompareUsersList())
+            if (_gestionCompteJoueur.CompareUsersList()) // Check if refresh needed
             {
                 dtgUsers.Rows.Clear();
                 ShowUsers();
@@ -79,29 +93,32 @@ namespace HugoLandEditeur.Presentation
             LoadChatbox();
         }
 
+        // Post new message on common chatbox
         private void btnPost_Click(object sender, EventArgs e)
         {
-            _gestionCompteJoueur.PostOnChatEditor(_gestionCompteJoueur.CompteCourrant.Id, txtPost.Text);
+            _gestionChatMessage.PostOnChatEditor(_gestionCompteJoueur.CompteCourrant.Id, txtPost.Text);
             LoadChatbox();
+            txtPost.Clear();
         }
 
+        // Load the 50 lasts post for the chatbox
         private void LoadChatbox()
         {
-            List<string> lstChatMessages = _gestionCompteJoueur.UpdateEditorChatBox(_lastMessageId);
+            List<string> lstChatMessages = _gestionChatMessage.UpdateEditorChatBox(_lastMessageId);
             if (lstChatMessages.Any(x => x == "???ERROR???"))
             {
                 txtChatbox.Text = "ERROR : Connexion failed!";
             }
             else
             {
-                if (lstChatMessages.Count != 0)
+                if (lstChatMessages.Count != 0) // Check if refresh needed
                 {
                     txtChatbox.Clear();
                     for (int i = lstChatMessages.Count - 1; i >= 0; i--)
                     {
                         txtChatbox.AppendText(lstChatMessages[i]);
                     }
-                    _lastMessageId = _gestionCompteJoueur.GetLastEditorPostId();
+                    _lastMessageId = _gestionChatMessage.GetLastEditorPostId();
                 }
             }
         }

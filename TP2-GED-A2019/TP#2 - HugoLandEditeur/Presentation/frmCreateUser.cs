@@ -13,15 +13,23 @@ using HugoLandEditeur.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {
+    /// <summary>
+    /// Author :        Alexandre Pouliot
+    /// Description :   Form to allows admin user to create a new user.
+    /// Date :          2019-11-04
+    /// </summary>
     public partial class frmCreateUser : Form
     {
+        // Local variables
         private GestionCompteJoueur _gestionCompteJoueur = new GestionCompteJoueur();
         private CompteCréation _compteCréation = new CompteCréation();
+
+        // Constructor
         public frmCreateUser()
         {
             InitializeComponent();
             loadFont();
-            // Binding
+            // Bindings to user's creation object
             cmbRole.DataSource = Enum.GetValues(typeof(Constantes.Role));
             txtUserName.DataBindings.Add("Text", _compteCréation, "UserName", true);
             txtFirstName.DataBindings.Add("Text", _compteCréation, "FirstName", true);
@@ -32,6 +40,7 @@ namespace HugoLandEditeur.Presentation
             txtConfirmPassword.DataBindings.Add("Text", _compteCréation, "PasswordConfirm", true);
         }
 
+        // Load special fonts
         private void loadFont()
         {
             PrivateFontCollection pfc = new PrivateFontCollection();
@@ -46,23 +55,19 @@ namespace HugoLandEditeur.Presentation
             lblConfirmPassword.Font = new Font(pfc.Families[0], lblTitleName.Font.Size, FontStyle.Bold);
         }
 
+        // Triger the user's creation
         private void btnCreateUser_Click(object sender, EventArgs e)
         {
-
+            // Clear error messages
             lblErrUserName.Text = "";
-
             lblErrFirstName.Text = "";
-
             lblErrLastName.Text = "";
-
             lblErrEmail.Text = "";
-
             lblErrRole.Text = "";
-
             lblErrPassword.Text = "";
-
             lblErrConfirmPassword.Text = "";
 
+            // Check if is there new error message to show
             Dictionary<string, string> dicErrors = _compteCréation.IsValid();
             foreach (var item in dicErrors)
             {
@@ -95,6 +100,7 @@ namespace HugoLandEditeur.Presentation
                 }
             }
 
+            // Try creation if no error count = 0
             if (dicErrors.Count == 0)
             {
                 try

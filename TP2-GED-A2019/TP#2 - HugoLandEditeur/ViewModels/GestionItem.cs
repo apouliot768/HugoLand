@@ -44,7 +44,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -75,7 +75,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -157,7 +157,7 @@ namespace HugoLandEditeur.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -199,7 +199,7 @@ namespace HugoLandEditeur.ViewModels
                     RetournerItems();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

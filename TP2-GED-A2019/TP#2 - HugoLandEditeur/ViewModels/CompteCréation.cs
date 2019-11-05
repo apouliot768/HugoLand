@@ -10,6 +10,11 @@ using HugoLandEditeur.Models;
 
 namespace HugoLandEditeur.ViewModels
 {
+    /// <summary>
+    /// Author :        Alexandre Pouliot
+    /// Description :   Object that collect and validate input to create new user.
+    /// Date :          2019-11-04
+    /// </summary>
     public class CompteCréation
     {
         [Required]
@@ -29,6 +34,7 @@ namespace HugoLandEditeur.ViewModels
         [Compare("Password")]
         public string PasswordConfirm { get; set; }
 
+        // Input validation and send the result to 
         public Dictionary<string, string> IsValid()
         {
             Dictionary<string, string> dicErrors = new Dictionary<string, string>();
@@ -38,7 +44,6 @@ namespace HugoLandEditeur.ViewModels
             {
                 foreach (ValidationResult result in errors)
                 {
-                    //string MemberName = result.MemberNames.First() is string ? result.MemberNames.First() : "PasswordConfirm";
                     dicErrors.Add(result.ErrorMessage, result.MemberNames.FirstOrDefault());
                 }
             }

@@ -213,6 +213,7 @@
     <Compile Include="Modele\Tile.cs" />
     <Compile Include="ViewModels\CompteCréation.cs" />
     <Compile Include="ViewModels\CompteRoles.cs" />
+    <Compile Include="ViewModels\GestionChatMessage.cs" />
     <Compile Include="ViewModels\GestionClasse.cs" />
     <Compile Include="ViewModels\GestionComptejoueur.cs" />
     <Compile Include="ViewModels\GestionEffetItem.cs" />

@@ -69,7 +69,7 @@ namespace HugoLandEditeur.Presentation
             this.UserName,
             this.Role,
             this.Connexion});
-            this.dtgUsers.Location = new System.Drawing.Point(12, 108);
+            this.dtgUsers.Location = new System.Drawing.Point(17, 68);
             this.dtgUsers.Name = "dtgUsers";
             this.dtgUsers.RowHeadersVisible = false;
             this.dtgUsers.RowHeadersWidth = 51;
@@ -127,7 +127,7 @@ namespace HugoLandEditeur.Presentation
             this.lblTitleUsersMenu.BackColor = System.Drawing.Color.Transparent;
             this.lblTitleUsersMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleUsersMenu.ForeColor = System.Drawing.Color.SeaShell;
-            this.lblTitleUsersMenu.Location = new System.Drawing.Point(12, 22);
+            this.lblTitleUsersMenu.Location = new System.Drawing.Point(12, 9);
             this.lblTitleUsersMenu.Name = "lblTitleUsersMenu";
             this.lblTitleUsersMenu.Size = new System.Drawing.Size(210, 39);
             this.lblTitleUsersMenu.TabIndex = 1;
@@ -139,7 +139,7 @@ namespace HugoLandEditeur.Presentation
             this.lblEditRole.BackColor = System.Drawing.Color.Transparent;
             this.lblEditRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEditRole.ForeColor = System.Drawing.Color.SeaShell;
-            this.lblEditRole.Location = new System.Drawing.Point(14, 61);
+            this.lblEditRole.Location = new System.Drawing.Point(14, 48);
             this.lblEditRole.Name = "lblEditRole";
             this.lblEditRole.Size = new System.Drawing.Size(317, 17);
             this.lblEditRole.TabIndex = 2;
@@ -157,7 +157,7 @@ namespace HugoLandEditeur.Presentation
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SeaShell;
-            this.label1.Location = new System.Drawing.Point(12, 420);
+            this.label1.Location = new System.Drawing.Point(12, 377);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 39);
             this.label1.TabIndex = 3;
@@ -165,7 +165,7 @@ namespace HugoLandEditeur.Presentation
             // 
             // txtChatbox
             // 
-            this.txtChatbox.Location = new System.Drawing.Point(12, 477);
+            this.txtChatbox.Location = new System.Drawing.Point(19, 430);
             this.txtChatbox.Multiline = true;
             this.txtChatbox.Name = "txtChatbox";
             this.txtChatbox.ReadOnly = true;
@@ -175,7 +175,7 @@ namespace HugoLandEditeur.Presentation
             // 
             // txtPost
             // 
-            this.txtPost.Location = new System.Drawing.Point(12, 773);
+            this.txtPost.Location = new System.Drawing.Point(17, 722);
             this.txtPost.Multiline = true;
             this.txtPost.Name = "txtPost";
             this.txtPost.Size = new System.Drawing.Size(356, 53);
@@ -183,7 +183,7 @@ namespace HugoLandEditeur.Presentation
             // 
             // btnPost
             // 
-            this.btnPost.Location = new System.Drawing.Point(147, 832);
+            this.btnPost.Location = new System.Drawing.Point(147, 781);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(75, 23);
             this.btnPost.TabIndex = 6;
@@ -197,7 +197,7 @@ namespace HugoLandEditeur.Presentation
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HugoLandEditeur.Properties.Resources.UserMenu6;
-            this.ClientSize = new System.Drawing.Size(421, 876);
+            this.ClientSize = new System.Drawing.Size(421, 942);
             this.Controls.Add(this.btnPost);
             this.Controls.Add(this.txtPost);
             this.Controls.Add(this.txtChatbox);

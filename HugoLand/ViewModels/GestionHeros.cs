@@ -61,7 +61,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -87,7 +87,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -128,7 +128,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -166,7 +166,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -222,7 +222,7 @@ namespace HugoLand.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -238,7 +238,7 @@ namespace HugoLand.ViewModels
                     return contexte.Heros.Where(h => h.CompteJoueurId == joueurId).ToList();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

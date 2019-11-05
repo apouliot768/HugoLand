@@ -42,9 +42,16 @@ D:\Bureau\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.xml
 D:\Bureau\GitRepos\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.xml
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CopyComplete
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
-C:\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference.cache
 C:\HugoLand\HugoLand\obj\Debug\HugoLand.TestForm.resources
 C:\HugoLand\HugoLand\obj\Debug\HugoLand.Properties.Resources.resources
 C:\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.GenerateResource.cache
 C:\HugoLand\HugoLand\obj\Debug\HugoLand.exe
 C:\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
+C:\HugoLand\HugoLand\bin\Debug\HugoLand.exe.config
+C:\HugoLand\HugoLand\bin\Debug\HugoLand.exe
+C:\HugoLand\HugoLand\bin\Debug\HugoLand.pdb
+C:\HugoLand\HugoLand\bin\Debug\EntityFramework.dll
+C:\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.dll
+C:\HugoLand\HugoLand\bin\Debug\EntityFramework.xml
+C:\HugoLand\HugoLand\bin\Debug\EntityFramework.SqlServer.xml
+C:\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CopyComplete
