@@ -61,6 +61,59 @@ namespace HugoLandEditeur.ViewModels
             } while (echecSauvegarde);
 
         }
+
+
+        public void CreerObjetMonde(ObjetMonde objMonde)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    // Ajouter l'item dans le monde demandé
+                    ObjetMonde objNew = new ObjetMonde()
+                    {
+                        x = objMonde.x,
+                        y = objMonde.y,
+                        TypeObjet = objMonde.TypeObjet,
+                        MondeId = objMonde.MondeId,
+                        Description = objMonde.Description
+                    };
+
+                    if (objNew.y > -1 && objNew.x > -1)
+                    {
+                        contexte.ObjetMondes.Add(objNew);
+                        contexte.SaveChanges();
+                        RetournerObjetMonde();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        // Modification d'un objetMonde lors d'un changement dans la bd
+        public void ModificationObjetMonde(string tileName, int TileID, int itemID)
+        {
+            try
+            {
+                using (EntitiesGEDEquipe1 contexte = new EntitiesGEDEquipe1())
+                {
+                    ObjetMonde objMonde = contexte.ObjetMondes.FirstOrDefault(x => x.Id == itemID);
+                    objMonde.Description = tileName;
+                    objMonde.TypeObjet = TileID;
+
+                    contexte.SaveChanges();
+                    RetournerObjetMonde();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         // Supression d'un Objet présent dans un monde
         public ObjetMonde SupprimerObjetMonde(ObjetMonde objetMonde)
         {

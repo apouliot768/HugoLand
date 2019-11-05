@@ -33,7 +33,14 @@ namespace HugoLandEditeur
         private int m_ActiveTileXIndex;
         private int m_ActiveTileYIndex;
         private GestionCompteJoueur m_GestionCompteJoueur = new GestionCompteJoueur();
+        private GestionItem m_GestionItem = new GestionItem();
+        private GestionMonde m_GestionMonde = new GestionMonde();
+        private GestionMonstre m_GestionMonstre = new GestionMonstre();
+        private GestionObjetMonde m_GestionObjetMonde = new GestionObjetMonde();
         private frmMenuUsers m_frmUser = null;
+        private string m_posTile;
+        private Tile tile;
+        private Monde world = new Monde();
 
         /// <summary>
         /// Summary description for Form1.
@@ -74,7 +81,6 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void frmMain_Load(object sender, System.EventArgs e)
         {
-
             m_Map = new CMap();
             m_TileLibrary = new CTileLibrary();
             m_Map.TileLibrary = m_TileLibrary;
@@ -146,19 +152,6 @@ namespace HugoLandEditeur
             Application.Exit();
         }
 
-        /// <summary>
-        /// Auteur : ???
-        /// Description : From the file drop-down menu, show the about window.
-        /// Date : ???
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuHelpAbout_Click(object sender, System.EventArgs e)
-        {
-            frmAbout f = new frmAbout();
-            f.ShowDialog(this);
-        }
-
         #region Zoom options
         // Zoom at x1 force.
         private void mnuZoomX1_Click(object sender, System.EventArgs e)
@@ -227,6 +220,20 @@ namespace HugoLandEditeur
 
         /// <summary>
         /// Auteur : ???
+        /// Description : From the file drop-down menu, show the about window.
+        /// Date : ???
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuHelpAbout_Click(object sender, System.EventArgs e)
+        {
+            frmAbout f = new frmAbout();
+            f.ShowDialog(this);
+        }
+
+        // Toolbar menu ↓
+        /// <summary>
+        /// Auteur : ???
         /// Description : When using the toolbar, do an action depending on the button clicked.
         /// Date : ???
         /// </summary>
@@ -240,8 +247,8 @@ namespace HugoLandEditeur
                 LoadMap();
             if (e.Button == tbbNew) // Create a new map
                 NewMap();
-            else if (e.Button == tbbHelp) // Open the help window
-                ShowHelp();
+            /*else if (e.Button == tbbHelp) // Open the help window
+                ShowHelp();*/ // TP #3
         }
         #endregion
 
@@ -437,9 +444,93 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void picMap_Click(object sender, System.EventArgs e)
         {
-            // To do : HUGO - MODIFIER ICI POUR AVOIR le tile et le type
             m_Map.PlotTile(m_ActiveXIndex, m_ActiveYIndex, m_ActiveTileID);
+            UpdateTile(tile, world.Id, m_ActiveXIndex, m_ActiveYIndex, m_ActiveTileID);
+            txtAttkMax.Clear();
+            txtAttkMin.Clear();
+            txtLevel.Clear();
+            txtPv.Clear();
             m_bRefresh = true;
+        }
+
+        private void UpdateTile(Tile t, int worldId, int ActiveX, int ActiveY,int TileID)
+        {
+            switch (t.TypeObjet)
+            {
+                case TypeTile.Item:
+                    m_GestionItem.RetournerItems();
+                    Item item = m_GestionItem.LstItems.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    if (item != null)
+                    {
+                        m_GestionItem.ModificationItem(t.Name, TileID, item.Id);
+                    }
+                    else
+                    {
+                        item = new Item()
+                        {
+                            Nom = t.Name,
+                            MondeId = worldId,
+                            x = ActiveX,
+                            y = ActiveY,
+                            ImageId = TileID,
+                            Description = t.Category + " " + t.Color
+                        };
+
+                        m_GestionItem.CreerItemMonde(item);
+                    }
+                    break;
+                case TypeTile.Monstre:
+                    m_GestionMonstre.RetournerMonstres();
+                    int statPv = 0, statLevel = 0;
+                    float statAttkMax = 0f, statAttkMin = 0f;
+                    
+                    int.TryParse(txtLevel.Text, out statLevel);
+                    int.TryParse(txtPv.Text, out statPv);
+                    float.TryParse(txtAttkMax.Text, out statAttkMax);
+                    float.TryParse(txtAttkMin.Text, out statAttkMin);
+
+                    Monstre monstre = m_GestionMonstre.LstMonstres.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    if (monstre != null)
+                    {
+                        m_GestionMonstre.ModificationMonstre(t.Name, TileID, monstre.Id, statPv, statAttkMax, statAttkMin, statLevel);
+                    }
+                    else
+                    {
+                        monstre = new Monstre()
+                        {
+                            Nom = t.Name,
+                            MondeId = worldId,
+                            x = ActiveX,
+                            y = ActiveY,
+                            ImageId = TileID,
+                        };
+
+                        m_GestionMonstre.CréerMonstre(monstre, statPv, statAttkMax, statAttkMin, statLevel);
+                    }
+                    break;
+                case TypeTile.ObjetMonde:
+                    m_GestionObjetMonde.RetournerObjetMonde();
+                    ObjetMonde objMonde = m_GestionObjetMonde.LstObjetMondes.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    if (objMonde != null)
+                    {
+                        m_GestionObjetMonde.ModificationObjetMonde(t.Name, TileID, objMonde.Id);
+                    }
+                    else
+                    {
+                        objMonde = new ObjetMonde()
+                        {
+                            Description = t.Name,
+                            MondeId = worldId,
+                            x = ActiveX,
+                            y = ActiveY,
+                            TypeObjet = TileID
+                        };
+
+                        m_GestionObjetMonde.CreerObjetMonde(objMonde);
+                    }
+                    break;
+
+            }
         }
 
         /* -------------------------------------------------------------- *\
@@ -464,8 +555,9 @@ namespace HugoLandEditeur
         \* -------------------------------------------------------------- */
         private void picTiles_Click(object sender, System.EventArgs e)
         {
-            // To do : HUGO - MODIFIER ICI POUR OBTENIR tile type.
             m_ActiveTileID = m_TileLibrary.TileToTileID(m_ActiveTileXIndex, m_ActiveTileYIndex);
+            tile = m_TileLibrary.ObjMonde.FirstOrDefault(x => x.Value.X_Image == m_ActiveTileXIndex &&
+                                                              x.Value.Y_Image == m_ActiveTileYIndex).Value;
             picActiveTile.Refresh();
         }
 
@@ -631,6 +723,7 @@ namespace HugoLandEditeur
 
                 m_ResizeMap();
                 m_MenuLogic();
+                world = f.MyWorld;
                 this.Cursor = Cursors.Default;
             }
             else
@@ -655,6 +748,8 @@ namespace HugoLandEditeur
                 this.Cursor = Cursors.WaitCursor;
                 try
                 {
+                    m_GestionMonde.ChargerMondeCourrant(world.Id);
+
                     m_Map.Save(dlgSaveMap.FileName);
                 }
                 catch
@@ -705,12 +800,16 @@ namespace HugoLandEditeur
                     Console.WriteLine("Error Creating...");
                 }
                 m_MenuLogic();
+                world = f.MyWorld;
                 this.Cursor = Cursors.Default;
             }
             else
                 MessageBox.Show("You have cancelled the creation of a new world.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        /*
+         * Sera implémenté lors de la prochaine version (TP#3)
+         * 
         /// <summary>
         /// Auteure : Joëlle Boyer
         /// Description : Opens the window when help is needed.
@@ -721,6 +820,7 @@ namespace HugoLandEditeur
             frmHelp f = new frmHelp();
             f.ShowDialog(this);
         }
+        */
 
         /* -------------------------------------------------------------- *\
             m_MenuLogic()

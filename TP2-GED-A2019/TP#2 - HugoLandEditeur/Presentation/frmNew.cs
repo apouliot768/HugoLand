@@ -16,6 +16,7 @@ namespace HugoLandEditeur
         private int m_Width;
         private int m_Height;
         private int m_DefaultTile;
+        private Monde m_World;
         private GestionMonde gMonde = new GestionMonde();
 
         // Width
@@ -37,6 +38,13 @@ namespace HugoLandEditeur
         {
             get { return m_DefaultTile; }
             set { m_DefaultTile = value; }
+        }
+
+        // World created by New
+        public Monde MyWorld
+        {
+            get { return m_World; }
+            set { m_World = value; }
         }
 
 
@@ -311,7 +319,8 @@ namespace HugoLandEditeur
                     SizeTile = size
                 };
 
-                gMonde.CréerMonde(m);
+                m = gMonde.CréerMonde(m);
+                MyWorld = m;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

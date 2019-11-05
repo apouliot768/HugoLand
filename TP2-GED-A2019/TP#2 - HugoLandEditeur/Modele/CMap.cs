@@ -210,7 +210,6 @@ namespace HugoLandEditeur
                 sw.WriteLine();
             }
             sw.Close();
-
             return 0;
         }
 
@@ -376,13 +375,12 @@ namespace HugoLandEditeur
             m_Height = m.LimiteY;
             int defaultTile = 32; // Grass
 
-            int[,] allThings = new int[m.LimiteX, m.LimiteY];
-
             try
             {
                 m_Tiles = new int[m_Height, m_Width];
 
                 for (i = 0; i < m_Height; i++)
+                {
                     for (j = 0; j < m_Width; j++)
                     {
                         if (j == 0 && i == 0)
@@ -398,6 +396,7 @@ namespace HugoLandEditeur
                         if (m.DefaultTile != null && m_Tiles[i, j] == 0)
                             m_Tiles[i, j] = defaultTile;
                     }
+                }
 
                 m_BackBuffer = new Bitmap(m_Width * csteApplication.TILE_WIDTH_IN_MAP, m_Height * csteApplication.TILE_HEIGHT_IN_MAP);
                 m_BackBufferDC = Graphics.FromImage(m_BackBuffer);

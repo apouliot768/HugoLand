@@ -15,13 +15,13 @@ namespace HugoLandEditeur.Presentation
     {
         // Local variables
         private GestionMonde _gMonde = new GestionMonde(); // Allowing to have infos from db.
-        private Monde m = new Monde();
+        private Monde monde = new Monde();
         private bool noFile = false;
 
         public Monde MyWorld
         {
-            get { return m; }
-            set { m = value; }
+            get { return monde; }
+            set { monde = value; }
         }
 
         public bool NoFile
@@ -59,10 +59,10 @@ namespace HugoLandEditeur.Presentation
             string sDescription = cboChoose.Text;
 
             if (sDescription != "Browse from my maps...")
-                m = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
+                monde = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
 
-            txtHeight.Text = m.LimiteY.ToString();
-            txtWidth.Text = m.LimiteX.ToString();
+            txtHeight.Text = monde.LimiteY.ToString();
+            txtWidth.Text = monde.LimiteX.ToString();
             btnOk.Enabled = true;
         }
 
@@ -75,6 +75,9 @@ namespace HugoLandEditeur.Presentation
         /// <param name="e"></param>
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (cboChoose.SelectedIndex == 0)
+                monde = _gMonde.CréerMonde(monde);
+
             this.DialogResult = DialogResult.OK;
         }
 

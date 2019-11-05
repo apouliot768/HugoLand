@@ -31,7 +31,6 @@ Z:\Desktop\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csprojAssemblyReference
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.TestForm.resources
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.Properties.Resources.resources
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.GenerateResource.cache
-D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.csproj.CoreCompileInputs.cache
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.exe
 D:\Bureau\GitRepos\HugoLand\HugoLand\obj\Debug\HugoLand.pdb
 D:\Bureau\GitRepos\HugoLand\HugoLand\bin\Debug\HugoLand.exe.config

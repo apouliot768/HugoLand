@@ -49,7 +49,7 @@ namespace HugoLandEditeur
 
                 IsTransparent = (tileData[6].ToLower() == "y");
                 IsBlock = ((tileData[8].ToLower()) == "block");
-
+                                                    
                 //Some types of tiles have a color
                 if (Category == "door" || Category == "key")
                     Color = tileData[9].ToLower();
