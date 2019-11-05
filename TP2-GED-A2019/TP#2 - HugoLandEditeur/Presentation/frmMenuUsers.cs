@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.Models;
-using HugoLandEditeur.ViewModels;
+using HugoLand.Models;
+using HugoLand.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {
@@ -72,7 +72,7 @@ namespace HugoLandEditeur.Presentation
             _gestionCompteJoueur.RafraichirComptes();
             for (int i = 0; i < _gestionCompteJoueur.LstComptes.Count; i++)
             {
-                CompteJoueur compte = _gestionCompteJoueur.LstComptes[i];
+                HugoLand.CompteJoueur compte = _gestionCompteJoueur.LstComptes[i];
 
                 if (compte.Connexion == false)
                     dtgUsers.Rows.Add(compte.Id, compte.NomJoueur, Enum.GetName(typeof(Constantes.Role), compte.TypeUtilisateur), Properties.Resources.red);

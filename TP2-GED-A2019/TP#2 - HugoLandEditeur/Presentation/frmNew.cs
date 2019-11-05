@@ -1,4 +1,4 @@
-﻿using HugoLandEditeur.ViewModels;
+﻿using HugoLand.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ namespace HugoLandEditeur
         private int m_Width;
         private int m_Height;
         private int m_DefaultTile;
-        private Monde m_World;
+        private HugoLand.Monde m_World;
         private GestionMonde gMonde = new GestionMonde();
 
         // Width
@@ -41,7 +41,7 @@ namespace HugoLandEditeur
         }
 
         // World created by New
-        public Monde MyWorld
+        public HugoLand.Monde MyWorld
         {
             get { return m_World; }
             set { m_World = value; }
@@ -308,7 +308,7 @@ namespace HugoLandEditeur
             // If both are valid, create a world with the parameters entered.
             if (validHW && valid)
             {
-                Monde m = new Monde()
+                HugoLand.Monde m = new HugoLand.Monde()
                 {
                     Description = desc,
                     DefaultTile = defaultTile,

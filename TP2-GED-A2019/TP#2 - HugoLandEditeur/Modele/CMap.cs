@@ -1,5 +1,5 @@
 
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -355,14 +355,14 @@ namespace HugoLandEditeur
 
         public void MapExistingWorld(int worldId)
         {
-            List<Item> lstItems = new List<Item>();
+            List<HugoLand.Item> lstItems = new List<HugoLand.Item>();
             lstItems = m_GestionItem.LstItems.Where(x => x.MondeId == worldId).ToList();
-            List<Monstre> lstMonstres = new List<Monstre>();
+            List<HugoLand.Monstre> lstMonstres = new List<HugoLand.Monstre>();
             lstMonstres = m_GestionMonstre.LstMonstres.Where(x => x.MondeId == worldId).ToList();
-            List<ObjetMonde> lstObjMonde = new List<ObjetMonde>();
+            List<HugoLand.ObjetMonde> lstObjMonde = new List<HugoLand.ObjetMonde>();
             lstObjMonde = m_GestionObjetMonde.LstObjetMondes.Where(x => x.MondeId == worldId).ToList();
 
-            Monde m = m_GestionMonde.LstMondes.FirstOrDefault(x => x.Id == worldId);
+            HugoLand.Monde m = m_GestionMonde.LstMondes.FirstOrDefault(x => x.Id == worldId);
             int i, j;
 
             if (m.LimiteX > csteApplication.MAP_MAX_WIDTH)
@@ -385,11 +385,11 @@ namespace HugoLandEditeur
                     {
                         if (j == 0 && i == 0)
                         {
-                            foreach (ObjetMonde obj in lstObjMonde)
+                            foreach (HugoLand.ObjetMonde obj in lstObjMonde)
                                 m_Tiles[obj.x, obj.y] = m_TileLibrary.TileToTileID(obj.x, obj.y);
-                            foreach (Monstre monster in lstMonstres)
+                            foreach (HugoLand.Monstre monster in lstMonstres)
                                 m_Tiles[monster.x, monster.y] = m_TileLibrary.TileToTileID(monster.x, monster.y);
-                            foreach (Item item in lstItems)
+                            foreach (HugoLand.Item item in lstItems)
                                 if (item.IdHero != null)
                                     m_Tiles[(int)item.x, (int)item.y] = m_TileLibrary.TileToTileID((int)item.x, (int)item.y);
                         }

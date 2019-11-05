@@ -1,5 +1,5 @@
 ﻿using HugoLandEditeur.Presentation;
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +39,7 @@ namespace HugoLandEditeur
         private GestionObjetMonde m_GestionObjetMonde = new GestionObjetMonde();
         private frmMenuUsers m_frmUser = null;
         private Tile tile;
-        private Monde world = new Monde();
+        private HugoLand.Monde world = new HugoLand.Monde();
 
         /// <summary>
         /// Summary description for Form1.
@@ -519,14 +519,14 @@ namespace HugoLandEditeur
             {
                 case TypeTile.Item:
                     m_GestionItem.RetournerItems();
-                    Item item = m_GestionItem.LstItems.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    HugoLand.Item item = m_GestionItem.LstItems.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
                     if (item != null)
                     {
                         m_GestionItem.ModificationItem(t.Name, TileID, item.Id);
                     }
                     else
                     {
-                        item = new Item()
+                        item = new HugoLand.Item()
                         {
                             Nom = t.Name,
                             MondeId = worldId,
@@ -549,14 +549,14 @@ namespace HugoLandEditeur
                     float.TryParse(txtAttkMax.Text, out statAttkMax);
                     float.TryParse(txtAttkMin.Text, out statAttkMin);
 
-                    Monstre monstre = m_GestionMonstre.LstMonstres.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    HugoLand.Monstre monstre = m_GestionMonstre.LstMonstres.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
                     if (monstre != null)
                     {
                         m_GestionMonstre.ModificationMonstre(t.Name, TileID, monstre.Id, statPv, statAttkMax, statAttkMin, statLevel);
                     }
                     else
                     {
-                        monstre = new Monstre()
+                        monstre = new HugoLand.Monstre()
                         {
                             Nom = t.Name,
                             MondeId = worldId,
@@ -570,14 +570,14 @@ namespace HugoLandEditeur
                     break;
                 case TypeTile.ObjetMonde:
                     m_GestionObjetMonde.RetournerObjetMonde();
-                    ObjetMonde objMonde = m_GestionObjetMonde.LstObjetMondes.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
+                    HugoLand.ObjetMonde objMonde = m_GestionObjetMonde.LstObjetMondes.FirstOrDefault(x => x.MondeId == worldId && x.x == ActiveX && x.y == ActiveY);
                     if (objMonde != null)
                     {
                         m_GestionObjetMonde.ModificationObjetMonde(t.Name, TileID, objMonde.Id);
                     }
                     else
                     {
-                        objMonde = new ObjetMonde()
+                        objMonde = new HugoLand.ObjetMonde()
                         {
                             Description = t.Name,
                             MondeId = worldId,
@@ -720,7 +720,7 @@ namespace HugoLandEditeur
             if (f.DialogResult == DialogResult.OK)
             {
                 DialogResult result;
-                Monde monde = f.MyWorld;
+                HugoLand.Monde monde = f.MyWorld;
                 string myWorld = monde.Id.ToString() + ".map";
 
                 if (File.Exists(myWorld) && f.MyWorld.Id != -1)

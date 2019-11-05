@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 
 namespace HugoLandEditeur.Presentation
 {
@@ -15,10 +15,10 @@ namespace HugoLandEditeur.Presentation
     {
         // Local variables
         private GestionMonde _gMonde = new GestionMonde(); // Allowing to have infos from db.
-        private Monde monde = new Monde();
+        private HugoLand.Monde monde = new HugoLand.Monde();
         private bool noFile = false;
 
-        public Monde MyWorld
+        public HugoLand.Monde MyWorld
         {
             get { return monde; }
             set { monde = value; }
@@ -43,7 +43,7 @@ namespace HugoLandEditeur.Presentation
 
             cboChoose.Items.Add("Browse from my maps...");
 
-            foreach (Monde m in _gMonde.LstMondes)
+            foreach (HugoLand.Monde m in _gMonde.LstMondes)
                 cboChoose.Items.Add(m.Description);
         }
 
@@ -59,7 +59,12 @@ namespace HugoLandEditeur.Presentation
             string sDescription = cboChoose.Text;
 
             if (sDescription != "Browse from my maps...")
+            {
                 monde = _gMonde.LstMondes.FirstOrDefault(x => x.Description == sDescription);
+                chkNoFile.Enabled = true;
+            }
+            else
+                chkNoFile.Enabled = false;
 
             txtHeight.Text = monde.LimiteY.ToString();
             txtWidth.Text = monde.LimiteX.ToString();

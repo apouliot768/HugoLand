@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HugoLandEditeur.ViewModels;
+using HugoLand.ViewModels;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 
@@ -23,7 +23,7 @@ namespace HugoLandEditeur.Presentation
         // Local variable
         private GestionCompteJoueur _gestionCompteJoueur = new GestionCompteJoueur();
         public int _tentative { get; set; }
-        public CompteJoueur _compte { get; set; }
+        public HugoLand.CompteJoueur _compte { get; set; }
 
         // Constructor
         public frmLogIn()
