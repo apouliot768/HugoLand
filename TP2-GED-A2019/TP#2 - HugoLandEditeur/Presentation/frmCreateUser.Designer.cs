@@ -58,11 +58,11 @@
             // 
             this.lblTitle1.AutoSize = true;
             this.lblTitle1.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle1.Font = new System.Drawing.Font("Diablo", 22F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle1.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle1.Location = new System.Drawing.Point(87, 35);
+            this.lblTitle1.Location = new System.Drawing.Point(148, 29);
             this.lblTitle1.Name = "lblTitle1";
-            this.lblTitle1.Size = new System.Drawing.Size(396, 40);
+            this.lblTitle1.Size = new System.Drawing.Size(292, 42);
             this.lblTitle1.TabIndex = 0;
             this.lblTitle1.Text = "Create new user";
             // 
@@ -81,11 +81,11 @@
             // 
             this.lblTitleName.AutoSize = true;
             this.lblTitleName.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitleName.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleName.ForeColor = System.Drawing.Color.Red;
-            this.lblTitleName.Location = new System.Drawing.Point(185, 83);
+            this.lblTitleName.Location = new System.Drawing.Point(205, 82);
             this.lblTitleName.Name = "lblTitleName";
-            this.lblTitleName.Size = new System.Drawing.Size(210, 30);
+            this.lblTitleName.Size = new System.Drawing.Size(172, 31);
             this.lblTitleName.TabIndex = 2;
             this.lblTitleName.Text = "User name :";
             // 
@@ -103,11 +103,11 @@
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.BackColor = System.Drawing.Color.Transparent;
-            this.lblFirstName.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFirstName.ForeColor = System.Drawing.Color.Red;
-            this.lblFirstName.Location = new System.Drawing.Point(176, 176);
+            this.lblFirstName.Location = new System.Drawing.Point(205, 175);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(219, 30);
+            this.lblFirstName.Size = new System.Drawing.Size(169, 31);
             this.lblFirstName.TabIndex = 4;
             this.lblFirstName.Text = "First name :";
             // 
@@ -125,11 +125,11 @@
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.BackColor = System.Drawing.Color.Transparent;
-            this.lblLastName.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastName.ForeColor = System.Drawing.Color.Red;
-            this.lblLastName.Location = new System.Drawing.Point(187, 276);
+            this.lblLastName.Location = new System.Drawing.Point(205, 275);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(208, 30);
+            this.lblLastName.Size = new System.Drawing.Size(166, 31);
             this.lblLastName.TabIndex = 6;
             this.lblLastName.Text = "Last name :";
             // 
@@ -147,11 +147,11 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.BackColor = System.Drawing.Color.Transparent;
-            this.lblEmail.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.ForeColor = System.Drawing.Color.Red;
-            this.lblEmail.Location = new System.Drawing.Point(228, 377);
+            this.lblEmail.Location = new System.Drawing.Point(242, 376);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(129, 30);
+            this.lblEmail.Size = new System.Drawing.Size(103, 31);
             this.lblEmail.TabIndex = 8;
             this.lblEmail.Text = "Email :";
             // 
@@ -169,11 +169,11 @@
             // 
             this.lblRole.AutoSize = true;
             this.lblRole.BackColor = System.Drawing.Color.Transparent;
-            this.lblRole.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRole.ForeColor = System.Drawing.Color.Red;
-            this.lblRole.Location = new System.Drawing.Point(237, 480);
+            this.lblRole.Location = new System.Drawing.Point(240, 479);
             this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(109, 30);
+            this.lblRole.Size = new System.Drawing.Size(91, 31);
             this.lblRole.TabIndex = 10;
             this.lblRole.Text = "Role :";
             // 
@@ -193,11 +193,11 @@
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.BackColor = System.Drawing.Color.Transparent;
-            this.lblPassword.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.ForeColor = System.Drawing.Color.Red;
-            this.lblPassword.Location = new System.Drawing.Point(185, 579);
+            this.lblPassword.Location = new System.Drawing.Point(205, 578);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(194, 30);
+            this.lblPassword.Size = new System.Drawing.Size(159, 31);
             this.lblPassword.TabIndex = 12;
             this.lblPassword.Text = "Password :";
             // 
@@ -215,11 +215,11 @@
             // 
             this.lblConfirmPassword.AutoSize = true;
             this.lblConfirmPassword.BackColor = System.Drawing.Color.Transparent;
-            this.lblConfirmPassword.Font = new System.Drawing.Font("Diablo", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfirmPassword.ForeColor = System.Drawing.Color.Red;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(110, 688);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(160, 687);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(344, 30);
+            this.lblConfirmPassword.Size = new System.Drawing.Size(266, 31);
             this.lblConfirmPassword.TabIndex = 14;
             this.lblConfirmPassword.Text = "Confirm password :";
             // 

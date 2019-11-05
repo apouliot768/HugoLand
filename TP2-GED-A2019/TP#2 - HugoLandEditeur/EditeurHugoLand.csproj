@@ -218,13 +218,7 @@
     <Content Include="Resources\OpenWorld.jpg" />
     <None Include="Resources\UserMenu6.jpg" />
     <None Include="Resources\UsersMenu5.jpg" />
-    <None Include="Resources\UserMenu4.png" />
-    <None Include="Resources\UsersMenu3.png" />
-    <None Include="Resources\UserMenu3.jpg" />
-    <None Include="Resources\UsersMenuBack2.jpg" />
-    <None Include="Resources\UserMenuBack.jpg" />
     <None Include="Resources\red.jpg" />
-    <None Include="Resources\green.bmp" />
     <None Include="Resources\green.jpg" />
     <Content Include="Resources\LogIn.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

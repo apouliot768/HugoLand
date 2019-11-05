@@ -130,22 +130,10 @@
   <data name="red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UserMenu3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UserMenu3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UserMenu4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UserMenu4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="UserMenu6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UserMenu6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UsersMenu3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UsersMenu3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="UsersMenu5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UsersMenu5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UsersMenuBack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UsersMenuBack2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
